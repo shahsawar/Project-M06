@@ -1,6 +1,5 @@
 package sample;
 
-<<<<<<< HEAD
 /***
  * @author shah
  */
@@ -34,7 +33,3 @@ public class WorkoutPlane {
     public void setFrequency(int frequency) {
         this.frequency = frequency;
     }
-=======
-public class WorkoutPlane {
->>>>>>> f3d7da64048bf7dc960b6c6ec8f8fdbecbdb0140
-}
