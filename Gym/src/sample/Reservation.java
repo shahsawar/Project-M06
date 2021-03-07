@@ -2,6 +2,10 @@ package sample;
 
 import java.util.Date;
 
+/***
+ * @author Ronald
+ */
+
 public class Reservation {
     private Date date;
     private int userCode;
