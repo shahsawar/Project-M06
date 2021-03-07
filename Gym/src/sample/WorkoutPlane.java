@@ -33,3 +33,5 @@ public class WorkoutPlane {
     public void setFrequency(int frequency) {
         this.frequency = frequency;
     }
+
+}
