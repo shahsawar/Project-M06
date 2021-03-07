@@ -10,13 +10,13 @@ public class Reservation {
     private Date date;
     private int userCode;
     private String roomName;
-    private WorkoutPlan workoutPlan;
+    private WorkoutPlane workoutPlane;
 
-    public Reservation(Date date, int userCode, String roomName, WorkoutPlan workoutPlan) {
+    public Reservation(Date date, int userCode, String roomName, WorkoutPlane workoutPlane) {
         this.date = date;
         this.userCode = userCode;
         this.roomName = roomName;
-        this.workoutPlan = workoutPlan;
+        this.workoutPlane = workoutPlane;
     }
 
     public Date getDate() {
@@ -43,11 +43,11 @@ public class Reservation {
         this.roomName = roomName;
     }
 
-    public WorkoutPlan getWorkoutPlan() {
-        return workoutPlan;
+    public WorkoutPlane getWorkoutPlan() {
+        return workoutPlane;
     }
 
-    public void setWorkoutPlan(WorkoutPlan workoutPlan) {
-        this.workoutPlan = workoutPlan;
+    public void setWorkoutPlan(WorkoutPlane workoutPlane) {
+        this.workoutPlane = workoutPlane;
     }
 }

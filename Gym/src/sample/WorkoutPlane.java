@@ -1,4 +1,4 @@
 package sample;
 
-public class WorkoutPlan {
+public class WorkoutPlane {
 }
