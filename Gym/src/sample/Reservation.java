@@ -7,6 +7,7 @@ import java.util.Date;
  */
 
 public class Reservation {
+    private int reservationCode;
     private Date date;
     private int userCode;
     private String roomName;
