@@ -1,4 +1,4 @@
-package com.github.gym;
+package db;
 
 import java.util.List;
 

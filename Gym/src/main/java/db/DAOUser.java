@@ -1,6 +1,6 @@
-package com.github.gym;
+package db;
 
-import java.util.List;
+import clases.User;
 
 public interface DAOUser extends DAO<User, Integer>{
 }
