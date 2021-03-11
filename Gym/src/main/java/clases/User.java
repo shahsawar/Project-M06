@@ -1,5 +1,7 @@
 package clases;
 
+import java.util.List;
+
 /***
  * @author Ronald
  */
@@ -11,6 +13,10 @@ public class User {
     private String lastname;
     private int age;
     private int userCode;
+    private List<Reservation> reservations;
+
+
+    public User(){};
 
     public User(String dni, String name, String lastname, int age, int userCode) {
         this.dni = dni;

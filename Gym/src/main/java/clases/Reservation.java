@@ -6,6 +6,7 @@ import java.util.Date;
  * @author Ronald
  */
 
+
 public class Reservation {
     private int reservationCode;
     private Date date;
@@ -13,11 +14,20 @@ public class Reservation {
     private String roomName;
     private WorkoutPlane workoutPlane;
 
-    public Reservation(Date date, int userCode, String roomName, WorkoutPlane workoutPlane) {
+    public Reservation(int reservationCode, Date date, int userCode, String roomName, WorkoutPlane workoutPlane) {
+        this.reservationCode = reservationCode;
         this.date = date;
         this.userCode = userCode;
         this.roomName = roomName;
         this.workoutPlane = workoutPlane;
+    }
+
+    public int getReservationCode() {
+        return reservationCode;
+    }
+
+    public void setReservationCode(int reservationCode) {
+        this.reservationCode = reservationCode;
     }
 
     public Date getDate() {
@@ -44,11 +54,11 @@ public class Reservation {
         this.roomName = roomName;
     }
 
-    public WorkoutPlane getWorkoutPlan() {
+    public WorkoutPlane getWorkoutPlane() {
         return workoutPlane;
     }
 
-    public void setWorkoutPlan(WorkoutPlane workoutPlane) {
+    public void setWorkoutPlane(WorkoutPlane workoutPlane) {
         this.workoutPlane = workoutPlane;
     }
 }
