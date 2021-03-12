@@ -79,6 +79,7 @@ public class DAOUserMongo implements DAOUser{
         docTmp.append("lastname", user.getLastname());
         docTmp.append("birthday", user.getBirthday());
         docTmp.append("user_code", user.getUserCode());
+        docTmp.append("reservations", user.getReservations());
         return docTmp;
     }
 
@@ -99,7 +100,7 @@ public class DAOUserMongo implements DAOUser{
             collection.insertOne(toDoc(user));
         }*/
 
-        /*
+
         User user = new User("1234", "user1", "userlastname", new SimpleDateFormat("dd-MM-yyyy").parse("10-10-2020"), 1);
         User user2 = new User("1235", "user2", "userlastname", new SimpleDateFormat("dd-MM-yyyy").parse("11-10-2020"), 2);
         User user3 = new User("1236", "user3", "userlastname", new SimpleDateFormat("dd-MM-yyyy").parse("12-10-2020"), 3);
@@ -110,7 +111,13 @@ public class DAOUserMongo implements DAOUser{
         d.insert(user2);
         d.insert(user3);
         d.insert(user4);
-        */
+
+        /*
+
+        db.users.update(
+           { user_code: 1 },
+           { $push: { reservations: 1 } }
+        );
 
         DAOUserMongo dGetAll = new DAOUserMongo();
         List<User> userList = dGetAll.getAll();
@@ -122,6 +129,6 @@ public class DAOUserMongo implements DAOUser{
             System.out.println(u.getUserCode());
             System.out.println(dGetAll.dateToString(u.getBirthday()));
             System.out.println();
-        }
+        }*/
     }
 }

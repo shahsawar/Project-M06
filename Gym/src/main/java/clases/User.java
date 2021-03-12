@@ -1,5 +1,6 @@
 package clases;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -25,6 +26,7 @@ public class User {
         this.lastname = lastname;
         this.birthday = birthday;
         this.userCode = userCode;
+        reservations = new ArrayList<>();
     }
 
     public String getDni() {
