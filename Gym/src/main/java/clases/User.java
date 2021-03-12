@@ -25,6 +25,13 @@ public class User {
         this.reservations = reservations;
     }
 
+    public User(String dni, String name, String lastname, Date birthDate) {
+        this.dni = dni;
+        this.name = name;
+        this.lastname = lastname;
+        this.birthDate = birthDate;
+    }
+
 
     public String getDni() {
         return dni;

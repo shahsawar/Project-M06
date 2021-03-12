@@ -52,7 +52,7 @@ public class DAOUserMongo implements DAOUser{
         userTmp.setDni(doc.getString("dni"));
         userTmp.setName(doc.getString("name"));
         userTmp.setLastname(doc.getString("lastname"));
-        userTmp.setAge(doc.getInteger("age"));
+        //userTmp.setAge(doc.getInteger("age"));
         userTmp.setUserCode(doc.getInteger("user_code"));
         return userTmp;
     }
@@ -62,9 +62,14 @@ public class DAOUserMongo implements DAOUser{
         docTmp.append("dni", user.getDni());
         docTmp.append("name", user.getName());
         docTmp.append("lastname", user.getLastname());
-        docTmp.append("age", user.getAge());
+        //docTmp.append("age", user.getAge());
         docTmp.append("user_code", user.getUserCode());
         return docTmp;
+    }
+
+    @Override
+    public int getLastUserId() {
+        return 0;
     }
 
 
