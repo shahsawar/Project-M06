@@ -43,12 +43,12 @@ public class DAOReservationMongo implements DAOReservation{
         docTmp.append("date", reservation.getDate());
         docTmp.append("user_code", reservation.getUserCode());
         docTmp.append("room_name", reservation.getRoomName());
-        docTmp.append("workout_plane", DAOWorkoutPlaneMongo.toDoc(reservation.getWorkoutPlane()));
+        docTmp.append("workout_plane", reservation.getWorkoutPlane());
         return docTmp;
     }
 
     public static void main(String[] args) throws ParseException {
-        Reservation r = new Reservation(123, new SimpleDateFormat("dd-MM-yyyy").parse("10-10-2020"),1233, "sala fitness", new WorkoutPlane("sprint", 2));
+        Reservation r = new Reservation(123, new SimpleDateFormat("dd-MM-yyyy").parse("10-10-2020"),1233, "sala fitness", true);
         DAOReservation d = new DAOReservationMongo();
         d.insert(r);
     }

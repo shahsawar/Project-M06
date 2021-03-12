@@ -12,9 +12,12 @@ public class Reservation {
     private Date date;
     private int userCode;
     private String roomName;
-    private WorkoutPlane workoutPlane;
+    private Boolean workoutPlane;
 
-    public Reservation(int reservationCode, Date date, int userCode, String roomName, WorkoutPlane workoutPlane) {
+    public Reservation() {
+    }
+
+    public Reservation(int reservationCode, Date date, int userCode, String roomName, Boolean workoutPlane) {
         this.reservationCode = reservationCode;
         this.date = date;
         this.userCode = userCode;
@@ -54,11 +57,11 @@ public class Reservation {
         this.roomName = roomName;
     }
 
-    public WorkoutPlane getWorkoutPlane() {
+    public Boolean getWorkoutPlane() {
         return workoutPlane;
     }
 
-    public void setWorkoutPlane(WorkoutPlane workoutPlane) {
+    public void setWorkoutPlane(Boolean workoutPlane) {
         this.workoutPlane = workoutPlane;
     }
 }

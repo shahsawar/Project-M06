@@ -1,5 +1,6 @@
 package clases;
 
+import java.util.Date;
 import java.util.List;
 
 /***
@@ -11,18 +12,18 @@ public class User {
     private String dni;
     private String name;
     private String lastname;
-    private int age;
+    private Date birthday;
     private int userCode;
     private List<Reservation> reservations;
 
+    public User() {
+    }
 
-    public User(){};
-
-    public User(String dni, String name, String lastname, int age, int userCode) {
+    public User(String dni, String name, String lastname, Date birthday, int userCode) {
         this.dni = dni;
         this.name = name;
         this.lastname = lastname;
-        this.age = age;
+        this.birthday = birthday;
         this.userCode = userCode;
     }
 
@@ -50,12 +51,12 @@ public class User {
         this.lastname = lastname;
     }
 
-    public int getAge() {
-        return age;
+    public Date getBirthday() {
+        return birthday;
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
     }
 
     public int getUserCode() {
@@ -64,5 +65,13 @@ public class User {
 
     public void setUserCode(int userCode) {
         this.userCode = userCode;
+    }
+
+    public List<Reservation> getReservations() {
+        return reservations;
+    }
+
+    public void setReservations(List<Reservation> reservations) {
+        this.reservations = reservations;
     }
 }
