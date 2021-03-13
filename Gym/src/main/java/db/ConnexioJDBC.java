@@ -11,6 +11,7 @@ public class ConnexioJDBC implements Connexio{
     //Insert para pruebas
     INSERT INTO user (user_code,dni, name, lastname, birthdate) VALUES (1, "Y26451892", "Ronald", "Intriago", STR_TO_DATE('1-01-2012', '%d-%m-%Y'));
      */
+    //Coment de prueba
 
     private final String bbdd =  "jdbc:mysql://localhost/gym";
     private final String username =  "gym_app";
