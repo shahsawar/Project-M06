@@ -3,6 +3,11 @@ import com.mongodb.client.*;
 import org.bson.Document;
 import clases.User;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /***
@@ -33,7 +38,17 @@ public class DAOUserMongo implements DAOUser{
 
     @Override
     public List<User> getAll() {
-        return null;
+        List<User> userList = new ArrayList<>();
+        MongoCollection<Document> collection = ConnectionMongo.start();
+        try (MongoCursor<Document> cursor = collection.find().iterator()){
+            while (cursor.hasNext()){
+                Document docTmp = cursor.next();
+                User userTmp = toUser(docTmp);
+                userList.add(userTmp);
+            }
+        }
+        ConnectionMongo.close();
+        return userList;
     }
 
     @Override
@@ -47,12 +62,16 @@ public class DAOUserMongo implements DAOUser{
      * @param doc
      * @return
      */
-    private User toClient(Document doc){
+    private User toUser(Document doc){
         User userTmp = new User();
         userTmp.setDni(doc.getString("dni"));
         userTmp.setName(doc.getString("name"));
         userTmp.setLastname(doc.getString("lastname"));
+<<<<<<< HEAD
         //userTmp.setAge(doc.getInteger("age"));
+=======
+        userTmp.setBirthday(doc.getDate("birthday"));
+>>>>>>> main
         userTmp.setUserCode(doc.getInteger("user_code"));
         return userTmp;
     }
@@ -62,30 +81,68 @@ public class DAOUserMongo implements DAOUser{
         docTmp.append("dni", user.getDni());
         docTmp.append("name", user.getName());
         docTmp.append("lastname", user.getLastname());
+<<<<<<< HEAD
         //docTmp.append("age", user.getAge());
+=======
+        docTmp.append("birthday", user.getBirthday());
+>>>>>>> main
         docTmp.append("user_code", user.getUserCode());
+        docTmp.append("reservations", user.getReservations());
         return docTmp;
     }
 
+<<<<<<< HEAD
     @Override
     public int getLastUserId() {
         return 0;
+=======
+    public String dateToString(Date date){
+        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        return dateFormat.format(date);
+>>>>>>> main
     }
 
 
-    /*
-    public static void main(String[] args) {
 
+    public static void main(String[] args) throws ParseException {
+        /*
         try (MongoClient mongoClient = MongoClients.create()) {
             MongoDatabase database = mongoClient.getDatabase("gym");
             MongoCollection<Document> collection = database.getCollection("users");
 
             User user = new User("12345678X", "shah", "sawar", 12, 1);
             collection.insertOne(toDoc(user));
-        }
+        }*/
 
-        User user = new User("12345678X", "shah", "sawar", 12, 1);
+
+        User user = new User("1234", "user1", "userlastname", new SimpleDateFormat("dd-MM-yyyy").parse("10-10-2020"), 1);
+        User user2 = new User("1235", "user2", "userlastname", new SimpleDateFormat("dd-MM-yyyy").parse("11-10-2020"), 2);
+        User user3 = new User("1236", "user3", "userlastname", new SimpleDateFormat("dd-MM-yyyy").parse("12-10-2020"), 3);
+        User user4 = new User("1237", "user4", "userlastname", new SimpleDateFormat("dd-MM-yyyy").parse("13-10-2020"), 4);
+
         DAOUserMongo d = new DAOUserMongo();
         d.insert(user);
-    }*/
+        d.insert(user2);
+        d.insert(user3);
+        d.insert(user4);
+
+        /*
+
+        db.users.update(
+           { user_code: 1 },
+           { $push: { reservations: 1 } }
+        );
+
+        DAOUserMongo dGetAll = new DAOUserMongo();
+        List<User> userList = dGetAll.getAll();
+
+        for (User u : userList) {
+            System.out.println(u.getDni());
+            System.out.println(u.getName());
+            System.out.println(u.getLastname());
+            System.out.println(u.getUserCode());
+            System.out.println(dGetAll.dateToString(u.getBirthday()));
+            System.out.println();
+        }*/
+    }
 }

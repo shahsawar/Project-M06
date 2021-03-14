@@ -44,7 +44,11 @@ public class DAOReservationMongo implements DAOReservation{
         docTmp.append("date", reservation.getDate());
         docTmp.append("user_code", reservation.getUserCode());
         docTmp.append("room_name", reservation.getRoomName());
+<<<<<<< HEAD
         //docTmp.append("workout_plane", reservation.isWorkoutPlane());
+=======
+        docTmp.append("workout_plane", reservation.getWorkoutPlane());
+>>>>>>> main
         return docTmp;
     }
 

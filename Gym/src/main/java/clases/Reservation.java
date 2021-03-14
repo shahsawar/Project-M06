@@ -12,6 +12,7 @@ public class Reservation {
     private Date date;
     private int userCode;
     private String roomName;
+<<<<<<< HEAD
     boolean workoutPlane;
 
     public Reservation(){
@@ -27,6 +28,14 @@ public class Reservation {
     }
 
     public Reservation(Date date, int userCode, String roomName, boolean workoutPlane) {
+=======
+    private Boolean workoutPlane;
+
+    public Reservation() {
+    }
+
+    public Reservation(int reservationCode, Date date, int userCode, String roomName, Boolean workoutPlane) {
+>>>>>>> main
         this.reservationCode = reservationCode;
         this.date = date;
         this.userCode = userCode;
@@ -66,11 +75,19 @@ public class Reservation {
         this.roomName = roomName;
     }
 
+<<<<<<< HEAD
     public boolean hasWorkoutPlane() {
         return workoutPlane;
     }
 
     public void setWorkoutPlane(boolean workoutPlane) {
+=======
+    public Boolean getWorkoutPlane() {
+        return workoutPlane;
+    }
+
+    public void setWorkoutPlane(Boolean workoutPlane) {
+>>>>>>> main
         this.workoutPlane = workoutPlane;
     }
 }
