@@ -18,9 +18,10 @@ public class DAOWorkoutPlaneMongo implements DAOWorkOutPlane{
     }
 
     @Override
-    public void update(WorkoutPlane workoutPlane) {
+    public void update(WorkoutPlane workoutPlane, String s) {
 
     }
+
 
     @Override
     public List<WorkoutPlane> getAll() {

@@ -27,7 +27,7 @@ public class DAOUserMongo implements DAOUser{
     }
 
     @Override
-    public void update(User user) {
+    public void update(User user, Integer integer) {
 
     }
 

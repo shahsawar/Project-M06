@@ -11,7 +11,7 @@ public interface DAO <T, I>{
     public void delete(T t);
 
     //Update
-    public void update(T t);
+    public void update(T t, I i);
 
     //GetAll
     public List<T> getAll();
