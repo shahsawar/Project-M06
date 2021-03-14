@@ -65,7 +65,7 @@ public class DAOReservationJDBC implements DAOReservation{
             sentenciaPreparada.setInt(1,reservation.getReservationCode());
             sentenciaPreparada.setInt(2,reservation.getUserCode());
             sentenciaPreparada.setString(3,reservation.getRoomName());
-            sentenciaPreparada.setString(4,booleanToInteger(reservation.hasWorkoutPlane()) + ""); //Booleano para formato SQL
+            sentenciaPreparada.setString(4,booleanToInteger(reservation.getWorkoutPlane()) + ""); //Booleano para formato SQL
             sentenciaPreparada.setString(5,sqlDate + "");
             insercion = sentenciaPreparada.executeUpdate();
         } catch (SQLException throwables) {
@@ -109,7 +109,7 @@ public class DAOReservationJDBC implements DAOReservation{
             PreparedStatement updateEXP = connexioJDBC.con.prepareStatement("UPDATE reservation SET user_code = ?, room_name = ?, has_workout_plane = ?, date = ?");
             updateEXP.setInt(1, reservation.getUserCode());
             updateEXP.setString(2, reservation.getRoomName());
-            updateEXP.setString(3, booleanToInteger(reservation.hasWorkoutPlane()) + ""); //Booleano para formato SQL
+            updateEXP.setString(3, booleanToInteger(reservation.getWorkoutPlane()) + ""); //Booleano para formato SQL
             updateEXP.setString(4, sqlDate + "");
             int result = updateEXP.executeUpdate();
             System.out.println(result + " rows updated");

@@ -27,11 +27,7 @@ public class DAOReservationMongo implements DAOReservation {
 
     @Override
     public void update(Reservation reservation, Integer integer) {
-<<<<<<< HEAD
-        
-=======
 
->>>>>>> jdbcCode
     }
 
 
@@ -51,11 +47,7 @@ public class DAOReservationMongo implements DAOReservation {
         docTmp.append("date", reservation.getDate());
         docTmp.append("user_code", reservation.getUserCode());
         docTmp.append("room_name", reservation.getRoomName());
-<<<<<<< HEAD
-        //docTmp.append("workout_plane", reservation.isWorkoutPlane());
-=======
         docTmp.append("workout_plane", reservation.getWorkoutPlane());
->>>>>>> main
         return docTmp;
     }
 
@@ -71,7 +63,7 @@ public class DAOReservationMongo implements DAOReservation {
 
 
     public static void main(String[] args) throws ParseException {
-        Reservation r = new Reservation(123, new SimpleDateFormat("dd-MM-yyyy").parse("10-10-2020"), 1, "sala fitness", true);
+        Reservation r = new Reservation(124, new SimpleDateFormat("dd-MM-yyyy").parse("10-10-2020"), 1, "sala fitness", true);
         DAOReservation d = new DAOReservationMongo();
         d.insert(r);
     }

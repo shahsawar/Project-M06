@@ -93,11 +93,7 @@ public class DAOUserMongo implements DAOUser{
         userTmp.setDni(doc.getString("dni"));
         userTmp.setName(doc.getString("name"));
         userTmp.setLastname(doc.getString("lastname"));
-<<<<<<< HEAD
-        //userTmp.setAge(doc.getInteger("age"));
-=======
-        userTmp.setBirthday(doc.getDate("birthday"));
->>>>>>> main
+        userTmp.setBirthDate(doc.getDate("birthday"));
         userTmp.setUserCode(doc.getInteger("user_code"));
         if (doc.containsKey("reservations")){
             List<Document> listTmp = doc.getList("reservations", Document.class);
@@ -115,25 +111,15 @@ public class DAOUserMongo implements DAOUser{
         docTmp.append("dni", user.getDni());
         docTmp.append("name", user.getName());
         docTmp.append("lastname", user.getLastname());
-<<<<<<< HEAD
-        //docTmp.append("age", user.getAge());
-=======
-        docTmp.append("birthday", user.getBirthday());
->>>>>>> main
+        docTmp.append("birthday", user.getBirthDate());
         docTmp.append("user_code", user.getUserCode());
         docTmp.append("reservations", user.getReservations());
         return docTmp;
     }
 
-<<<<<<< HEAD
-    @Override
-    public int getLastUserId() {
-        return 0;
-=======
     public String dateToString(Date date){
         DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         return dateFormat.format(date);
->>>>>>> main
     }
 
 
@@ -147,7 +133,6 @@ public class DAOUserMongo implements DAOUser{
             User user = new User("12345678X", "shah", "sawar", 12, 1);
             collection.insertOne(toDoc(user));
         }
-           */
 
         User user = new User("1234", "user1", "userlastname", new SimpleDateFormat("dd-MM-yyyy").parse("10-10-2020"));
         User user2 = new User("1235", "user2", "userlastname", new SimpleDateFormat("dd-MM-yyyy").parse("11-10-2020"));
@@ -161,26 +146,19 @@ public class DAOUserMongo implements DAOUser{
         d.insert(user4);
         d.insert(user5);
 
-
         System.out.println("The last id " +d.getLastUserId());
-
-        /*
 
         db.users.update(
            { user_code: 1 },
            { $push: { reservations: 1 } }
         );
+        */
 
         DAOUserMongo dGetAll = new DAOUserMongo();
         List<User> userList = dGetAll.getAll();
 
         for (User u : userList) {
-            System.out.println(u.getDni());
-            System.out.println(u.getName());
-            System.out.println(u.getLastname());
-            System.out.println(u.getUserCode());
-            System.out.println(dGetAll.dateToString(u.getBirthday()));
-            System.out.println();
-        }*/
+            System.out.println(u);
+        }
     }
 }

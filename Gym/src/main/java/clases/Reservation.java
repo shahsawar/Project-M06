@@ -1,5 +1,7 @@
 package clases;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /***
@@ -12,23 +14,6 @@ public class Reservation {
     private Date date;
     private int userCode;
     private String roomName;
-<<<<<<< HEAD
-    boolean workoutPlane;
-
-    public Reservation(){
-
-    }
-
-    public Reservation(int reservationCode, Date date, int userCode, String roomName, boolean workoutPlane) {
-        this.reservationCode = reservationCode;
-        this.date = date;
-        this.userCode = userCode;
-        this.roomName = roomName;
-        this.workoutPlane = workoutPlane;
-    }
-
-    public Reservation(Date date, int userCode, String roomName, boolean workoutPlane) {
-=======
     private Boolean workoutPlane;
 
     public Reservation() {
@@ -36,7 +21,6 @@ public class Reservation {
 
 
     public Reservation(int reservationCode, Date date, int userCode, String roomName, Boolean workoutPlane) {
->>>>>>> main
         this.reservationCode = reservationCode;
         this.date = date;
         this.userCode = userCode;
@@ -76,19 +60,27 @@ public class Reservation {
         this.roomName = roomName;
     }
 
-<<<<<<< HEAD
-    public boolean hasWorkoutPlane() {
-        return workoutPlane;
-    }
-
-    public void setWorkoutPlane(boolean workoutPlane) {
-=======
     public Boolean getWorkoutPlane() {
         return workoutPlane;
     }
 
     public void setWorkoutPlane(Boolean workoutPlane) {
->>>>>>> main
         this.workoutPlane = workoutPlane;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("reservationCode: ").append(reservationCode).append(System.lineSeparator());
+        sb.append("Date: ").append(dateToString(date)).append(System.lineSeparator());
+        sb.append("UserCode: ").append(userCode).append(System.lineSeparator());
+        sb.append("RoomName: ").append(roomName).append(System.lineSeparator());
+        sb.append("WorkoutPlane: ").append(workoutPlane).append(System.lineSeparator()).append(System.lineSeparator());
+        return sb.toString();
+    }
+
+    public String dateToString(Date date){
+        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        return dateFormat.format(date);
     }
 }
