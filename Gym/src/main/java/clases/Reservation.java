@@ -17,6 +17,7 @@ public class Reservation {
     public Reservation() {
     }
 
+
     public Reservation(int reservationCode, Date date, int userCode, String roomName, Boolean workoutPlane) {
         this.reservationCode = reservationCode;
         this.date = date;

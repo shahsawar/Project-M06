@@ -1,4 +1,5 @@
 package db;
+import clases.Reservation;
 import com.mongodb.client.*;
 import org.bson.Document;
 import clases.User;
@@ -9,6 +10,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import static com.mongodb.client.model.Filters.eq;
 
 /***
  * @author shah
@@ -21,6 +24,7 @@ public class DAOUserMongo implements DAOUser{
 
     @Override
     public void insert(User user) {
+        user.setUserCode(getLastUserId()+1);
         MongoCollection<Document> collection = ConnectionMongo.start();
         collection.insertOne(toDoc(user));
         ConnectionMongo.close();
@@ -28,13 +32,16 @@ public class DAOUserMongo implements DAOUser{
 
     @Override
     public void delete(User user) {
-
+        MongoCollection<Document> collection = ConnectionMongo.start();
+        collection.deleteOne(toDoc(user));
+        ConnectionMongo.close();
     }
 
     @Override
-    public void update(User user) {
+    public void update(User user, Integer integer) {
 
     }
+
 
     @Override
     public List<User> getAll() {
@@ -52,10 +59,29 @@ public class DAOUserMongo implements DAOUser{
     }
 
     @Override
-    public User getByIdentifier(Integer integer) {
-        return null;
+    public User getByIdentifier(Integer code) {
+        MongoCollection<Document> collection = ConnectionMongo.start();
+        Document mydoc = collection.find(eq("user_code", code)).first();
+        User userTmp = toUser(mydoc);
+        ConnectionMongo.close();
+        return userTmp;
     }
 
+    public List<Reservation> getAllReservations(int code){
+        User userTmp = getByIdentifier(code);
+        return userTmp.getReservations();
+    }
+
+    @Override
+    public int getLastUserId() {
+        MongoCollection<Document> collection = ConnectionMongo.start();
+        Document myDoc = collection.find().sort(new Document("_id", -1)).first();
+        if (myDoc == null){
+            return 0;
+        }
+        ConnectionMongo.close();
+        return myDoc.getInteger("user_code");
+    }
 
     /***
      *
@@ -69,6 +95,14 @@ public class DAOUserMongo implements DAOUser{
         userTmp.setLastname(doc.getString("lastname"));
         userTmp.setBirthday(doc.getDate("birthday"));
         userTmp.setUserCode(doc.getInteger("user_code"));
+        if (doc.containsKey("reservations")){
+            List<Document> listTmp = doc.getList("reservations", Document.class);
+            List<Reservation> reservationList = new ArrayList<>();
+            for (Document docTmp: listTmp) {
+                reservationList.add(DAOReservationMongo.toReservation(docTmp));
+            }
+            userTmp.setReservations(reservationList);
+        }
         return userTmp;
     }
 
@@ -98,19 +132,23 @@ public class DAOUserMongo implements DAOUser{
 
             User user = new User("12345678X", "shah", "sawar", 12, 1);
             collection.insertOne(toDoc(user));
-        }*/
+        }
+           */
 
-
-        User user = new User("1234", "user1", "userlastname", new SimpleDateFormat("dd-MM-yyyy").parse("10-10-2020"), 1);
-        User user2 = new User("1235", "user2", "userlastname", new SimpleDateFormat("dd-MM-yyyy").parse("11-10-2020"), 2);
-        User user3 = new User("1236", "user3", "userlastname", new SimpleDateFormat("dd-MM-yyyy").parse("12-10-2020"), 3);
-        User user4 = new User("1237", "user4", "userlastname", new SimpleDateFormat("dd-MM-yyyy").parse("13-10-2020"), 4);
-
+        User user = new User("1234", "user1", "userlastname", new SimpleDateFormat("dd-MM-yyyy").parse("10-10-2020"));
+        User user2 = new User("1235", "user2", "userlastname", new SimpleDateFormat("dd-MM-yyyy").parse("11-10-2020"));
+        User user3 = new User("1236", "user3", "userlastname", new SimpleDateFormat("dd-MM-yyyy").parse("12-10-2020"));
+        User user4 = new User("1237", "user4", "userlastname", new SimpleDateFormat("dd-MM-yyyy").parse("13-10-2020"));
+        User user5 = new User("1237", "user4", "userlastname", new SimpleDateFormat("dd-MM-yyyy").parse("13-10-2020"));
         DAOUserMongo d = new DAOUserMongo();
         d.insert(user);
         d.insert(user2);
         d.insert(user3);
         d.insert(user4);
+        d.insert(user5);
+
+
+        System.out.println("The last id " +d.getLastUserId());
 
         /*
 

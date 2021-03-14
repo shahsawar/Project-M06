@@ -20,6 +20,14 @@ public class User {
     public User() {
     }
 
+    public User(String dni, String name, String lastname, Date birthday) {
+        this.dni = dni;
+        this.name = name;
+        this.lastname = lastname;
+        this.birthday = birthday;
+        reservations = new ArrayList<>();
+    }
+
     public User(String dni, String name, String lastname, Date birthday, int userCode) {
         this.dni = dni;
         this.name = name;
