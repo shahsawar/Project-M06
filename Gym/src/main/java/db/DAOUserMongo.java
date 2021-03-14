@@ -93,7 +93,11 @@ public class DAOUserMongo implements DAOUser{
         userTmp.setDni(doc.getString("dni"));
         userTmp.setName(doc.getString("name"));
         userTmp.setLastname(doc.getString("lastname"));
+<<<<<<< HEAD
+        //userTmp.setAge(doc.getInteger("age"));
+=======
         userTmp.setBirthday(doc.getDate("birthday"));
+>>>>>>> main
         userTmp.setUserCode(doc.getInteger("user_code"));
         if (doc.containsKey("reservations")){
             List<Document> listTmp = doc.getList("reservations", Document.class);
@@ -111,15 +115,25 @@ public class DAOUserMongo implements DAOUser{
         docTmp.append("dni", user.getDni());
         docTmp.append("name", user.getName());
         docTmp.append("lastname", user.getLastname());
+<<<<<<< HEAD
+        //docTmp.append("age", user.getAge());
+=======
         docTmp.append("birthday", user.getBirthday());
+>>>>>>> main
         docTmp.append("user_code", user.getUserCode());
         docTmp.append("reservations", user.getReservations());
         return docTmp;
     }
 
+<<<<<<< HEAD
+    @Override
+    public int getLastUserId() {
+        return 0;
+=======
     public String dateToString(Date date){
         DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         return dateFormat.format(date);
+>>>>>>> main
     }
 
 
