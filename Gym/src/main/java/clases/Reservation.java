@@ -28,6 +28,14 @@ public class Reservation {
         this.workoutPlane = workoutPlane;
     }
 
+    public Reservation( Date date, int userCode, String roomName, Boolean workoutPlane) {
+        this.reservationCode = reservationCode;
+        this.date = date;
+        this.userCode = userCode;
+        this.roomName = roomName;
+        this.workoutPlane = workoutPlane;
+    }
+
     public int getReservationCode() {
         return reservationCode;
     }

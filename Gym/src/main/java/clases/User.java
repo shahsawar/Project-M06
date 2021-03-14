@@ -1,5 +1,8 @@
 package clases;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -16,24 +19,24 @@ public class User {
     private int userCode;
     private List<Reservation> reservations;
 
-    public User(){
-
+    public User() {
     }
 
-    public User(String dni, String name, String lastname, Date birthDate, int userCode, List<Reservation> reservations) {
+    public User(String dni, String name, String lastname, Date birthday) {
         this.dni = dni;
         this.name = name;
         this.lastname = lastname;
-        this.birthDate = birthDate;
+        this.birthDate = birthday;
+        reservations = new ArrayList<>();
+    }
+
+    public User(String dni, String name, String lastname, Date birthday, int userCode) {
+        this.dni = dni;
+        this.name = name;
+        this.lastname = lastname;
+        this.birthDate = birthday;
         this.userCode = userCode;
-        this.reservations = reservations;
-    }
-
-    public User(String dni, String name, String lastname, Date birthDate) {
-        this.dni = dni;
-        this.name = name;
-        this.lastname = lastname;
-        this.birthDate = birthDate;
+        reservations = new ArrayList<>();
     }
 
     public String getDni() {
@@ -64,8 +67,8 @@ public class User {
         return birthDate;
     }
 
-    public void setBirthDate(Date birthDate) {
-        this.birthDate = birthDate;
+    public void setBirthDate(Date birthday) {
+        this.birthDate = birthday;
     }
 
     public int getUserCode() {
@@ -82,5 +85,27 @@ public class User {
 
     public void setReservations(List<Reservation> reservations) {
         this.reservations = reservations;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Dni: ").append(dni).append(System.lineSeparator());
+        sb.append("Name: ").append(name).append(System.lineSeparator());
+        sb.append("Lastname: ").append(lastname).append(System.lineSeparator());
+        sb.append("Birthday: ").append(dateToString(birthDate)).append(System.lineSeparator());
+        sb.append("UserCode: ").append(userCode).append(System.lineSeparator()).append(System.lineSeparator());
+        if (reservations.size() > 0){
+            sb.append("reservations: ").append(System.lineSeparator());
+            for (Reservation reservation : reservations) {
+                sb.append(reservation.toString());
+            }
+        }
+        return sb.toString();
+    }
+
+    public String dateToString(Date date){
+        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        return dateFormat.format(date);
     }
 }
