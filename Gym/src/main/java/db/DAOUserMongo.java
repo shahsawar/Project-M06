@@ -12,6 +12,9 @@ import java.util.Date;
 import java.util.List;
 
 import static com.mongodb.client.model.Filters.eq;
+import static com.mongodb.client.model.Filters.in;
+import static com.mongodb.client.model.Updates.combine;
+import static com.mongodb.client.model.Updates.set;
 
 /***
  * @author shah
@@ -39,7 +42,9 @@ public class DAOUserMongo implements DAOUser{
 
     @Override
     public void update(User user, Integer integer) {
-
+        MongoCollection<Document> collection = ConnectionMongo.start();
+        collection.updateOne(eq("user_code", integer), combine(set("dni", user.getDni()), set("name",user.getName()),set("lastname",user.getLastname()),set("birthday",user.getBirthDate())));
+        ConnectionMongo.close();
     }
 
 
@@ -152,13 +157,20 @@ public class DAOUserMongo implements DAOUser{
            { user_code: 1 },
            { $push: { reservations: 1 } }
         );
+
+        db.users.updateOne(
+          { user_code: 1 },
+          { $set: { "list.$[ele].reservation_code": 123 } },
+          { arrayFilters: [ { "ele.user_code": 1 } ] }
+        )
+
+        db.users.find({$and:[{user_code:1}, {"reservations.workout_plane": true}]})
         */
 
-        DAOUserMongo dGetAll = new DAOUserMongo();
-        List<User> userList = dGetAll.getAll();
+        User userTmp = new User("123456789", "user1", "userlastname", new SimpleDateFormat("dd-MM-yyyy").parse("13-10-2020"));
+        DAOUserMongo mongo = new DAOUserMongo();
+        mongo.update(userTmp, 1);
 
-        for (User u : userList) {
-            System.out.println(u);
-        }
+
     }
 }

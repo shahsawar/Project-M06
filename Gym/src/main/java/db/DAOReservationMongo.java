@@ -1,14 +1,18 @@
 package db;
 
 import clases.Reservation;
+import clases.User;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Updates;
 import org.bson.Document;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
-import static com.mongodb.client.model.Filters.eq;
+import static com.mongodb.client.model.Filters.*;
+import static com.mongodb.client.model.Updates.combine;
+import static com.mongodb.client.model.Updates.set;
 
 public class DAOReservationMongo implements DAOReservation {
     @Override
@@ -30,7 +34,6 @@ public class DAOReservationMongo implements DAOReservation {
 
     }
 
-
     @Override
     public List<Reservation> getAll() {
         return null;
@@ -39,6 +42,17 @@ public class DAOReservationMongo implements DAOReservation {
     @Override
     public Reservation getByIdentifier(Integer integer) {
         return null;
+    }
+
+
+    public int getLastUserId(User user) {
+        MongoCollection<Document> collection = ConnectionMongo.start();
+        Document myDoc = collection.find(eq("reservations_user_code", 1)).sort(new Document("_id", -1)).first();
+        if (myDoc == null){
+            return 0;
+        }
+        ConnectionMongo.close();
+        return myDoc.getInteger("user_code");
     }
 
     public static Document toDoc(Reservation reservation) {
@@ -63,8 +77,19 @@ public class DAOReservationMongo implements DAOReservation {
 
 
     public static void main(String[] args) throws ParseException {
-        Reservation r = new Reservation(124, new SimpleDateFormat("dd-MM-yyyy").parse("10-10-2020"), 1, "sala fitness", true);
+        Reservation r = new Reservation(123, new SimpleDateFormat("dd-MM-yyyy").parse("10-10-2021"), 1, "SALA FITNESS", false);
         DAOReservation d = new DAOReservationMongo();
-        d.insert(r);
+        d.update(r, r.getUserCode());
+
+        MongoCollection<Document> collection = ConnectionMongo.start();
+        Document myDoc = collection.find(eq("reservations.user_code", 1)).sort(new Document("_id", -1)).first();
+
+        System.out.println(myDoc.getInteger("reservation_code"));
+
+
+
+        ConnectionMongo.close();
+        System.out.println();
     }
+
 }
