@@ -38,7 +38,10 @@ public class DAOUserJDBC implements DAOUser{
         return fecha;
     }
 
-
+    /***
+     *
+     * @param user
+     */
     @Override
     public void insert(User user) {
 
@@ -79,6 +82,9 @@ public class DAOUserJDBC implements DAOUser{
 
     }
 
+    /**
+     * @param user
+     */
     @Override
     public void delete(User user) {
 
