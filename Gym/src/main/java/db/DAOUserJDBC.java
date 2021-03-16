@@ -38,6 +38,10 @@ public class DAOUserJDBC implements DAOUser{
         return fecha;
     }
 
+    /***
+     *
+     * @param user
+     */
     @Override
     public void insert(User user) {
 
