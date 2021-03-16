@@ -106,11 +106,10 @@ public class DAOReservationJDBC implements DAOReservation{
         java.sql.Date sqlDate = new java.sql.Date(reservation.getDate().getTime()); //Fecha en formato sql
         try {
 
-            PreparedStatement updateEXP = connexioJDBC.con.prepareStatement("UPDATE reservation SET user_code = ?, room_name = ?, has_workout_plane = ?, date = ?");
-            updateEXP.setInt(1, reservation.getUserCode());
-            updateEXP.setString(2, reservation.getRoomName());
-            updateEXP.setString(3, booleanToInteger(reservation.getWorkoutPlane()) + ""); //Booleano para formato SQL
-            updateEXP.setString(4, sqlDate + "");
+            PreparedStatement updateEXP = connexioJDBC.con.prepareStatement("UPDATE reservation SET room_name = ?, has_workout_plane = ?, date = ?");
+            updateEXP.setString(1, reservation.getRoomName());
+            updateEXP.setString(2, booleanToInteger(reservation.getWorkoutPlane()) + ""); //Booleano para formato SQL
+            updateEXP.setString(3, sqlDate + "");
             int result = updateEXP.executeUpdate();
             System.out.println(result + " rows updated");
 
