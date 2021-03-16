@@ -82,6 +82,9 @@ public class DAOUserJDBC implements DAOUser{
 
     }
 
+    /**
+     * @param user
+     */
     @Override
     public void delete(User user) {
 
