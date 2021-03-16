@@ -38,6 +38,7 @@ public class DAOUserJDBC implements DAOUser{
         return fecha;
     }
 
+
     @Override
     public void insert(User user) {
 
