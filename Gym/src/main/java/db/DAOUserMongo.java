@@ -43,7 +43,11 @@ public class DAOUserMongo implements DAOUser{
     @Override
     public void update(User user, Integer integer) {
         MongoCollection<Document> collection = ConnectionMongo.start();
-        collection.updateOne(eq("user_code", integer), combine(set("dni", user.getDni()), set("name",user.getName()),set("lastname",user.getLastname()),set("birthday",user.getBirthDate())));
+        collection.updateOne(eq("user_code", integer), combine(
+                set("dni", user.getDni()),
+                set("name",user.getName()),
+                set("lastname",user.getLastname()),
+                set("birthday",user.getBirthDate())));
         ConnectionMongo.close();
     }
 

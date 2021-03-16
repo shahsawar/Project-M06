@@ -38,13 +38,17 @@ public class DAOReservationMongo implements DAOReservation {
     public void update(Reservation reservation, Integer integer) {
         MongoCollection<Document> collection = ConnectionMongo.start();
 
-        /*
         Bson filter = eq("user_code", reservation.getUserCode());
         UpdateOptions options = new UpdateOptions().arrayFilters(asList(eq("ele.reservation_code", integer)));
-        Bson update = set("reservations.$[ele].workout_plane", true);
-        UpdateResult result = collection.updateMany(filter, update, options);
-
-        System.out.println(result.toString());
+        //Bson update = set("reservations.$[ele].workout_plane", false);
+        Bson update = combine(
+                set("reservations.$[ele].date",reservation.getDate()),
+                set("reservations.$[ele].room_name",reservation.getRoomName()),
+                set("reservations.$[ele].workout_plane",reservation.getWorkoutPlane())
+        );
+        collection.updateOne(filter, update, options);
+        //UpdateResult result = collection.updateOne(filter, update, options);
+        //System.out.println(result.toString());
 
         /*
         Document doc = collection.find(eq("reservations.reservation_code", 123)).first();
@@ -109,7 +113,7 @@ public class DAOReservationMongo implements DAOReservation {
 
 
     public static void main(String[] args) throws ParseException {
-        Reservation r = new Reservation(124, new SimpleDateFormat("dd-MM-yyyy").parse("10-10-2021"), 1, "SALA FITNESS", false);
+        Reservation r = new Reservation(123, new SimpleDateFormat("dd-MM-yyyy").parse("10-10-2020"), 1, "sala fitness", true);
         DAOReservation d = new DAOReservationMongo();
         //d.insert(r);
         d.update(r, 123);
