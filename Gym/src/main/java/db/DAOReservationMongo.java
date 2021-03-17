@@ -22,6 +22,7 @@ import static java.util.Arrays.asList;
 public class DAOReservationMongo implements DAOReservation {
     @Override
     public void insert(Reservation reservation) {
+        reservation.setReservationCode(getLastUserId(reservation.getUserCode())+1);
         MongoCollection<Document> collection = ConnectionMongo.start();
         collection.updateOne(eq("user_code", reservation.getUserCode()), Updates.push("reservations", toDoc(reservation)));
         ConnectionMongo.close();
@@ -67,6 +68,7 @@ public class DAOReservationMongo implements DAOReservation {
             }
 
         }*/
+        ConnectionMongo.close();
     }
 
 
@@ -82,14 +84,17 @@ public class DAOReservationMongo implements DAOReservation {
 
 
 
-    public int getLastUserId(User user) {
+    public int getLastUserId(int user_code) {
+        int lastDoc = 0;
         MongoCollection<Document> collection = ConnectionMongo.start();
-        Document myDoc = collection.find().sort(new Document("_id", -1)).first();
-        if (myDoc == null){
-            return 0;
+        Document mydoc = collection.find(eq("user_code", user_code)).first();
+        if (mydoc.containsKey("reservations")) {
+            lastDoc = mydoc.getList("reservations", Document.class).size();
+            System.out.println("This is last:"+lastDoc);
+
         }
         ConnectionMongo.close();
-        return myDoc.getInteger("user_code");
+        return lastDoc;
     }
 
     public static Document toDoc(Reservation reservation) {
@@ -115,9 +120,9 @@ public class DAOReservationMongo implements DAOReservation {
 
     public static void main(String[] args) throws ParseException {
         Reservation r = new Reservation(123, new SimpleDateFormat("dd-MM-yyyy").parse("10-10-2020"), 1, "sala fitness", true);
-        DAOReservation d = new DAOReservationMongo();
-        //d.insert(r);
-        d.update(r, 123);
+        DAOReservationMongo d = new DAOReservationMongo();
+        d.insert(r);
+        //d.update(r, 123);
         /*
         MongoCollection<Document> collection = ConnectionMongo.start();
         Document myDoc = collection.find(eq("reservations.user_code", 1)).sort(new Document("_id", -1)).first();+
@@ -127,7 +132,6 @@ public class DAOReservationMongo implements DAOReservation {
         */
 
         ConnectionMongo.close();
-        System.out.println();
     }
 
 }
