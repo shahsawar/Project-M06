@@ -81,9 +81,10 @@ public class DAOReservationMongo implements DAOReservation {
     }
 
 
+
     public int getLastUserId(User user) {
         MongoCollection<Document> collection = ConnectionMongo.start();
-        Document myDoc = collection.find(eq("reservations_user_code", 1)).sort(new Document("_id", -1)).first();
+        Document myDoc = collection.find().sort(new Document("_id", -1)).first();
         if (myDoc == null){
             return 0;
         }
