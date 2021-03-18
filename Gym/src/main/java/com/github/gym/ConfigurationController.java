@@ -25,8 +25,8 @@ public class ConfigurationController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         Image image = new Image(getClass().getResourceAsStream("/images/mysql.jpg"));
         Image imageMongo = new Image(getClass().getResourceAsStream("/images/mongodb.jpg"));
-        //imageViewSQL.setFitHeight(100); //726
-        //imageViewSQL.setFitWidth(200); //500
+        imageViewSQL.setFitHeight(100); //726
+        imageViewSQL.setFitWidth(200); //500
         imageViewSQL.setImage(image);
         imageViewMongo.setImage(imageMongo);
 
@@ -49,6 +49,15 @@ public class ConfigurationController implements Initializable {
                 event.consume();
             }
         });
+
+
+        imageViewSQL.setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent t) {
+                System.out.println("Hover on Mysql detected");
+            }
+        });
+
     }
 
 

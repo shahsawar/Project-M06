@@ -1,13 +1,27 @@
 package com.github.gym;
 
 import java.io.IOException;
-import javafx.fxml.FXML;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class PrimaryController {
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.layout.VBox;
+
+public class PrimaryController implements Initializable {
+
+    @FXML
+    VBox mainVBox;
+
 
     @FXML
     private void switchToSecondary() throws IOException {
         //App.setRoot("secondary");
         App.setRoot("configuration");
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        mainVBox.getStyleClass().add("mainBox");
     }
 }
