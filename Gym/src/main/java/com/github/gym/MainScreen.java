@@ -1,5 +1,7 @@
 package com.github.gym;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -36,11 +38,16 @@ public class MainScreen implements Initializable {
     @FXML
     private TableColumn<User, String> colUserLastname;
 
+
+    ObservableList<User> observableList = FXCollections.observableArrayList();
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         Image image = new Image(getClass().getResourceAsStream("/images/settings.png"));
         imagenMainScreen.setImage(image);
+
+        App.gestorPersistencia.
 
         colUserDni.setCellValueFactory(new PropertyValueFactory<>("dni"));
         colUserName.setCellValueFactory(new PropertyValueFactory<>("name"));

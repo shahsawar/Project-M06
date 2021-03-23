@@ -5,7 +5,7 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 
-public class ConnectionMongo {
+public class ConnectionMongo{
 
     private static final String DATABASENAME = "gym";
     private static final String COLLECTIONNAME = "users";
