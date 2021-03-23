@@ -1,5 +1,7 @@
 package clases;
 
+import clases.Reservation;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

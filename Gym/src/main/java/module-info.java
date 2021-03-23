@@ -5,5 +5,7 @@ module com.github.gym {
     requires java.sql;
 
     opens com.github.gym to javafx.fxml;
+    opens clases to javafx.base;
+
     exports com.github.gym;
 }

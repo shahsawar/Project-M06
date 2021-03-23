@@ -1,6 +1,5 @@
 package com.github.gym;
 
-import clases.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
@@ -18,6 +17,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+
+import clases.*;
 
 /**
  * @autor shah
@@ -53,6 +54,9 @@ public class MainScreen implements Initializable {
         imagenMainScreen.setImage(image);
 
         List<User> userList = App.gestorPersistencia.getAllUsers();
+        User userTmp = new User();
+        observableList.add(userTmp);
+
         for (User user : userList) {
             observableList.add(user);
         }

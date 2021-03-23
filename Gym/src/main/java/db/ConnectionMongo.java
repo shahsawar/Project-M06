@@ -11,6 +11,7 @@ public class ConnectionMongo{
     private static final String COLLECTIONNAME = "users";
     private static MongoClient mongoClient;
 
+
     public static MongoCollection<Document> start() {
         mongoClient = MongoClients.create();
         MongoDatabase database = mongoClient.getDatabase(DATABASENAME);
