@@ -1,5 +1,6 @@
 package com.github.gym;
 
+import clases.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
@@ -7,14 +8,15 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import clases.*;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 /**
@@ -28,6 +30,9 @@ public class MainScreen implements Initializable {
 
     @FXML
     private Button mainScreenAddBtn;
+
+    @FXML
+    private TableView<User> mainScreenTable;
 
     @FXML
     private TableColumn<User, String> colUserDni;
@@ -47,11 +52,17 @@ public class MainScreen implements Initializable {
         Image image = new Image(getClass().getResourceAsStream("/images/settings.png"));
         imagenMainScreen.setImage(image);
 
-        App.gestorPersistencia.
+        List<User> userList = App.gestorPersistencia.getAllUsers();
+        for (User user : userList) {
+            observableList.add(user);
+        }
 
         colUserDni.setCellValueFactory(new PropertyValueFactory<>("dni"));
         colUserName.setCellValueFactory(new PropertyValueFactory<>("name"));
         colUserLastname.setCellValueFactory(new PropertyValueFactory<>("lastname"));
+
+        mainScreenTable.setItems(observableList);
+
 
         imagenMainScreen.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
