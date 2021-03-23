@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.gym.MainScreen">
+   <children>
+      <VBox layoutX="2.0" layoutY="1.0" prefHeight="642.0" prefWidth="1023.0">
+         <children>
+            <HBox fx:id="mainScreenTitle" prefHeight="58.0" prefWidth="1023.0">
+               <children>
+                  <Label prefHeight="69.0" prefWidth="489.0" text="Main Screen">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </Label>
+               </children></HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label alignment="TOP_LEFT" text="Name:">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets right="20.0" />
+                     </HBox.margin>
+                  </Label>
+                  <TextField fx:id="textFieldName">
+                     <HBox.margin>
+                        <Insets right="20.0" />
+                     </HBox.margin>
+                  </TextField>
+                  <Button fx:id="btnFind" mnemonicParsing="false" text="Find">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Button>
+                  <ImageView fx:id="imagenMainScreen" fitHeight="70.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                     <HBox.margin>
+                        <Insets left="300.0" />
+                     </HBox.margin></ImageView>
+               </children></HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
