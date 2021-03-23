@@ -3,6 +3,8 @@ package db;
 import clases.Reservation;
 import clases.User;
 
+import java.util.List;
+
 public class GestorPersistenciaJDBC extends GestorPersistencia{
 
     DAOUserJDBC daoUserJDBC = new DAOUserJDBC();
@@ -26,6 +28,11 @@ public class GestorPersistenciaJDBC extends GestorPersistencia{
     @Override
     public User getUserById(Integer id) {
         return daoUserJDBC.getByIdentifier(id);
+    }
+
+    @Override
+    public List<User> getAllUsers() {
+        return daoUserJDBC.getAll();
     }
 
     @Override

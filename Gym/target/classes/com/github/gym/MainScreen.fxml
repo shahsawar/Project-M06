@@ -46,6 +46,18 @@
                         <Insets left="200.0" />
                      </HBox.margin></ImageView>
                </children></HBox>
+            <TableView fx:id="mainScreenTable" prefHeight="200.0" prefWidth="200.0">
+              <columns>
+                <TableColumn fx:id="colUserDni" prefWidth="121.0" text="DNI" />
+                <TableColumn fx:id="colUserName" prefWidth="143.0" text="Name" />
+                  <TableColumn fx:id="colUserLastname" prefWidth="143.0" text="Lastname" />
+              </columns>
+            </TableView>
+            <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Button fx:id="mainScreenAddBtn" mnemonicParsing="false" text="Add reservation" />
+               </children>
+            </HBox>
          </children>
       </VBox>
    </children>

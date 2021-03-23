@@ -3,6 +3,8 @@ package db;
 import clases.Reservation;
 import clases.User;
 
+import java.util.List;
+
 public class GestorPersistenciaMongo extends GestorPersistencia{
 
     DAOUserMongo daoUserMongo = new DAOUserMongo();
@@ -26,6 +28,11 @@ public class GestorPersistenciaMongo extends GestorPersistencia{
     @Override
     public User getUserById(Integer id) {
         return daoUserMongo.getByIdentifier(id);
+    }
+
+    @Override
+    public List<User> getAllUsers() {
+        return daoUserMongo.getAll();
     }
 
     @Override
