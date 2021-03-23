@@ -27,11 +27,11 @@
       <Label text="Name" GridPane.columnIndex="1" GridPane.rowIndex="2" />
       <Label text="Lastname" GridPane.columnIndex="1" GridPane.rowIndex="3" />
       <Label text="Birthdate" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-      <TextField GridPane.columnIndex="2" GridPane.rowIndex="1" />
-      <TextField GridPane.columnIndex="2" GridPane.rowIndex="2" />
-      <TextField GridPane.columnIndex="2" GridPane.rowIndex="3" />
-      <DatePicker GridPane.columnIndex="2" GridPane.rowIndex="4" />
-      <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="82.0" text="Save" GridPane.columnIndex="5" GridPane.rowIndex="6" />
-      <Button fx:id="cancelBtn" mnemonicParsing="false" text="Cancel" GridPane.columnIndex="4" GridPane.rowIndex="6" />
+      <TextField fx:id="dniInput" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+      <TextField fx:id="nameInput" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+      <TextField fx:id="lastnameInput" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+      <DatePicker fx:id="dateInput" editable="false" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+      <Button fx:id="saveBtn" mnemonicParsing="false" onAction="#clickSave" prefHeight="26.0" prefWidth="82.0" text="Save" GridPane.columnIndex="5" GridPane.rowIndex="6" />
+      <Button fx:id="cancelBtn" mnemonicParsing="false" onAction="#clickCancel" text="Cancel" GridPane.columnIndex="4" GridPane.rowIndex="6" />
    </children>
 </GridPane>

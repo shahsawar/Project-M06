@@ -1,11 +1,20 @@
 package com.github.gym;
 
 import clases.User;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.TextField;
 
 import java.io.IOException;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 
 /***
@@ -13,31 +22,63 @@ import java.util.List;
  */
 public class InsertUserController{
 
+    private final StringProperty dni = new SimpleStringProperty("");
+    private final StringProperty name = new SimpleStringProperty("");
+    private final StringProperty lastName = new SimpleStringProperty("");
+    private final StringProperty birthdate = new SimpleStringProperty("");
+
     @FXML
     private Button cancelBtn;
+
+    @FXML
+    private TextField dniInput;
+
+    @FXML
+    private TextField nameInput;
+
+    @FXML
+    private TextField lastnameInput;
+
+    @FXML
+    private DatePicker dateInput;
 
 
     public void initialize() {
 
+        //Bind
+        dni.bind(dniInput.textProperty());
+        name.bind(nameInput.textProperty());
+        lastName.bind(lastnameInput.textProperty());
+        //dateInput.bind(dateInput.textProperty());
+    }
+
+
+    @FXML
+    public void clickSave(ActionEvent actionEvent) {
+
+        System.out.println(name.get());
         /*
-        //Bind entre controles
-        textNom.textProperty()
-                .bindBidirectional(textNomFiscal.textProperty());
+        LocalDate localDate = dateInput.getValue();
+        Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
+        Date date = Date.from(instant);
+        System.out.println(date);*/
+        Date fecha = new Date();
+        String fechaStr = "24/11/2001";
+        try {
+            fecha = java.sql.Date.valueOf(LocalDate.parse(fechaStr, DateTimeFormatter.ofPattern("d/MM/yyyy")));
+        }catch (Exception e){
+            System.out.println("Fecha incorrecta");
+        }
 
-        //Bind de controles y atributos de la clase
-        nombre.bind(textNom.textProperty());
-        nomFiscalText.bind(textNomFiscal.textProperty());
-        direccionText.bind(direccion.textProperty());
-        ciudadText.bind(ciudad.textProperty());
-        provinciaText.bind(provincia.textProperty());*/
+        App.gestorPersistencia.insertUser(new User(dni.get(), name.get(), lastName.get(), fecha));
 
-        List<User> userList = App.gestorPersistencia.getAllUsers();
-        for (User user : userList) {
-            System.out.println(user.getName());
+        try {
+            App.setRoot("MainScreen");
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
     }
-
 
     @FXML
     public void clickCancel(ActionEvent actionEvent) {
