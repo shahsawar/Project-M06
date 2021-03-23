@@ -3,9 +3,13 @@ package com.github.gym;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import clases.*;
 
 import java.io.IOException;
 import java.net.URL;
@@ -20,10 +24,27 @@ public class MainScreen implements Initializable {
     @FXML
     private ImageView imagenMainScreen;
 
+    @FXML
+    private Button mainScreenAddBtn;
+
+    @FXML
+    private TableColumn<User, String> colUserDni;
+
+    @FXML
+    private TableColumn<User, String> colUserName;
+
+    @FXML
+    private TableColumn<User, String> colUserLastname;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
         Image image = new Image(getClass().getResourceAsStream("/images/settings.png"));
         imagenMainScreen.setImage(image);
+
+        colUserDni.setCellValueFactory(new PropertyValueFactory<>("dni"));
+        colUserName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        colUserLastname.setCellValueFactory(new PropertyValueFactory<>("lastname"));
 
         imagenMainScreen.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
@@ -36,6 +57,18 @@ public class MainScreen implements Initializable {
                 event.consume();
             }
         });
+
+        mainScreenAddBtn.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                try {
+                    App.setRoot("insertUser");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
     }
 
 
