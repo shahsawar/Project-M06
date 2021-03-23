@@ -1,5 +1,6 @@
 package com.github.gym;
 
+import db.GestorPersistencia;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -14,6 +15,7 @@ import java.io.IOException;
 public class App extends Application {
 
     private static Scene scene;
+    static GestorPersistencia gestorPersistencia;
 
     @Override
     public void start(Stage stage) throws IOException {
