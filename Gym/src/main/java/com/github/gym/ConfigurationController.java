@@ -17,7 +17,6 @@ import java.util.ResourceBundle;
 
 public class ConfigurationController implements Initializable {
 
-
     @FXML
     private ImageView imageViewSQL;
 
@@ -42,7 +41,6 @@ public class ConfigurationController implements Initializable {
         imageViewSQL.setFitWidth(200); //500
         imageViewSQL.setImage(image);
         imageViewMongo.setImage(imageMongo);
-
 
         //MongoDB selected
         imageViewMongo.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
