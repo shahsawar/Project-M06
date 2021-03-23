@@ -29,7 +29,7 @@ public class ConfigurationController implements Initializable {
      * @throws IOException
      */
     void backToMain() throws IOException {
-        App.setRoot("primary");
+        App.setRoot("MainScreen");
     }
 
 
