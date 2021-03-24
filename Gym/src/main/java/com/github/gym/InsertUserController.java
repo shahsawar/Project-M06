@@ -22,11 +22,6 @@ import java.util.List;
  */
 public class InsertUserController{
 
-    private final StringProperty dni = new SimpleStringProperty("");
-    private final StringProperty name = new SimpleStringProperty("");
-    private final StringProperty lastName = new SimpleStringProperty("");
-    private final StringProperty birthdate = new SimpleStringProperty("");
-
     @FXML
     private Button cancelBtn;
 
@@ -43,34 +38,40 @@ public class InsertUserController{
     private DatePicker dateInput;
 
 
-    public void initialize() {
+    boolean userAlreadyExist(String dni){
+        boolean exist = false;
 
-        //Bind
-        dni.bind(dniInput.textProperty());
-        name.bind(nameInput.textProperty());
-        lastName.bind(lastnameInput.textProperty());
-        //dateInput.bind(dateInput.textProperty());
+        User user = App.gestorPersistencia.getUserByDNI(dni);
+        if (user != null){ //Ha devuelto un usuario, por lo tanto existe
+            exist = true;
+        }
+
+        return exist;
     }
-
 
     @FXML
     public void clickSave(ActionEvent actionEvent) {
 
-        System.out.println(name.get());
+        System.out.println(nameInput.getText());
 
         LocalDate localDate = dateInput.getValue();
         Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
         Date date = Date.from(instant);
 
+        System.out.println("DNI: " + dniInput.getText());
 
-        /*
-        App.gestorPersistencia.insertUser(new User(dni.get(), name.get(), lastName.get(), date));
+        if (userAlreadyExist(dniInput.getText())){
+            System.out.println("El usuario ya existe");
+        } else {
 
-        try {
-            App.setRoot("MainScreen");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
+            App.gestorPersistencia.insertUser(new User(dniInput.getText(), nameInput.getText(), lastnameInput.getText(), date));
+
+            try {
+                App.setRoot("MainScreen");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
 
     }
 

@@ -35,7 +35,10 @@ public class Prueba {
         }
 
         //daoReservation.delete(reservations.get(0));
-        daoReservation.update(reservation, reservations.get(0).getReservationCode());
+        //daoReservation.update(reservation, reservations.get(0).getReservationCode());
+        //User user1 = daoUserJDBC.getUserByDNI("Y2645188");
+        User user1 = daoUserJDBC.getUserByDNI("Y2645188");
+        System.out.println("User founded: " + user1.getName());
 
         //daoUserJDBC.insert(user);
         /*List<User> users = daoUserJDBC.getAll();

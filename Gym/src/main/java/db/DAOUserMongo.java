@@ -94,7 +94,12 @@ public class DAOUserMongo implements DAOUser{
 
     @Override
     public User getUserByDNI(String dni) {
-        return new User();
+
+        MongoCollection<Document> collection = ConnectionMongo.start();
+        Document mydoc = collection.find(eq("dni", dni)).first();
+        User userTmp = toUser(mydoc);
+        ConnectionMongo.close();
+        return userTmp;
     }
 
     /***
