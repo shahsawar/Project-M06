@@ -227,13 +227,9 @@ public class DAOUserJDBC implements DAOUser {
         Statement statement = null;
         User user = new User();
         try {
-<<<<<<< HEAD
-            statement = connexioJDBC.con.createStatement();
-            String sentenciaSQL = "SELECT *  FROM user WHERE dni = '" + dni +"';";
-=======
             statement = connexioJDBC.start().createStatement();
-            String sentenciaSQL = "SELECT *  FROM user WHERE dni = " + dni;
->>>>>>> 4d62d2b0c1b1ab45d866e7282d2dd70cd550dc24
+            String sentenciaSQL = "SELECT *  FROM user WHERE dni = '" + dni +"';";
+
             ResultSet rs = statement.executeQuery(sentenciaSQL);
 
             while (rs.next()) {

@@ -44,7 +44,6 @@ public class DAOReservationJDBC implements DAOReservation{
     @Override
     public void insert(Reservation reservation) {
         ConnexioJDBC connexioJDBC = new ConnexioJDBC();
-        connexioJDBC.start();
 
         int insercion = 0;
         java.sql.Date sqlDate = new java.sql.Date(reservation.getDate().getTime()); //Fecha en formato sql
@@ -61,7 +60,7 @@ public class DAOReservationJDBC implements DAOReservation{
         PreparedStatement sentenciaPreparada = null;
 
         try {
-            sentenciaPreparada = connexioJDBC.con.prepareStatement(sentenciaSQL);
+            sentenciaPreparada = connexioJDBC.start().prepareStatement(sentenciaSQL);
             sentenciaPreparada.setInt(1,reservation.getReservationCode());
             sentenciaPreparada.setInt(2,reservation.getUserCode());
             sentenciaPreparada.setString(3,reservation.getRoomName());
@@ -84,11 +83,10 @@ public class DAOReservationJDBC implements DAOReservation{
     @Override
     public void delete(Reservation reservation) {
         ConnexioJDBC connexioJDBC = new ConnexioJDBC();
-        connexioJDBC.start();
         try {
 
             String sentenciaSQL = "DELETE FROM reservation WHERE code = " + reservation.getReservationCode();
-            PreparedStatement preparedStatement = connexioJDBC.con.prepareStatement(sentenciaSQL);
+            PreparedStatement preparedStatement = connexioJDBC.start().prepareStatement(sentenciaSQL);
             preparedStatement.executeUpdate();
 
         } catch (SQLException throwables) {
@@ -101,12 +99,11 @@ public class DAOReservationJDBC implements DAOReservation{
     @Override
     public void update(Reservation reservation, Integer integer) {
         ConnexioJDBC connexioJDBC = new ConnexioJDBC();
-        connexioJDBC.start();
 
         java.sql.Date sqlDate = new java.sql.Date(reservation.getDate().getTime()); //Fecha en formato sql
         try {
 
-            PreparedStatement updateEXP = connexioJDBC.con.prepareStatement("UPDATE reservation SET room_name = ?, has_workout_plane = ?, date = ?");
+            PreparedStatement updateEXP = connexioJDBC.start().prepareStatement("UPDATE reservation SET room_name = ?, has_workout_plane = ?, date = ?");
             updateEXP.setString(1, reservation.getRoomName());
             updateEXP.setString(2, booleanToInteger(reservation.getWorkoutPlane()) + ""); //Booleano para formato SQL
             updateEXP.setString(3, sqlDate + "");
@@ -124,11 +121,10 @@ public class DAOReservationJDBC implements DAOReservation{
     public List<Reservation> getAll() {
 
         ConnexioJDBC connexioJDBC = new ConnexioJDBC();
-        connexioJDBC.start();
         Statement statement = null;
         List<Reservation> reservations = new ArrayList<>();
         try {
-            statement = connexioJDBC.con.createStatement();
+            statement = connexioJDBC.start().createStatement();
             String sentenciaSQL = "SELECT *  FROM reservation;";
             ResultSet rs = statement.executeQuery(sentenciaSQL);
 
@@ -155,11 +151,10 @@ public class DAOReservationJDBC implements DAOReservation{
     public Reservation getByIdentifier(Integer integer) {
 
         ConnexioJDBC connexioJDBC = new ConnexioJDBC();
-        connexioJDBC.start();
         Statement statement = null;
         Reservation reservation = new Reservation();
         try {
-            statement = connexioJDBC.con.createStatement();
+            statement = connexioJDBC.start().createStatement();
             String sentenciaSQL = "SELECT *  FROM reservation WHERE code = " + integer;
             ResultSet rs = statement.executeQuery(sentenciaSQL);
 
@@ -184,11 +179,10 @@ public class DAOReservationJDBC implements DAOReservation{
 
     public List<Reservation> getUserReservations(int user_code){
         ConnexioJDBC connexioJDBC = new ConnexioJDBC();
-        connexioJDBC.start();
         Statement statement = null;
         List<Reservation> reservations = new ArrayList<>();
         try {
-            statement = connexioJDBC.con.createStatement();
+            statement = connexioJDBC.start().createStatement();
             String sentenciaSQL = "SELECT *  FROM reservation WHERE user_code = " + user_code;
             ResultSet rs = statement.executeQuery(sentenciaSQL);
 
@@ -215,11 +209,10 @@ public class DAOReservationJDBC implements DAOReservation{
     public int getLastReservationCode() {
 
         ConnexioJDBC connexioJDBC = new ConnexioJDBC();
-        connexioJDBC.start();
         Statement statement = null;
         int lastCode = 0;
         try {
-            statement = connexioJDBC.con.createStatement();
+            statement = connexioJDBC.start().createStatement();
             String sentenciaSQL = "SELECT *  FROM reservation ORDER BY code DESC LIMIT 1;";//Recogemos el último registro
             ResultSet rs = statement.executeQuery(sentenciaSQL);
 
