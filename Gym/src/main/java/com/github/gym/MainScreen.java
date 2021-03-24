@@ -5,16 +5,17 @@ import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
 import java.net.URL;
+import java.text.DateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -44,6 +45,9 @@ public class MainScreen implements Initializable {
     @FXML
     private TableColumn<User, String> colUserLastname;
 
+    @FXML
+    private TableColumn<User, String> colUserBirthday;
+
 
     ObservableList<User> observableList = FXCollections.observableArrayList();
 
@@ -54,18 +58,18 @@ public class MainScreen implements Initializable {
         imagenMainScreen.setImage(image);
 
         List<User> userList = App.gestorPersistencia.getAllUsers();
-        User userTmp = new User();
-        observableList.add(userTmp);
-
-        for (User user : userList) {
-            observableList.add(user);
-        }
+        observableList.addAll(userList);
 
         colUserDni.setCellValueFactory(new PropertyValueFactory<>("dni"));
         colUserName.setCellValueFactory(new PropertyValueFactory<>("name"));
         colUserLastname.setCellValueFactory(new PropertyValueFactory<>("lastname"));
+        colUserBirthday.setCellValueFactory(new PropertyValueFactory<>("birthday"));
 
         mainScreenTable.setItems(observableList);
+        mainScreenTable.setEditable(true);
+        colUserName.setCellFactory(TextFieldTableCell.forTableColumn());
+        colUserLastname.setCellFactory(TextFieldTableCell.forTableColumn());
+        colUserBirthday.setCellFactory(TextFieldTableCell.forTableColumn());
 
 
         imagenMainScreen.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
@@ -93,5 +97,15 @@ public class MainScreen implements Initializable {
 
     }
 
+    public void updateUserName(TableColumn.CellEditEvent<User, String> userStringCellEditEvent) {
+        User user = mainScreenTable.getSelectionModel().getSelectedItem();
+        user.setName(userStringCellEditEvent.getNewValue());
+        App.gestorPersistencia.updateUser(user, user.getUserCode());
+    }
 
+    public void updateUserLastname(TableColumn.CellEditEvent<User, String> userStringCellEditEvent) {
+        User user = mainScreenTable.getSelectionModel().getSelectedItem();
+        user.setLastname(userStringCellEditEvent.getNewValue());
+        App.gestorPersistencia.updateUser(user, user.getUserCode());
+    }
 }

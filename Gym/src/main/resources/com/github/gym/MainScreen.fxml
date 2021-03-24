@@ -8,7 +8,7 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.gym.MainScreen">
    <children>
-      <VBox layoutX="2.0" layoutY="1.0" prefHeight="642.0" prefWidth="1023.0">
+      <VBox layoutX="2.0" layoutY="1.0" prefHeight="424.0" prefWidth="833.0">
          <children>
             <HBox fx:id="mainScreenTitle" prefHeight="58.0" prefWidth="1023.0">
                <children>
@@ -49,13 +49,14 @@
             <TableView fx:id="mainScreenTable" prefHeight="200.0" prefWidth="200.0">
               <columns>
                 <TableColumn fx:id="colUserDni" prefWidth="121.0" text="DNI" />
-                <TableColumn fx:id="colUserName" prefWidth="143.0" text="Name" />
-                  <TableColumn fx:id="colUserLastname" prefWidth="143.0" text="Lastname" />
+                <TableColumn fx:id="colUserName" onEditCommit="#updateUserName" prefWidth="143.0" text="Name" />
+                  <TableColumn fx:id="colUserLastname" onEditCommit="#updateUserLastname" prefWidth="143.0" text="Lastname" />
+                  <TableColumn fx:id="colUserBirthday" onEditCommit="#updateUserLastname" prefWidth="143.0" text="Birthday" />
               </columns>
             </TableView>
             <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Button fx:id="mainScreenAddBtn" mnemonicParsing="false" text="Add reservation" />
+                  <Button fx:id="mainScreenAddBtn" mnemonicParsing="false" text="AddUser" />
                </children>
             </HBox>
          </children>
