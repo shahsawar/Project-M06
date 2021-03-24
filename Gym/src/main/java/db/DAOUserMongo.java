@@ -92,6 +92,11 @@ public class DAOUserMongo implements DAOUser{
         return myDoc.getInteger("user_code");
     }
 
+    @Override
+    public User getUserByDNI(String dni) {
+        return new User();
+    }
+
     /***
      *
      * @param doc

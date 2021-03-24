@@ -57,26 +57,20 @@ public class InsertUserController{
     public void clickSave(ActionEvent actionEvent) {
 
         System.out.println(name.get());
-        /*
+
         LocalDate localDate = dateInput.getValue();
         Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
         Date date = Date.from(instant);
-        System.out.println(date);*/
-        Date fecha = new Date();
-        String fechaStr = "24/11/2001";
-        try {
-            fecha = java.sql.Date.valueOf(LocalDate.parse(fechaStr, DateTimeFormatter.ofPattern("d/MM/yyyy")));
-        }catch (Exception e){
-            System.out.println("Fecha incorrecta");
-        }
 
-        App.gestorPersistencia.insertUser(new User(dni.get(), name.get(), lastName.get(), fecha));
+
+        /*
+        App.gestorPersistencia.insertUser(new User(dni.get(), name.get(), lastName.get(), date));
 
         try {
             App.setRoot("MainScreen");
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
 
     }
 

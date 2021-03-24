@@ -11,6 +11,7 @@ public abstract class GestorPersistencia {
     public abstract void updateUser(User user, Integer user_code);
     public abstract void deleteUser(User user);
     public abstract User getUserById(Integer id);
+    public abstract User getUserByDNI(String dni);
     public abstract List<User> getAllUsers();
 
     public abstract void insertReservation(Reservation reservation);

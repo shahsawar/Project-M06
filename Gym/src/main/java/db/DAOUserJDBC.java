@@ -220,4 +220,33 @@ public class DAOUserJDBC implements DAOUser{
         return lastCode;
     }
 
+    @Override
+    public User getUserByDNI(String dni) {
+
+        ConnexioJDBC connexioJDBC = new ConnexioJDBC();
+        connexioJDBC.start();
+        Statement statement = null;
+        User user = new User();
+        try {
+            statement = connexioJDBC.con.createStatement();
+            String sentenciaSQL = "SELECT *  FROM user WHERE dni = " + dni;
+            ResultSet rs = statement.executeQuery(sentenciaSQL);
+
+            while (rs.next()) {
+                user.setUserCode(rs.getInt("user_code"));
+                user.setDni(rs.getString("dni"));
+                user.setName(rs.getString("name"));
+                user.setLastname(rs.getString("lastname"));
+                user.setBirthDate((Date)rs.getDate("birthdate"));
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } finally {
+            connexioJDBC.close();
+        }
+
+        return user;
+    }
+
 }

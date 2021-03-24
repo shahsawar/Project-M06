@@ -31,6 +31,11 @@ public class GestorPersistenciaMongo extends GestorPersistencia{
     }
 
     @Override
+    public User getUserByDNI(String dni) {
+        return daoUserMongo.getUserByDNI(dni);
+    }
+
+    @Override
     public List<User> getAllUsers() {
         return daoUserMongo.getAll();
     }

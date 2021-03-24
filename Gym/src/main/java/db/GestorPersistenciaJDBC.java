@@ -31,6 +31,11 @@ public class GestorPersistenciaJDBC extends GestorPersistencia{
     }
 
     @Override
+    public User getUserByDNI(String dni) {
+        return daoUserJDBC.getUserByDNI(dni);
+    }
+
+    @Override
     public List<User> getAllUsers() {
         return daoUserJDBC.getAll();
     }
