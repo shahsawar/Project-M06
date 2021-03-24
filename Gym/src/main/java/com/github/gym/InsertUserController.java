@@ -38,29 +38,18 @@ public class InsertUserController{
     private DatePicker dateInput;
 
 
-    boolean userAlreadyExist(String dni){
-        boolean exist = false;
-
-        User user = App.gestorPersistencia.getUserByDNI(dni);
-        if (user != null){ //Ha devuelto un usuario, por lo tanto existe
-            exist = true;
-        }
-
-        return exist;
-    }
-
     @FXML
     public void clickSave(ActionEvent actionEvent) {
-
-        System.out.println(nameInput.getText());
 
         LocalDate localDate = dateInput.getValue();
         Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
         Date date = Date.from(instant);
 
-        System.out.println("DNI: " + dniInput.getText());
+        //Check if user already exist
+        User userTmp = null;
+        userTmp = App.gestorPersistencia.getUserByDNI(dniInput.getText());
 
-        if (userAlreadyExist(dniInput.getText())){
+        if (userTmp.getDni() != null){
             System.out.println("El usuario ya existe");
         } else {
 
