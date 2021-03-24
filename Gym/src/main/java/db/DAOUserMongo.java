@@ -27,35 +27,47 @@ public class DAOUserMongo implements DAOUser{
 
     @Override
     public void insert(User user) {
+        //Create connection
+        ConnectionMongo conn = new ConnectionMongo();
+
         user.setUserCode(getLastUserId()+1);
-        MongoCollection<Document> collection = ConnectionMongo.start();
+        MongoCollection<Document> collection = conn.start();
         collection.insertOne(toDoc(user));
-        ConnectionMongo.close();
+        conn.close();//Close Connection
     }
 
     @Override
     public void delete(User user) {
-        MongoCollection<Document> collection = ConnectionMongo.start();
+        //Create connection
+        ConnectionMongo conn = new ConnectionMongo();
+
+        MongoCollection<Document> collection = conn.start();
         collection.deleteOne(toDoc(user));
-        ConnectionMongo.close();
+        conn.close();//Close Connection
     }
 
     @Override
     public void update(User user, Integer integer) {
-        MongoCollection<Document> collection = ConnectionMongo.start();
+        //Create connection
+        ConnectionMongo conn = new ConnectionMongo();
+
+        MongoCollection<Document> collection = conn.start();
         collection.updateOne(eq("user_code", integer), combine(
                 set("dni", user.getDni()),
                 set("name",user.getName()),
                 set("lastname",user.getLastname()),
                 set("birthday",user.getBirthDate())));
-        ConnectionMongo.close();
+        conn.close();
     }
 
 
     @Override
     public List<User> getAll() {
+        //Create connection
+        ConnectionMongo conn = new ConnectionMongo();
+
         List<User> userList = new ArrayList<>();
-        MongoCollection<Document> collection = ConnectionMongo.start();
+        MongoCollection<Document> collection = conn.start();
         try (MongoCursor<Document> cursor = collection.find().iterator()){
             while (cursor.hasNext()){
                 Document docTmp = cursor.next();
@@ -63,16 +75,19 @@ public class DAOUserMongo implements DAOUser{
                 userList.add(userTmp);
             }
         }
-        ConnectionMongo.close();
+        conn.close();
         return userList;
     }
 
     @Override
     public User getByIdentifier(Integer code) {
-        MongoCollection<Document> collection = ConnectionMongo.start();
+        //Create connection
+        ConnectionMongo conn = new ConnectionMongo();
+
+        MongoCollection<Document> collection = conn.start();
         Document mydoc = collection.find(eq("user_code", code)).first();
         User userTmp = toUser(mydoc);
-        ConnectionMongo.close();
+        conn.close();
         return userTmp;
     }
 
@@ -83,12 +98,15 @@ public class DAOUserMongo implements DAOUser{
 
     @Override
     public int getLastUserId() {
-        MongoCollection<Document> collection = ConnectionMongo.start();
+        //Create connection
+        ConnectionMongo conn = new ConnectionMongo();
+
+        MongoCollection<Document> collection = conn.start();
         Document myDoc = collection.find().sort(new Document("_id", -1)).first();
         if (myDoc == null){
             return 0;
         }
-        ConnectionMongo.close();
+        conn.close();
         return myDoc.getInteger("user_code");
     }
 

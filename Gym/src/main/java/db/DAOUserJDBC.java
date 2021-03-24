@@ -17,7 +17,7 @@ import java.util.List;
  * @author ronald
  */
 
-public class DAOUserJDBC implements DAOUser{
+public class DAOUserJDBC implements DAOUser {
 
     private Date stringToDate(String strDate) {
         DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
@@ -32,7 +32,6 @@ public class DAOUserJDBC implements DAOUser{
             System.out.println("Error: " + e);
         }
 
-
         return fecha;
     }
 
@@ -44,12 +43,12 @@ public class DAOUserJDBC implements DAOUser{
     public void insert(User user) {
 
         ConnexioJDBC connexioJDBC = new ConnexioJDBC();
-        connexioJDBC.start();
+
 
         int insercion = 0;
         java.sql.Date sqlDate = new java.sql.Date(user.getBirthDate().getTime()); //Fecha en formato sql
         int lastUserCode = getLastUserId();
-        if (lastUserCode == -1 ){
+        if (lastUserCode == -1) {
             lastUserCode = 1;
         } else {
             lastUserCode++;
@@ -59,12 +58,12 @@ public class DAOUserJDBC implements DAOUser{
         PreparedStatement sentenciaPreparada = null;
 
         try {
-            sentenciaPreparada = connexioJDBC.con.prepareStatement(sentenciaSQL);
-            sentenciaPreparada.setInt(1,user.getUserCode());
-            sentenciaPreparada.setString(2,user.getDni());
-            sentenciaPreparada.setString(3,user.getName());
-            sentenciaPreparada.setString(4,user.getLastname());
-            sentenciaPreparada.setString(5,sqlDate + "");
+            sentenciaPreparada = connexioJDBC.start().prepareStatement(sentenciaSQL);
+            sentenciaPreparada.setInt(1, user.getUserCode());
+            sentenciaPreparada.setString(2, user.getDni());
+            sentenciaPreparada.setString(3, user.getName());
+            sentenciaPreparada.setString(4, user.getLastname());
+            sentenciaPreparada.setString(5, sqlDate + "");
             insercion = sentenciaPreparada.executeUpdate();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -87,11 +86,11 @@ public class DAOUserJDBC implements DAOUser{
     public void delete(User user) {
 
         ConnexioJDBC connexioJDBC = new ConnexioJDBC();
-        connexioJDBC.start();
+
         try {
 
             String sentenciaSQL = "DELETE FROM user WHERE user_code = " + user.getUserCode();
-            PreparedStatement preparedStatement = connexioJDBC.con.prepareStatement(sentenciaSQL);
+            PreparedStatement preparedStatement = connexioJDBC.start().prepareStatement(sentenciaSQL);
             preparedStatement.executeUpdate();
 
         } catch (SQLException throwables) {
@@ -105,12 +104,12 @@ public class DAOUserJDBC implements DAOUser{
     @Override
     public void update(User user, Integer code) {
         ConnexioJDBC connexioJDBC = new ConnexioJDBC();
-        connexioJDBC.start();
+
 
         java.sql.Date sqlDate = new java.sql.Date(user.getBirthDate().getTime()); //Fecha en formato sql
         try {
 
-            PreparedStatement updateEXP = connexioJDBC.con.prepareStatement("UPDATE user SET dni = ?, name = ?, lastname = ?, birthdate = ? WHERE");
+            PreparedStatement updateEXP = connexioJDBC.start().prepareStatement("UPDATE user SET dni = ?, name = ?, lastname = ?, birthdate = ? WHERE");
             updateEXP.setString(1, user.getDni());
             updateEXP.setString(2, user.getName());
             updateEXP.setString(3, user.getLastname());
@@ -129,11 +128,11 @@ public class DAOUserJDBC implements DAOUser{
     public List<User> getAll() {
 
         ConnexioJDBC connexioJDBC = new ConnexioJDBC();
-        connexioJDBC.start();
+
         Statement statement = null;
         List<User> users = new ArrayList<>();
         try {
-            statement = connexioJDBC.con.createStatement();
+            statement = connexioJDBC.start().createStatement();
             String sentenciaSQL = "SELECT *  FROM user;";
             ResultSet rs = statement.executeQuery(sentenciaSQL);
 
@@ -160,11 +159,11 @@ public class DAOUserJDBC implements DAOUser{
     public User getByIdentifier(Integer integer) {
 
         ConnexioJDBC connexioJDBC = new ConnexioJDBC();
-        connexioJDBC.start();
+
         Statement statement = null;
         User user = new User();
         try {
-            statement = connexioJDBC.con.createStatement();
+            statement = connexioJDBC.start().createStatement();
             String sentenciaSQL = "SELECT *  FROM user WHERE user_code = " + integer;
             ResultSet rs = statement.executeQuery(sentenciaSQL);
 
@@ -173,7 +172,7 @@ public class DAOUserJDBC implements DAOUser{
                 user.setDni(rs.getString("dni"));
                 user.setName(rs.getString("name"));
                 user.setLastname(rs.getString("lastname"));
-                user.setBirthDate((Date)rs.getDate("birthdate"));
+                user.setBirthDate((Date) rs.getDate("birthdate"));
             }
 
         } catch (SQLException throwables) {
@@ -189,11 +188,11 @@ public class DAOUserJDBC implements DAOUser{
     public int getLastUserId() {
 
         ConnexioJDBC connexioJDBC = new ConnexioJDBC();
-        connexioJDBC.start();
+
         Statement statement = null;
         int lastCode = 0;
         try {
-            statement = connexioJDBC.con.createStatement();
+            statement = connexioJDBC.start().createStatement();
             String sentenciaSQL = "SELECT *  FROM user ORDER BY user_code DESC LIMIT 1;";//Recogemos el último registro
             ResultSet rs = statement.executeQuery(sentenciaSQL);
 
@@ -205,7 +204,7 @@ public class DAOUserJDBC implements DAOUser{
                 contador++;
             }
 
-            if(contador > 0) {
+            if (contador > 0) {
                 System.out.println("Se han recuperado " + contador + " cliente(s)");
             } else {
                 lastCode = -1;//La tabla está vacía
@@ -224,12 +223,17 @@ public class DAOUserJDBC implements DAOUser{
     public User getUserByDNI(String dni) {
 
         ConnexioJDBC connexioJDBC = new ConnexioJDBC();
-        connexioJDBC.start();
+
         Statement statement = null;
         User user = new User();
         try {
+<<<<<<< HEAD
             statement = connexioJDBC.con.createStatement();
             String sentenciaSQL = "SELECT *  FROM user WHERE dni = '" + dni +"';";
+=======
+            statement = connexioJDBC.start().createStatement();
+            String sentenciaSQL = "SELECT *  FROM user WHERE dni = " + dni;
+>>>>>>> 4d62d2b0c1b1ab45d866e7282d2dd70cd550dc24
             ResultSet rs = statement.executeQuery(sentenciaSQL);
 
             while (rs.next()) {
@@ -237,7 +241,7 @@ public class DAOUserJDBC implements DAOUser{
                 user.setDni(rs.getString("dni"));
                 user.setName(rs.getString("name"));
                 user.setLastname(rs.getString("lastname"));
-                user.setBirthDate((Date)rs.getDate("birthdate"));
+                user.setBirthDate((Date) rs.getDate("birthdate"));
             }
 
         } catch (SQLException throwables) {

@@ -3,7 +3,8 @@ package db;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-public class ConnexioJDBC implements Connexio{
+
+public class ConnexioJDBC implements Connexio {
 
     /*Creación de BBDD User
     CREATE TABLE user (user_code INT NOT NULL PRIMARY KEY, dni VARCHAR(9) NOT NULL, name VARCHAR(20) NOT NULL, lastname VARCHAR(20) NOT NULL, birthdate DATE NOT NULL);
@@ -18,39 +19,30 @@ public class ConnexioJDBC implements Connexio{
      */
     //Coment de prueba
 
-    private final String bbdd =  "jdbc:mysql://localhost/gym";
-    private final String username =  "gym_app";
-    private final String passwd =  "gym_app123";
-
-    private String url;
-    private String usuario;
-    private String password;
-    Connection con;
+    private final String bbdd = "jdbc:mysql://localhost/gym";
+    private final String username = "gym_app";
+    private final String passwd = "gym_app123";
+    private static Connection conn;
 
     public ConnexioJDBC() {
     }
 
     @Override
-    public void start() {
-        this.url = bbdd;
-        this.usuario = username;
-        this.password = passwd;
-
+    public Connection start() {
         try {
-            this.con = DriverManager.getConnection(this.url, this.usuario, this.password);
+            conn = DriverManager.getConnection(bbdd, username, passwd);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+        return conn;
     }
 
     @Override
     public void close() {
         try {
-            this.con.close();
+            conn.close();
             System.out.println("Se ha cerrado la conexión con la BBDD");
-
         } catch (SQLException ex) {
-
             System.err.println("Error: No se ha podido cerrar la conexón con la BBDD");
         }
     }
