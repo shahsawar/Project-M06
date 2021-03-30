@@ -41,7 +41,7 @@
                         <Font size="15.0" />
                      </font>
                   </Button>
-                  <ImageView fx:id="imagenMainScreen" fitHeight="70.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="imagenMainScreen" fitHeight="70.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" styleClass=".configurationBtn">
                      <HBox.margin>
                         <Insets left="200.0" />
                      </HBox.margin></ImageView>
@@ -56,12 +56,15 @@
             </TableView>
             <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Button fx:id="mainScreenAddBtn" minWidth="100.0" mnemonicParsing="false" text="AddUser" />
-                  <Button minWidth="100.0" mnemonicParsing="false" onAction="#removeUser" text="RemoveUser">
+                  <Button minWidth="100.0" mnemonicParsing="false" onAction="#removeUser" styleClass="removeUserBtn" text="Remove User">
                      <HBox.margin>
                         <Insets left="20.0" right="20.0" />
                      </HBox.margin>
                   </Button>
+                  <Button fx:id="mainScreenAddBtn" minWidth="100.0" mnemonicParsing="false" styleClass="addUserBtn" text="Add User">
+                     <HBox.margin>
+                        <Insets right="20.0" />
+                     </HBox.margin></Button>
                </children>
             </HBox>
          </children>

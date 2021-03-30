@@ -8,11 +8,10 @@
 
 
 .button{
-
     -fx-padding: 5 22 5 22;
     -fx-border-width: 2;
     -fx-background-radius: 2;
-    -fx-background-color:rgb(77,102,204);
+    -fx-background-color:rgba(77, 102, 204,0.92);
     -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
     -fx-font-size: 11pt;
     -fx-text-fill: #fff;
@@ -21,10 +20,29 @@
     /*-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);*/
 }
 
+.button:hover{
+    -fx-background-color:#4d66cc;
+}
+
 .cancelButton{
     -fx-background-color:rgba(77,102,204,0.1);
     -fx-text-fill: #000;
 }
+
+.cancelButton:hover{
+    -fx-background-color:rgba(77,102,204,0.16);
+}
+
+.removeUserBtn{
+    -fx-background-color:rgba(197, 58, 75,0.5);
+    -fx-text-fill: #fff;
+}
+
+.removeUserBtn:hover{
+    -fx-background-color:#C53A4B;
+}
+
+
 
 .text-field {
         -fx-background-color: -fx-text-box-border, -fx-background ;
@@ -61,6 +79,11 @@
 /*Individual Column Headers*/
 .table-view .column-header {
     -fx-background-color: transparent;
+}
+
+.table-view .column-header .label{
+    -fx-alignment:CENTER_LEFT;
+    -fx-padding: 0 0 0 5px;
 }
 
 /*Cells and Rows*/
