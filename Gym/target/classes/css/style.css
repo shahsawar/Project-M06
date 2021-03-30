@@ -76,6 +76,11 @@
     -fx-cursor:text;
 }
 
+.table-row-cell:selected .table-cell {
+    -fx-background-color: #93f9b911;
+    -fx-text-background-color: #000;
+}
+
 .table-row-cell: odd{
     -fx-background-color: #fff;
     -fx-background-insets: 0, 0 0 1 0;
