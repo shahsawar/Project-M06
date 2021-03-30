@@ -22,6 +22,8 @@ public class App extends Application {
     public void start(Stage stage) throws IOException {
         scene = new Scene(loadFXML("configuration"), 900, 480);
 
+        //Añadimos el css
+        scene.getStylesheets().add(getClass().getResource("/css/style.css").toExternalForm());
         //Icono
         stage.getIcons().add(new Image(App.class.getResourceAsStream("/images/icon.png")));
 

@@ -15,6 +15,7 @@ import javafx.scene.input.MouseEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.text.DateFormat;
+import java.time.Period;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -70,7 +71,6 @@ public class MainScreen implements Initializable {
         colUserName.setCellFactory(TextFieldTableCell.forTableColumn());
         colUserLastname.setCellFactory(TextFieldTableCell.forTableColumn());
         colUserBirthday.setCellFactory(TextFieldTableCell.forTableColumn());
-
 
         imagenMainScreen.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
