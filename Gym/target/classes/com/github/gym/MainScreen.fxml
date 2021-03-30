@@ -60,7 +60,11 @@
                         <Insets left="20.0" right="20.0" />
                      </HBox.margin>
                   </Button>
+<<<<<<< HEAD
                   <Button fx:id="mainScreenAddReservation" mnemonicParsing="false" text="Add Reservation">
+=======
+                  <Button mnemonicParsing="false" text="Add Reservation">
+>>>>>>> working on config page 2021/03/30-21:41
                      <HBox.margin>
                         <Insets right="20.0" />
                      </HBox.margin>
