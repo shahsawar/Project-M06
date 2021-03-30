@@ -12,7 +12,6 @@ import java.util.Date;
 import java.util.List;
 
 import static com.mongodb.client.model.Filters.eq;
-import static com.mongodb.client.model.Filters.in;
 import static com.mongodb.client.model.Updates.combine;
 import static com.mongodb.client.model.Updates.set;
 
@@ -42,9 +41,10 @@ public class DAOUserMongo implements DAOUser{
         ConnectionMongo conn = new ConnectionMongo();
 
         MongoCollection<Document> collection = conn.start();
-        collection.deleteOne(toDoc(user));
+        collection.deleteOne(eq("user_code", user.getUserCode()));
         conn.close();//Close Connection
     }
+
 
     @Override
     public void update(User user, Integer integer) {
@@ -204,7 +204,9 @@ public class DAOUserMongo implements DAOUser{
 
         User userTmp = new User("123456789", "user1", "userlastname", new SimpleDateFormat("dd-MM-yyyy").parse("13-10-2020"));
         DAOUserMongo mongo = new DAOUserMongo();
-        mongo.update(userTmp, 1);
+        //User userTmp = mongo.getByIdentifier(1);
+        mongo.insert(userTmp);
+        //mongo.delete(userTmp);
 
 
     }

@@ -2,6 +2,7 @@ package com.github.gym;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -45,9 +46,6 @@ public class MainScreen implements Initializable {
     @FXML
     private TableColumn<User, String> colUserLastname;
 
-    @FXML
-    private TableColumn<User, String> colUserBirthday;
-
 
     ObservableList<User> observableList = FXCollections.observableArrayList();
 
@@ -63,13 +61,11 @@ public class MainScreen implements Initializable {
         colUserDni.setCellValueFactory(new PropertyValueFactory<>("dni"));
         colUserName.setCellValueFactory(new PropertyValueFactory<>("name"));
         colUserLastname.setCellValueFactory(new PropertyValueFactory<>("lastname"));
-        colUserBirthday.setCellValueFactory(new PropertyValueFactory<>("birthday"));
 
         mainScreenTable.setItems(observableList);
         mainScreenTable.setEditable(true);
         colUserName.setCellFactory(TextFieldTableCell.forTableColumn());
         colUserLastname.setCellFactory(TextFieldTableCell.forTableColumn());
-        colUserBirthday.setCellFactory(TextFieldTableCell.forTableColumn());
 
 
         imagenMainScreen.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
@@ -107,5 +103,25 @@ public class MainScreen implements Initializable {
         User user = mainScreenTable.getSelectionModel().getSelectedItem();
         user.setLastname(userStringCellEditEvent.getNewValue());
         App.gestorPersistencia.updateUser(user, user.getUserCode());
+    }
+
+    public void reservationUser(TableColumn.CellEditEvent<User, String> userStringCellEditEvent) {
+        User user = mainScreenTable.getSelectionModel().getSelectedItem();
+        user.setLastname(userStringCellEditEvent.getNewValue());
+        App.gestorPersistencia.updateUser(user, user.getUserCode());
+    }
+
+
+    public void removeUser(ActionEvent actionEvent) {
+
+        //User selected to be remove
+        ObservableList<User> selectedUser = mainScreenTable.getSelectionModel().getSelectedItems();
+
+        //Remove user from database
+        User userTmp = App.gestorPersistencia.getUserById(selectedUser.get(0).getUserCode());
+        App.gestorPersistencia.deleteUser(userTmp);
+
+        //Remove user from tableview
+        selectedUser.forEach(observableList::remove);
     }
 }
