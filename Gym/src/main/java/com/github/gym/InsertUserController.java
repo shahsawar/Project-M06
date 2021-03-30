@@ -8,6 +8,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 import java.io.IOException;
 import java.time.Instant;
@@ -36,6 +38,16 @@ public class InsertUserController{
 
     @FXML
     private DatePicker dateInput;
+
+    @FXML
+
+    private ImageView newUserIlustration;
+
+
+    public void initialize() {
+        Image image = new Image(getClass().getResourceAsStream("/images/newUser.png"));
+        newUserIlustration.setImage(image);
+    }
 
 
     @FXML

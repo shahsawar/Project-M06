@@ -19,7 +19,7 @@ public class ConnexioJDBC implements Connexio {
      */
     //Coment de prueba
 
-    private final String bbdd = "jdbc:mysql://localhost/gym";
+    private final String bbdd = "jdbc:mysql://localhost/gym?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
     private final String username = "gym_app";
     private final String passwd = "gym_app123";
     private static Connection conn;
