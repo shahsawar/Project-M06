@@ -48,10 +48,9 @@
                </children></HBox>
             <TableView fx:id="mainScreenTable" prefHeight="200.0" prefWidth="200.0">
               <columns>
-                <TableColumn fx:id="colUserDni" prefWidth="220.0" text="DNI" />
-                <TableColumn fx:id="colUserName" onEditCommit="#updateUserName" prefWidth="220.0" text="Name" />
-                  <TableColumn fx:id="colUserLastname" onEditCommit="#updateUserLastname" prefWidth="230.0" text="Lastname" />
-                  <TableColumn fx:id="colUserReservation" onEditCommit="#reservationUser" prefWidth="150.0" text="Reservations" />
+                <TableColumn fx:id="colUserDni" prefWidth="275.0" text="DNI" />
+                <TableColumn fx:id="colUserName" onEditCommit="#updateUserName" prefWidth="275.0" text="Name" />
+                  <TableColumn fx:id="colUserLastname" onEditCommit="#updateUserLastname" prefWidth="280.0" text="Lastname" />
               </columns>
             </TableView>
             <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
@@ -60,6 +59,11 @@
                   <Button minWidth="100.0" mnemonicParsing="false" onAction="#removeUser" text="RemoveUser">
                      <HBox.margin>
                         <Insets left="20.0" right="20.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button mnemonicParsing="false" text="Add Reservation">
+                     <HBox.margin>
+                        <Insets right="20.0" />
                      </HBox.margin>
                   </Button>
                </children>
