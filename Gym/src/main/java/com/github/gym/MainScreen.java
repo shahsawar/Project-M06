@@ -94,6 +94,7 @@ public class MainScreen implements Initializable {
             }
         });
 
+
         mainScreenAddReservation.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {

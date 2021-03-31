@@ -35,8 +35,8 @@ public class ConfigurationController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        Image image = new Image(getClass().getResourceAsStream("/images/mysql.jpg"));
-        Image imageMongo = new Image(getClass().getResourceAsStream("/images/mongodb.jpg"));
+        Image image = new Image(getClass().getResourceAsStream("/images/mysql.png"));
+        Image imageMongo = new Image(getClass().getResourceAsStream("/images/mongo.png"));
         imageViewSQL.setFitHeight(100); //726
         imageViewSQL.setFitWidth(200); //500
         imageViewSQL.setImage(image);

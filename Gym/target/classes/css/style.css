@@ -24,6 +24,21 @@
     -fx-background-color:#4d66cc;
 }
 
+
+.sqlContainer{
+    -fx-background-image:url("../images/dolphin1.jpg");
+    -fx-background-repeat: stretch;
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+}
+
+.mongoContainer{
+    -fx-background-image:url("../images/hoja1.jpg");
+    -fx-background-repeat: stretch;
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+}
+
 .cancelButton{
     -fx-background-color:rgba(77,102,204,0.1);
     -fx-text-fill: #000;
