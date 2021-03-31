@@ -65,7 +65,7 @@
                         <Insets right="20.0" />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="mainScreenAddBtn" minWidth="100.0" mnemonicParsing="false" styleClass="addUserBtn" text="Add User">
+                  <Button fx:id="mainScreenAddUserBtn" minWidth="100.0" mnemonicParsing="false" styleClass="addUserBtn" text="Add User">
                      <HBox.margin>
                         <Insets right="20.0" />
                      </HBox.margin></Button>

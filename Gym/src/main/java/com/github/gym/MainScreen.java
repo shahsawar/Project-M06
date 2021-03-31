@@ -37,6 +37,9 @@ public class MainScreen implements Initializable {
     private Button mainScreenAddReservation;
 
     @FXML
+    private Button mainScreenAddUserBtn;
+
+    @FXML
     private TableView<User> mainScreenTable;
 
     @FXML
@@ -77,6 +80,17 @@ public class MainScreen implements Initializable {
                     e.printStackTrace();
                 }
                 event.consume();
+            }
+        });
+
+        mainScreenAddUserBtn.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                try {
+                    App.setRoot("insertUser");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
