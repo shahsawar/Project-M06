@@ -15,14 +15,16 @@ public class ConnectionMongo implements Connexio<MongoCollection<Document>>{
     }
 
     public boolean connectionValid(){
+        boolean valid =  false;
         try {
-            //this.mongoClient.getAddress();
+            mongoClient.getDatabase(DATABASENAME);
+            valid = true;
         } catch (Exception e) {
             System.out.println("Database unavailable!");
             mongoClient.close();
         }
 
-        return true;
+        return valid;
     }
 
     @Override

@@ -27,6 +27,7 @@ public class Reservation {
         this.userCode = userCode;
         this.roomName = roomName;
         this.workoutPlane = workoutPlane;
+        this.dateStr = dateToString(this.date);
     }
 
     public Reservation( Date date, int userCode, String roomName, Boolean workoutPlane) {
@@ -35,8 +36,8 @@ public class Reservation {
         this.userCode = userCode;
         this.roomName = roomName;
         this.workoutPlane = workoutPlane;
+        this.dateStr = dateToString(date);
     }
-    
 
     public int getReservationCode() {
         return reservationCode;
