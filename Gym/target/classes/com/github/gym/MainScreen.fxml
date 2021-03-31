@@ -60,7 +60,7 @@
                         <Insets left="20.0" right="20.0" />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="mainScreenAddReservation" mnemonicParsing="false" text="Add Reservation">
+                  <Button fx:id="mainScreenAddReservation" mnemonicParsing="false" onAction="#handleButtonAction" text="Add Reservation">
                      <HBox.margin>
                         <Insets right="20.0" />
                      </HBox.margin>

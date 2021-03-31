@@ -5,7 +5,10 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
@@ -15,13 +18,11 @@ import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
 import java.net.URL;
-import java.text.DateFormat;
-import java.time.Period;
-import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
 import clases.*;
+import javafx.stage.Stage;
 
 /**
  * @autor shah
@@ -31,9 +32,6 @@ public class MainScreen implements Initializable {
 
     @FXML
     private ImageView imagenMainScreen;
-
-    @FXML
-    private Button mainScreenAddBtn;
 
     @FXML
     private Button mainScreenAddReservation;
@@ -49,7 +47,6 @@ public class MainScreen implements Initializable {
 
     @FXML
     private TableColumn<User, String> colUserLastname;
-
 
     ObservableList<User> observableList = FXCollections.observableArrayList();
 
@@ -83,29 +80,16 @@ public class MainScreen implements Initializable {
             }
         });
 
-        mainScreenAddBtn.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                try {
-                    App.setRoot("insertUser");
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-
-
         mainScreenAddReservation.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 try {
-                    App.setRoot("reservation");
+                    App.setRootWithData("reservation", mainScreenTable.getSelectionModel().getSelectedItems().get(0));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
         });
-
     }
 
     public void updateUserName(TableColumn.CellEditEvent<User, String> userStringCellEditEvent) {
@@ -120,13 +104,6 @@ public class MainScreen implements Initializable {
         App.gestorPersistencia.updateUser(user, user.getUserCode());
     }
 
-    public void reservationUser(TableColumn.CellEditEvent<User, String> userStringCellEditEvent) {
-        User user = mainScreenTable.getSelectionModel().getSelectedItem();
-        user.setLastname(userStringCellEditEvent.getNewValue());
-        App.gestorPersistencia.updateUser(user, user.getUserCode());
-    }
-
-
     public void removeUser(ActionEvent actionEvent) {
 
         //User selected to be remove
@@ -139,4 +116,25 @@ public class MainScreen implements Initializable {
         //Remove user from tableview
         selectedUser.forEach(observableList::remove);
     }
+
+
+    @FXML
+    private void handleButtonAction(ActionEvent event){
+        User u = mainScreenTable.getSelectionModel().getSelectedItems().get(0);
+
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("reservation.fxml"));
+        try {
+            loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        ReservationController r = loader.getController();
+        r.setUserData(mainScreenTable.getSelectionModel().getSelectedItems().get(0));
+        Parent p = loader.getRoot();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(p));
+        stage.show();
+    }
+
 }
