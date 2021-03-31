@@ -61,6 +61,5 @@
             </HBox>
          </children>
       </VBox>
-      <ToggleButton mnemonicParsing="false" text="ToggleButton" GridPane.columnIndex="2" GridPane.rowIndex="2" />
    </children>
 </GridPane>
