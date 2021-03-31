@@ -59,4 +59,9 @@ public class GestorPersistenciaMongo extends GestorPersistencia{
     public Reservation getReservationById(Integer id) {
         return daoReservationMongo.getByIdentifier(id);
     }
+
+    @Override
+    public List<Reservation> getAllReservations() {
+        return daoReservationMongo.getAll();
+    }
 }

@@ -59,4 +59,9 @@ public class GestorPersistenciaJDBC extends GestorPersistencia{
     public Reservation getReservationById(Integer id) {
         return daoReservationJDBC.getByIdentifier(id);
     }
+
+    @Override
+    public List<Reservation> getAllReservations() {
+        return daoReservationJDBC.getAll();
+    }
 }

@@ -18,5 +18,6 @@ public abstract class GestorPersistencia {
     public abstract void updateReservation(Reservation reservation, Integer reservation_code);
     public abstract void deleteReservation(Reservation reservation);
     public abstract Reservation getReservationById(Integer id);
+    public abstract List<Reservation> getAllReservations();
 
 }

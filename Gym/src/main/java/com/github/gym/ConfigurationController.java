@@ -53,8 +53,10 @@ public class ConfigurationController implements Initializable {
 
                 ConnectionMongo con = new ConnectionMongo();
                 try{
-                    MongoCollection<Document> c = con.start();
+                    //MongoCollection<Document> c = con.start();
+                    con.connectionValid();
 
+                    /*
                     if (c != null){
                         App.gestorPersistencia = new GestorPersistenciaMongo();
                         try {
@@ -62,7 +64,7 @@ public class ConfigurationController implements Initializable {
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
-                    }
+                    }*/
                     con.close();
                 } catch (Exception e){
                     System.out.println("Mongodb Connnection not possible");//No se pone en log porque ya está al ejecutar start()
