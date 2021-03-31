@@ -47,7 +47,7 @@ public class Reservation {
         // Using DateFormat format method we can create a string
         // representation of a date with the defined format.
         String str = df.format(this.date);
-        
+
         return str;
     }
 

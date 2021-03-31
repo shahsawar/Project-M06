@@ -14,6 +14,15 @@ public class ConnectionMongo implements Connexio<MongoCollection<Document>>{
     public ConnectionMongo() {
     }
 
+    public boolean connectionValid(){
+        try {
+            this.mongoClient.getAddress();
+        } catch (Exception e) {
+            System.out.println("Database unavailable!");
+            mongoClient.close();
+        }
+    }
+
     @Override
     public MongoCollection<Document> start() {
         mongoClient = MongoClients.create();

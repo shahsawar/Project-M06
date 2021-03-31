@@ -51,17 +51,21 @@ public class ConfigurationController implements Initializable {
                 Log.info("MongoDB database selected");
                 event.consume();
 
-                //Test Connection
-                /*ConnectionMongo con = new ConnectionMongo();
-                MongoCollection<Document> doc = con.start();
+                ConnectionMongo con = new ConnectionMongo();
+                try{
+                    MongoCollection<Document> c = con.start();
 
-                con.close();*/
-
-                App.gestorPersistencia = new GestorPersistenciaMongo();
-                try {
-                    backToMain();
-                } catch (IOException e) {
-                    e.printStackTrace();
+                    if (c != null){
+                        App.gestorPersistencia = new GestorPersistenciaMongo();
+                        try {
+                            backToMain();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    con.close();
+                } catch (Exception e){
+                    System.out.println("Mongodb Connnection not possible");//No se pone en log porque ya está al ejecutar start()
                 }
             }
         });
