@@ -34,9 +34,6 @@ public class MainScreen implements Initializable {
     private ImageView imagenMainScreen;
 
     @FXML
-    private Button mainScreenAddReservation;
-
-    @FXML
     private Button mainScreenAddUserBtn;
 
     @FXML
@@ -93,17 +90,6 @@ public class MainScreen implements Initializable {
                 }
             }
         });
-
-        mainScreenAddReservation.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                try {
-                    App.setRootWithData("reservation", mainScreenTable.getSelectionModel().getSelectedItems().get(0));
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
     }
 
     public void updateUserName(TableColumn.CellEditEvent<User, String> userStringCellEditEvent) {
@@ -133,7 +119,8 @@ public class MainScreen implements Initializable {
 
 
     @FXML
-    private void handleButtonAction(ActionEvent event){
+    private void addReservation(ActionEvent event){
+        //User selected
         User u = mainScreenTable.getSelectionModel().getSelectedItems().get(0);
 
         FXMLLoader loader = new FXMLLoader();

@@ -36,20 +36,7 @@ public class Reservation {
         this.roomName = roomName;
         this.workoutPlane = workoutPlane;
     }
-
-    public String getDateStr() {
-
-        String pattern = "dd/MM/yyyy";
-        // Create an instance of SimpleDateFormat used for formatting
-        // the string representation of date according to the chosen pattern
-        DateFormat df = new SimpleDateFormat(pattern);
-
-        // Using DateFormat format method we can create a string
-        // representation of a date with the defined format.
-        String str = df.format(this.date);
-
-        return str;
-    }
+    
 
     public int getReservationCode() {
         return reservationCode;
