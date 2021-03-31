@@ -44,7 +44,6 @@ public class DAOUserJDBC implements DAOUser {
 
         ConnexioJDBC connexioJDBC = new ConnexioJDBC();
 
-
         int insercion = 0;
         java.sql.Date sqlDate = new java.sql.Date(user.getBirthDate().getTime()); //Fecha en formato sql
         int lastUserCode = getLastUserId();

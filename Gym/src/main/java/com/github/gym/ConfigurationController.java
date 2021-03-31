@@ -1,18 +1,20 @@
 package com.github.gym;
 
-import db.GestorPersistencia;
-import db.GestorPersistenciaJDBC;
-import db.GestorPersistenciaMongo;
+import com.mongodb.client.MongoCollection;
+import db.*;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import org.bson.Document;
+import utilities.Log;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
 import java.util.ResourceBundle;
 
 public class ConfigurationController implements Initializable {
@@ -46,13 +48,24 @@ public class ConfigurationController implements Initializable {
         imageViewMongo.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                System.out.println("Mongo selected ");
+                Log.info("MongoDB database selected");
                 event.consume();
-                App.gestorPersistencia = new GestorPersistenciaMongo();
-                try {
-                    backToMain();
-                } catch (IOException e) {
-                    e.printStackTrace();
+
+                ConnectionMongo con = new ConnectionMongo();
+                try{
+                    MongoCollection<Document> c = con.start();
+
+                    if (c != null){
+                        App.gestorPersistencia = new GestorPersistenciaMongo();
+                        try {
+                            backToMain();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    con.close();
+                } catch (Exception e){
+                    System.out.println("Mongodb Connnection not possible");//No se pone en log porque ya está al ejecutar start()
                 }
             }
         });
@@ -61,14 +74,28 @@ public class ConfigurationController implements Initializable {
         imageViewSQL.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                System.out.println("MySQL selected ");
+                Log.info("Mysql database selected");
                 event.consume();
-                App.gestorPersistencia = new GestorPersistenciaJDBC();
-                try {
-                    backToMain();
-                } catch (IOException e) {
-                    e.printStackTrace();
+
+                ConnexioJDBC con = new ConnexioJDBC();
+                try{
+                    Connection c = con.start();
+
+                    if (c != null){
+                        App.gestorPersistencia = new GestorPersistenciaJDBC();
+                        Log.config("Mysql database set to use");
+                        try {
+                            backToMain();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    con.close();
+                } catch (Exception e){
+                    System.out.println("JDBC Connnection not possible");//No se pone en log porque ya está al ejecutar start()
                 }
+
+
             }
         });
 
