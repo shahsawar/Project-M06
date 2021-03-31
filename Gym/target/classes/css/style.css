@@ -37,6 +37,9 @@
     -fx-background-repeat: stretch;
     -fx-background-size: cover;
     -fx-background-position: center center;
+    -fx-border-width: 0.1;
+    -fx-border-color: transparent transparent transparent black;
+    -fx-border-style: solid;
 }
 
 .cancelButton{

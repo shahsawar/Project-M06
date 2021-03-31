@@ -1,5 +1,7 @@
 package db;
 
+import utilities.Log;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -32,7 +34,8 @@ public class ConnexioJDBC implements Connexio {
         try {
             conn = DriverManager.getConnection(bbdd, username, passwd);
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            //throwables.printStackTrace();
+            Log.severe("Could not connect to JDBC");
         }
         return conn;
     }
