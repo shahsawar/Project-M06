@@ -118,6 +118,11 @@ public class DAOUserMongo implements DAOUser{
 
         MongoCollection<Document> collection = conn.start();
         Document mydoc = collection.find(eq("dni", dni)).first();
+
+        if (mydoc == null){
+            return null;
+        }
+
         User userTmp = toUser(mydoc);
         conn.close();
         return userTmp;

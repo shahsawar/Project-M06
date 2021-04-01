@@ -58,10 +58,9 @@ public class InsertUserController{
         Date date = Date.from(instant);
 
         //Check if user already exist
-        User userTmp = new User();
-        userTmp = App.gestorPersistencia.getUserByDNI(dniInput.getText());
+        User userTmp = App.gestorPersistencia.getUserByDNI(dniInput.getText());
 
-        if (userTmp.getDni() != null){
+        if (userTmp != null){
             System.out.println("El usuario ya existe");
         } else {
 
