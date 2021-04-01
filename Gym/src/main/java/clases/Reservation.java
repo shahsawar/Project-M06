@@ -12,7 +12,6 @@ import java.util.Date;
 public class Reservation {
     private int reservationCode;
     private Date date;
-    private String dateStr;
     private int userCode;
     private String roomName;
     private Boolean workoutPlane;
@@ -20,24 +19,22 @@ public class Reservation {
     public Reservation() {
     }
 
-
     public Reservation(int reservationCode, Date date, int userCode, String roomName, Boolean workoutPlane) {
         this.reservationCode = reservationCode;
         this.date = date;
         this.userCode = userCode;
         this.roomName = roomName;
         this.workoutPlane = workoutPlane;
-        this.dateStr = dateToString(this.date);
     }
 
     public Reservation( Date date, int userCode, String roomName, Boolean workoutPlane) {
-        this.reservationCode = reservationCode;
         this.date = date;
         this.userCode = userCode;
         this.roomName = roomName;
         this.workoutPlane = workoutPlane;
-        this.dateStr = dateToString(date);
     }
+
+
 
     public int getReservationCode() {
         return reservationCode;

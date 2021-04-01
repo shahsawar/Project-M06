@@ -2,6 +2,7 @@ package db;
 
 import clases.Reservation;
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
 import com.mongodb.client.model.UpdateOptions;
 import com.mongodb.client.model.Updates;
 import org.bson.Document;
@@ -34,7 +35,8 @@ public class DAOReservationMongo implements DAOReservation {
         ConnectionMongo conn = new ConnectionMongo();
 
         MongoCollection<Document> collection = conn.start();
-        collection.deleteOne(toDoc(reservation));
+        //collection.deleteOne(eq("user_code", user.getUserCode()));
+        //collection.deleteOne(toDoc(reservation));
         conn.close();
     }
 
@@ -46,16 +48,8 @@ public class DAOReservationMongo implements DAOReservation {
         MongoCollection<Document> collection = conn.start();
 
         Bson filter = eq("user_code", reservation.getUserCode());
-        UpdateOptions options = new UpdateOptions().arrayFilters(asList(eq("ele.reservation_code", integer)));
-        //Bson update = set("reservations.$[ele].workout_plane", false);
-        Bson update = combine(
-                set("reservations.$[ele].date",reservation.getDate()),
-                set("reservations.$[ele].room_name",reservation.getRoomName()),
-                set("reservations.$[ele].workout_plane",reservation.getWorkoutPlane())
-        );
-        collection.updateOne(filter, update, options);
-        //UpdateResult result = collection.updateOne(filter, update, options);
-        //System.out.println(result.toString());
+        Bson delete = Updates.push("reservations.reservation_code", 1);
+        collection.updateOne(filter, delete);
 
         /*
         Document doc = collection.find(eq("reservations.reservation_code", 123)).first();
@@ -100,7 +94,6 @@ public class DAOReservationMongo implements DAOReservation {
         Document mydoc = collection.find(eq("user_code", user_code)).first();
         if (mydoc.containsKey("reservations")) {
             lastDoc = mydoc.getList("reservations", Document.class).size();
-            System.out.println("This is last:"+lastDoc);
         }
         conn.close();
         return lastDoc;
@@ -129,9 +122,15 @@ public class DAOReservationMongo implements DAOReservation {
 
     public static void main(String[] args) throws ParseException {
 
-        Reservation r = new Reservation(123, new SimpleDateFormat("dd-MM-yyyy").parse("10-10-2020"), 1, "sala fitness", true);
-        DAOReservationMongo d = new DAOReservationMongo();
-        d.insert(r);
+
+        ConnectionMongo conn = new ConnectionMongo();
+        MongoCollection<Document> collection = conn.start();
+        collection.findOneAndDelete(eq("reservations.reservation_code", 1));
+
+
+        //Reservation r = new Reservation(123, new SimpleDateFormat("dd-MM-yyyy").parse("10-10-2020"), 2, "sala fitness", true);
+        //DAOReservationMongo d = new DAOReservationMongo();
+        //d.insert(r);
         //d.update(r, 123);
         /*
         MongoCollection<Document> collection = ConnectionMongo.start();

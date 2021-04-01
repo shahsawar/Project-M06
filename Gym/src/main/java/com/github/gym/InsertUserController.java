@@ -58,7 +58,7 @@ public class InsertUserController{
         Date date = Date.from(instant);
 
         //Check if user already exist
-        User userTmp = null;
+        User userTmp = new User();
         userTmp = App.gestorPersistencia.getUserByDNI(dniInput.getText());
 
         if (userTmp.getDni() != null){
@@ -73,7 +73,6 @@ public class InsertUserController{
                 e.printStackTrace();
             }
         }
-
     }
 
     @FXML
