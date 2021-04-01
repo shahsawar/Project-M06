@@ -14,6 +14,8 @@ import llibreries.FormattedDateValueFactory;
 
 import java.io.IOException;
 import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -83,6 +85,8 @@ public class ReservationController implements Initializable {
         reservationTableView.setItems(observableList);
         reservationTableView.setEditable(true);
         colReservationRoomname.setCellFactory(TextFieldTableCell.forTableColumn());
+        colReservationDate.setCellFactory(TextFieldTableCell.forTableColumn());
+
     }
 
     @FXML
@@ -120,13 +124,33 @@ public class ReservationController implements Initializable {
     }
 
 
-    public void update(TableColumn.CellEditEvent<Reservation, String> reservationStringCellEditEvent) {
+    public void updateRoomName(TableColumn.CellEditEvent<Reservation, String> reservationStringCellEditEvent) {
         Reservation reservation = reservationTableView.getSelectionModel().getSelectedItem();
         reservation.setRoomName(reservationStringCellEditEvent.getNewValue());
         App.gestorPersistencia.updateReservation(reservation, reservation.getUserCode());
     }
 
+    public void updateDate(TableColumn.CellEditEvent<Reservation, String> reservationStringCellEditEvent) {
+        Reservation reservation = reservationTableView.getSelectionModel().getSelectedItem();
 
-    //Hidden line
+        //String to date
+        Date date = null;
+        try {
+            date = new SimpleDateFormat("dd/MM/yyyy").parse(reservationStringCellEditEvent.getNewValue());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        reservation.setDate(date);
+        App.gestorPersistencia.updateReservation(reservation, reservation.getUserCode());
+    }
+
+    @FXML
+    public void back(ActionEvent actionEvent) {
+        try {
+            App.setRoot("MainScreen");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 }

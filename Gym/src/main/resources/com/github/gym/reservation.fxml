@@ -198,7 +198,7 @@
                   </VBox>
                   <HBox alignment="CENTER" layoutY="486.0" prefHeight="100.0" prefWidth="652.0">
                      <children>
-                        <Button layoutX="221.0" layoutY="44.0" minWidth="100.0" mnemonicParsing="false" text="Back">
+                        <Button fx:id="back" layoutX="221.0" layoutY="44.0" minWidth="100.0" mnemonicParsing="false" onAction="#back" text="Back">
                            <font>
                               <Font size="18.0" />
                            </font>
@@ -228,8 +228,8 @@
                <children>
                   <TableView fx:id="reservationTableView" layoutY="44.0" prefHeight="200.0" prefWidth="652.0">
                     <columns>
-                      <TableColumn fx:id="colReservationDate" minWidth="215.0" prefWidth="75.0" text="Date" />
-                      <TableColumn fx:id="colReservationRoomname" minWidth="215.0" onEditCommit="#update" prefWidth="123.0" text="Room name" />
+                      <TableColumn fx:id="colReservationDate" minWidth="215.0" onEditCommit="#updateDate" prefWidth="75.0" text="Date" />
+                      <TableColumn fx:id="colReservationRoomname" minWidth="215.0" onEditCommit="#updateRoomName" prefWidth="123.0" text="Room name" />
                         <TableColumn fx:id="colReservationWorkoutplane" minWidth="220.0" prefWidth="130.0" text="Workout plane" />
                     </columns>
                   </TableView>
