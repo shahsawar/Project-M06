@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 /***
  * @author Ronald
@@ -85,6 +86,19 @@ public class User {
 
     public void setReservations(List<Reservation> reservations) {
         this.reservations = reservations;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return userCode == user.userCode && dni.equals(user.dni);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(dni, userCode);
     }
 
     @Override

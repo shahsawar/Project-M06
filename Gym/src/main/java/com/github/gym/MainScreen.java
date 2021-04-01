@@ -125,6 +125,7 @@ public class MainScreen implements Initializable {
             alert.showAndWait();
 
         } else {
+
             //User selected to be remove
             ObservableList<User> selectedUser = mainScreenTable.getSelectionModel().getSelectedItems();
 
@@ -132,8 +133,17 @@ public class MainScreen implements Initializable {
             User userTmp = App.gestorPersistencia.getUserById(selectedUser.get(0).getUserCode());
             App.gestorPersistencia.deleteUser(userTmp);
 
-            //Remove user from tableview
-            selectedUser.forEach(observableList::remove);
+            Alert alert = new Alert(Alert.AlertType.NONE, "Do you want to delete user " + userTmp.getName() + " with dni: " + userTmp.getDni(), ButtonType.NO, ButtonType.YES);
+            alert.setTitle("Are you sure?");
+            alert.showAndWait();
+
+            if (alert.getResult() == ButtonType.YES) {
+                //Remove user from tableview
+                selectedUser.forEach(observableList::remove);
+
+                //Remove from the array
+                userList.remove(userTmp);
+            }
         }
     }
 

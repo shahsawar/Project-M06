@@ -108,7 +108,7 @@ public class DAOUserJDBC implements DAOUser {
         java.sql.Date sqlDate = new java.sql.Date(user.getBirthDate().getTime()); //Fecha en formato sql
         try {
 
-            PreparedStatement updateEXP = connexioJDBC.start().prepareStatement("UPDATE user SET dni = ?, name = ?, lastname = ?, birthdate = ? WHERE");
+            PreparedStatement updateEXP = connexioJDBC.start().prepareStatement("UPDATE user SET dni = ?, name = ?, lastname = ?, birthdate = ? WHERE user_code= " + code);
             updateEXP.setString(1, user.getDni());
             updateEXP.setString(2, user.getName());
             updateEXP.setString(3, user.getLastname());
