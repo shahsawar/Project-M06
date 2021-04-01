@@ -239,6 +239,10 @@ public class DAOUserJDBC implements DAOUser {
                 user.setBirthDate((Date) rs.getDate("birthdate"));
             }
 
+            if (user.getDni() == null){
+                return null;
+            }
+
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         } finally {
