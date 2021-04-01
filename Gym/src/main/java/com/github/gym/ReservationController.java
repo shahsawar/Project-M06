@@ -113,7 +113,7 @@ public class ReservationController implements Initializable {
         ObservableList<Reservation> selectedReservation = reservationTableView.getSelectionModel().getSelectedItems();
 
         //Remove reservation from database
-        Reservation reservationTmp = App.gestorPersistencia.getReservationById(selectedReservation.get(0).getReservationCode());
+        Reservation reservationTmp = selectedReservation.get(0);
         App.gestorPersistencia.deleteReservation(reservationTmp);
 
         //Remove reservation from tableview

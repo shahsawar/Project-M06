@@ -34,9 +34,12 @@ public class DAOReservationMongo implements DAOReservation {
         //Create connection
         ConnectionMongo conn = new ConnectionMongo();
 
+        System.out.println(reservation.toString());
+
         MongoCollection<Document> collection = conn.start();
-        //collection.deleteOne(eq("user_code", user.getUserCode()));
-        //collection.deleteOne(toDoc(reservation));
+        Bson filter = eq("user_code", reservation.getUserCode());
+        Bson delete = Updates.pull("reservations", new Document("reservation_code", reservation.getReservationCode()));
+        collection.updateOne(filter, delete);
         conn.close();
     }
 
@@ -48,8 +51,16 @@ public class DAOReservationMongo implements DAOReservation {
         MongoCollection<Document> collection = conn.start();
 
         Bson filter = eq("user_code", reservation.getUserCode());
-        Bson delete = Updates.push("reservations.reservation_code", 1);
-        collection.updateOne(filter, delete);
+        UpdateOptions options = new UpdateOptions().arrayFilters(asList(eq("ele.reservation_code", integer)));
+        //Bson update = set("reservations.$[ele].workout_plane", false);
+        Bson update = combine(
+                set("reservations.$[ele].date",reservation.getDate()),
+                set("reservations.$[ele].room_name",reservation.getRoomName()),
+                set("reservations.$[ele].workout_plane",reservation.getWorkoutPlane())
+        );
+        collection.updateOne(filter, update, options);
+        //UpdateResult result = collection.updateOne(filter, update, options);
+        //System.out.println(result.toString());
 
         /*
         Document doc = collection.find(eq("reservations.reservation_code", 123)).first();
@@ -125,7 +136,8 @@ public class DAOReservationMongo implements DAOReservation {
 
         ConnectionMongo conn = new ConnectionMongo();
         MongoCollection<Document> collection = conn.start();
-        collection.findOneAndDelete(eq("reservations.reservation_code", 1));
+
+        //Document cursor = collection.deleteOne(eq("reservations.reservation_code", 1)).first();
 
 
         //Reservation r = new Reservation(123, new SimpleDateFormat("dd-MM-yyyy").parse("10-10-2020"), 2, "sala fitness", true);
