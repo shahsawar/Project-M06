@@ -1,0 +1,3 @@
+//How to remove subdocument in array mongod java
+https://docs.mongodb.com/manual/reference/operator/update/pull/
+https://stackoverflow.com/questions/40292201/mongodb-pull-using-java-driver

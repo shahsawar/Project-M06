@@ -141,6 +141,7 @@ public class MainScreen implements Initializable {
     @FXML
     private void addReservation(ActionEvent event){
 
+
         int selectedItems = mainScreenTable.getSelectionModel().getSelectedItems().size();
 
         if (selectedItems == 0){
@@ -153,7 +154,7 @@ public class MainScreen implements Initializable {
 
         } else {
             //User selected
-            User u = mainScreenTable.getSelectionModel().getSelectedItems().get(0);
+            User userSelected = mainScreenTable.getSelectionModel().getSelectedItems().get(0);
 
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("reservation.fxml"));
@@ -163,7 +164,7 @@ public class MainScreen implements Initializable {
                 e.printStackTrace();
             }
             ReservationController r = loader.getController();
-            r.setUserData(mainScreenTable.getSelectionModel().getSelectedItems().get(0));
+            r.setUserData(userSelected);
             Parent p = loader.getRoot();
             Stage stage = new Stage();
             stage.setScene(new Scene(p));

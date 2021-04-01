@@ -229,7 +229,7 @@
                   <TableView fx:id="reservationTableView" layoutY="44.0" prefHeight="200.0" prefWidth="652.0">
                     <columns>
                       <TableColumn fx:id="colReservationDate" minWidth="215.0" prefWidth="75.0" text="Date" />
-                      <TableColumn fx:id="colReservationRoomname" minWidth="215.0" prefWidth="123.0" text="Room name" />
+                      <TableColumn fx:id="colReservationRoomname" minWidth="215.0" onEditCommit="#update" prefWidth="123.0" text="Room name" />
                         <TableColumn fx:id="colReservationWorkoutplane" minWidth="220.0" prefWidth="130.0" text="Workout plane" />
                     </columns>
                   </TableView>

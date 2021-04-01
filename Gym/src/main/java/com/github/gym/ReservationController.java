@@ -55,7 +55,6 @@ public class ReservationController implements Initializable {
     private RadioButton radioBtn1, radioBtn2;
 
 
-
     ObservableList<Reservation> observableList = FXCollections.observableArrayList();
 
     @Override
@@ -119,4 +118,14 @@ public class ReservationController implements Initializable {
         //Remove reservation from tableview
         selectedReservation.forEach(observableList::remove);
     }
+
+
+    public void update(TableColumn.CellEditEvent<Reservation, String> reservationStringCellEditEvent) {
+        Reservation reservation = reservationTableView.getSelectionModel().getSelectedItem();
+        reservation.setRoomName(reservationStringCellEditEvent.getNewValue());
+        App.gestorPersistencia.updateReservation(reservation, reservation.getUserCode());
+    }
+
+
+
 }
