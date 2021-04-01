@@ -1,6 +1,7 @@
 package com.github.gym;
 
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
 import db.*;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -26,7 +27,7 @@ public class ConfigurationController implements Initializable {
     private ImageView imageViewMongo;
 
     /***
-     * Back
+     * Back to the main screen
      * @throws IOException
      */
     void backToMain() throws IOException {
@@ -53,21 +54,19 @@ public class ConfigurationController implements Initializable {
 
                 ConnectionMongo con = new ConnectionMongo();
                 try{
-                    //MongoCollection<Document> c = con.start();
-                    con.connectionValid();
 
-                    /*
-                    if (c != null){
-                        App.gestorPersistencia = new GestorPersistenciaMongo();
-                        try {
-                            backToMain();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    }*/
-                    con.close();
+                    con.test();
+
+                    App.gestorPersistencia = new GestorPersistenciaMongo();
+                    try {
+                        backToMain();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
                 } catch (Exception e){
-                    System.out.println("Mongodb Connnection not possible");//No se pone en log porque ya está al ejecutar start()
+                    System.out.println("Mongodb Connnection not possible");
+                    Log.severe("MongoDB is down");
                 }
             }
         });

@@ -1,6 +1,8 @@
 package db;
 
+import com.mongodb.*;
 import com.mongodb.client.*;
+import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
@@ -14,17 +16,17 @@ public class ConnectionMongo implements Connexio<MongoCollection<Document>>{
     public ConnectionMongo() {
     }
 
-    public boolean connectionValid(){
-        boolean valid =  false;
-        try {
-            mongoClient.getDatabase(DATABASENAME);
-            valid = true;
-        } catch (Exception e) {
-            System.out.println("Database unavailable!");
-            mongoClient.close();
-        }
+    /***
+     * Test if mongoDB server is active
+     * @throws Exception to be captured when user selects MongoDB database
+     */
+    public void test() throws Exception {
+        MongoClientOptions.Builder o = MongoClientOptions.builder().connectTimeout(1).socketTimeout(1).serverSelectionTimeout(1500);//1.5 secs to do it fast
+        Mongo mongo = new com.mongodb.MongoClient(new ServerAddress("localhost"),o.build());
 
-        return valid;
+        //Test with a ping
+        DBObject ping = new BasicDBObject("ping", "1");
+        mongo.getDB("gym").command(ping);
     }
 
     @Override
@@ -40,7 +42,6 @@ public class ConnectionMongo implements Connexio<MongoCollection<Document>>{
         mongoClient.close();
         System.out.println("Connection close successfully");
     }
-
 
     /*
     public static MongoCollection<Document> start() {
