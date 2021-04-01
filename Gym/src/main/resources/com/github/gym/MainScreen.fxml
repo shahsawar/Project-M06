@@ -36,7 +36,7 @@
                         <Insets right="20.0" />
                      </HBox.margin>
                   </TextField>
-                  <Button fx:id="btnFind" mnemonicParsing="false" text="Find">
+                  <Button fx:id="btnFind" mnemonicParsing="false" onAction="#searchUserByName" text="Find">
                      <font>
                         <Font size="15.0" />
                      </font>

@@ -34,8 +34,6 @@ public class Reservation {
         this.workoutPlane = workoutPlane;
     }
 
-
-
     public int getReservationCode() {
         return reservationCode;
     }

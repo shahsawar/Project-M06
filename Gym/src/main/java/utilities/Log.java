@@ -22,4 +22,8 @@ public class Log {
         logger.config(msg);
     }
 
+    public static void warning(String msg){//Warning messages.
+        logger.warning(msg);
+    }
+
 }
