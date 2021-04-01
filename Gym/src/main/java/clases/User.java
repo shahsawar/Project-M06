@@ -19,7 +19,7 @@ public class User {
     private String lastname;
     private Date birthDate;
     private int userCode;
-    private List<Reservation> reservations;
+    private List<Reservation> reservations = new ArrayList<>();
 
     public User() {
     }
@@ -29,7 +29,6 @@ public class User {
         this.name = name;
         this.lastname = lastname;
         this.birthDate = birthday;
-        reservations = new ArrayList<>();
     }
 
     public User(String dni, String name, String lastname, Date birthday, int userCode) {
@@ -38,7 +37,6 @@ public class User {
         this.lastname = lastname;
         this.birthDate = birthday;
         this.userCode = userCode;
-        reservations = new ArrayList<>();
     }
 
     public String getDni() {
