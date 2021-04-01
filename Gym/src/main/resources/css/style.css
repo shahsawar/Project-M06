@@ -32,6 +32,10 @@
     -fx-background-position: center center;
 }
 
+#imageViewSQL, #imageViewMongo, #imagenMainScreen{
+    -fx-cursor: hand;
+}
+
 .mongoContainer{
     -fx-background-image:url("../images/hoja1.jpg");
     -fx-background-repeat: stretch;
@@ -40,10 +44,6 @@
     -fx-border-width: 0.1;
     -fx-border-color: transparent transparent transparent black;
     -fx-border-style: solid;
-}
-
-#imagenMainScreen{
-    -fx-cursor: hand;
 }
 
 .cancelButton{
