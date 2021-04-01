@@ -42,6 +42,10 @@
     -fx-border-style: solid;
 }
 
+#imagenMainScreen{
+    -fx-cursor: hand;
+}
+
 .cancelButton{
     -fx-background-color:rgba(77,102,204,0.1);
     -fx-text-fill: #000;
