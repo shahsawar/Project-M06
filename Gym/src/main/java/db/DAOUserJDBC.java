@@ -1,6 +1,7 @@
 package db;
 
 import clases.User;
+import utilities.Log;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -71,9 +72,9 @@ public class DAOUserJDBC implements DAOUser {
         }
 
         if (insercion == 1) {
-            System.out.println("Cliente añadido correctamente");
+            Log.info("User with dni " + user.getDni() + " added correctly");
         } else {
-            System.out.println("Ha ocurrido un error al insertar el cliente con DNI: " + user.getDni());
+            Log.info("An error occurred while inserting the user with DNI: " + user.getDni());
         }
 
     }
@@ -91,6 +92,7 @@ public class DAOUserJDBC implements DAOUser {
             String sentenciaSQL = "DELETE FROM user WHERE user_code = " + user.getUserCode();
             PreparedStatement preparedStatement = connexioJDBC.start().prepareStatement(sentenciaSQL);
             preparedStatement.executeUpdate();
+            Log.info("User " + user.getUserCode() + " has been deleted");
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -108,13 +110,13 @@ public class DAOUserJDBC implements DAOUser {
         java.sql.Date sqlDate = new java.sql.Date(user.getBirthDate().getTime()); //Fecha en formato sql
         try {
 
-            PreparedStatement updateEXP = connexioJDBC.start().prepareStatement("UPDATE user SET dni = ?, name = ?, lastname = ?, birthdate = ? WHERE");
+            PreparedStatement updateEXP = connexioJDBC.start().prepareStatement("UPDATE user SET dni = ?, name = ?, lastname = ?, birthdate = ? WHERE user_code= " + code);
             updateEXP.setString(1, user.getDni());
             updateEXP.setString(2, user.getName());
             updateEXP.setString(3, user.getLastname());
             updateEXP.setString(4, sqlDate + "");
             int result = updateEXP.executeUpdate();
-            System.out.println(result + " rows updated");
+            Log.info("User " + code + " has been updaed");
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -142,6 +144,9 @@ public class DAOUserJDBC implements DAOUser {
                 user.setName(rs.getString("name"));
                 user.setLastname(rs.getString("lastname"));
                 user.setBirthDate(stringToDate(rs.getString("birthdate")));
+
+                DAOReservationJDBC daoReservationJDBC = new DAOReservationJDBC();
+                user.setReservations(daoReservationJDBC.getUserReservations(user.getUserCode()));
 
                 users.add(user);
             }
@@ -173,6 +178,9 @@ public class DAOUserJDBC implements DAOUser {
                 user.setLastname(rs.getString("lastname"));
                 user.setBirthDate((Date) rs.getDate("birthdate"));
             }
+
+            DAOReservationJDBC daoReservationJDBC = new DAOReservationJDBC();
+            user.setReservations(daoReservationJDBC.getUserReservations(user.getUserCode()));
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -238,6 +246,9 @@ public class DAOUserJDBC implements DAOUser {
                 user.setLastname(rs.getString("lastname"));
                 user.setBirthDate((Date) rs.getDate("birthdate"));
             }
+
+            DAOReservationJDBC daoReservationJDBC = new DAOReservationJDBC();
+            user.setReservations(daoReservationJDBC.getUserReservations(user.getUserCode()));
 
             if (user.getDni() == null){
                 return null;

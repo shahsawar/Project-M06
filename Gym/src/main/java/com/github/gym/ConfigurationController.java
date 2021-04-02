@@ -3,12 +3,16 @@ package com.github.gym;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import db.*;
+import javafx.animation.*;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
+import javafx.util.Duration;
 import org.bson.Document;
 import utilities.Log;
 
@@ -26,12 +30,43 @@ public class ConfigurationController implements Initializable {
     @FXML
     private ImageView imageViewMongo;
 
+    @FXML
+    private HBox mysqlContainerBox;
+
+    @FXML
+    private HBox mysqlMongoBox;
+
     /***
      * Back to the main screen
      * @throws IOException
      */
     void backToMain() throws IOException {
         App.setRoot("MainScreen");
+    }
+
+    /**
+     *
+     * @param imageView the image to scale
+     * @param bigger if true, the animation scale will increase the size, if it's false, will decrease
+     */
+    void scaleSizeAnimation(ImageView imageView, boolean bigger){
+        ScaleTransition st = new ScaleTransition(Duration.millis(100), imageView);
+
+        double initialSize = 1;
+        double biggerSize = 1.1;
+
+        if (bigger){
+            st.setFromX(initialSize);
+            st.setFromY(initialSize);
+            st.setToX(biggerSize);
+            st.setToY(biggerSize);
+        } else {
+            st.setFromX(biggerSize);
+            st.setFromY(biggerSize);
+            st.setToX(initialSize);
+            st.setToY(initialSize);
+        }
+        st.play();
     }
 
 
@@ -102,12 +137,24 @@ public class ConfigurationController implements Initializable {
         });
 
 
-        //Hover
-        imageViewSQL.setOnMouseEntered(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent t) {
-                System.out.println("Hover on Mysql detected");
-            }
+        //BBDD Images hover
+        imageViewMongo.addEventFilter(MouseEvent.MOUSE_ENTERED, e -> {
+
+            scaleSizeAnimation(imageViewMongo, true);
+        });
+
+
+        imageViewMongo.addEventFilter(MouseEvent.MOUSE_EXITED, e -> {
+            scaleSizeAnimation(imageViewMongo, false);
+        });
+
+        imageViewSQL.addEventFilter(MouseEvent.MOUSE_ENTERED, e -> {
+            scaleSizeAnimation(imageViewSQL, true);
+        });
+
+
+        imageViewSQL.addEventFilter(MouseEvent.MOUSE_EXITED, e -> {
+            scaleSizeAnimation(imageViewSQL, false);
         });
 
     }

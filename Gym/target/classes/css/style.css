@@ -6,6 +6,13 @@
     -fx-background-color:transparent;
 }
 
+/*
+#mainScreenContainer{
+    -fx-background-image:url("../images/gym.jpg");
+    -fx-background-repeat: stretch;
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+}*/
 
 .button{
     -fx-padding: 5 22 5 22;
@@ -41,9 +48,9 @@
     -fx-background-repeat: stretch;
     -fx-background-size: cover;
     -fx-background-position: center center;
-    -fx-border-width: 0.1;
+    /*-fx-border-width: 0.1;
     -fx-border-color: transparent transparent transparent black;
-    -fx-border-style: solid;
+    -fx-border-style: solid;*/
 }
 
 .cancelButton{

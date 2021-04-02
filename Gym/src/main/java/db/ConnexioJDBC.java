@@ -32,6 +32,7 @@ public class ConnexioJDBC implements Connexio {
     @Override
     public Connection start() {
         try {
+
             conn = DriverManager.getConnection(bbdd, username, passwd);
         } catch (SQLException throwables) {
             //throwables.printStackTrace();
