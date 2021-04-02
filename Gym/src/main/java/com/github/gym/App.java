@@ -7,6 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import utilities.Log;
 
 import java.io.IOException;
 
@@ -32,6 +33,7 @@ public class App extends Application {
 
         stage.setScene(scene);
         stage.show();
+        Log.start();//To assign the log file to the log
     }
 
     static void setRoot(String fxml) throws IOException {

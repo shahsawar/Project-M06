@@ -19,12 +19,12 @@
          <font>
             <Font name="System Bold" size="18.0" />
          </font></Label>
-      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" styleClass="sqlContainer" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+      <HBox fx:id="mysqlContainerBox" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" styleClass="sqlContainer" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
          <children>
             <ImageView fx:id="imageViewSQL" fitHeight="404.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="ALWAYS" />
          </children>
       </HBox>
-      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" styleClass="mongoContainer" GridPane.columnIndex="2" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+      <HBox fx:id="mysqlMongoBox" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" styleClass="mongoContainer" GridPane.columnIndex="2" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
          <children>
             <ImageView fx:id="imageViewMongo" fitHeight="401.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="ALWAYS" />
          </children>

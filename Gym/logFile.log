@@ -1,0 +1,24 @@
+Apr 02, 2021 4:15:07 PM utilities.Log info
+INFO: Mysql database selected
+Apr 02, 2021 4:15:08 PM utilities.Log info
+INFO: MongoDB database selected
+Apr 02, 2021 4:15:53 PM utilities.Log info
+INFO: Mysql database selected
+Apr 02, 2021 4:15:55 PM utilities.Log info
+INFO: MongoDB database selected
+Apr 02, 2021 4:15:57 PM utilities.Log info
+INFO: Mysql database selected
+Apr 02, 2021 4:15:58 PM utilities.Log warning
+WARNING: Not user selected, can't delete
+Apr 02, 2021 4:16:00 PM utilities.Log warning
+WARNING: Not user selected, can't add reservation
+Apr 02, 2021 4:16:33 PM utilities.Log info
+INFO: MongoDB database selected
+Apr 02, 2021 4:16:35 PM utilities.Log info
+INFO: Mysql database selected
+Apr 02, 2021 4:24:39 PM utilities.Log info
+INFO: Mysql database selected
+Apr 02, 2021 4:24:44 PM utilities.Log info
+INFO: User 3 has been updaed
+Apr 02, 2021 4:24:48 PM utilities.Log info
+INFO: User 3 has been updaed

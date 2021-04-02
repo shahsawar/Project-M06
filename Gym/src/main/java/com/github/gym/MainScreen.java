@@ -1,5 +1,8 @@
 package com.github.gym;
 
+import javafx.animation.Animation;
+import javafx.animation.Interpolator;
+import javafx.animation.RotateTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -24,6 +27,7 @@ import java.util.ResourceBundle;
 
 import clases.*;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import utilities.Log;
 
 /**
@@ -59,6 +63,7 @@ public class MainScreen implements Initializable {
     ObservableList<User> observableList = FXCollections.observableArrayList();
     List<User> userList = App.gestorPersistencia.getAllUsers();
 
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -75,6 +80,16 @@ public class MainScreen implements Initializable {
         mainScreenTable.setEditable(true);
         colUserName.setCellFactory(TextFieldTableCell.forTableColumn());
         colUserLastname.setCellFactory(TextFieldTableCell.forTableColumn());
+
+        //Roatation animation
+        RotateTransition rt = new RotateTransition(Duration.millis(3000), imagenMainScreen);
+        rt.setByAngle(360);
+        rt.setCycleCount(Animation.INDEFINITE);
+        rt.setInterpolator(Interpolator.LINEAR);
+
+        //Hover
+        imagenMainScreen.setOnMouseEntered(e -> rt.play());
+        imagenMainScreen.setOnMouseExited(e -> rt.pause());
 
         imagenMainScreen.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
@@ -98,6 +113,7 @@ public class MainScreen implements Initializable {
                 }
             }
         });
+
     }
 
     public void updateUserName(TableColumn.CellEditEvent<User, String> userStringCellEditEvent) {

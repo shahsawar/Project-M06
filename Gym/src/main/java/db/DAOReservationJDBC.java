@@ -1,6 +1,8 @@
 package db;
 
 import clases.Reservation;
+import utilities.Log;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -28,8 +30,7 @@ public class DAOReservationJDBC implements DAOReservation{
             fecha = formatter.parse(strDate);
 
         } catch (ParseException e) {
-
-            System.out.println("Error: " + e);
+            Log.severe("Error, can't parse date " + strDate);
         }
 
 
@@ -74,9 +75,9 @@ public class DAOReservationJDBC implements DAOReservation{
         }
 
         if (insercion == 1) {
-            System.out.println("Reserva añadida correctamente");
+            Log.info("Reservation added");
         } else {
-            System.out.println("Ha ocurrido un error al insertar la reserva num. " + reservation.getReservationCode());
+            Log.info("An error occurred while inserting the reservation num. " + reservation.getReservationCode());
         }
     }
 
@@ -97,18 +98,18 @@ public class DAOReservationJDBC implements DAOReservation{
     }
 
     @Override
-    public void update(Reservation reservation, Integer integer) {
+    public void update(Reservation reservation, Integer reservationCode) {
         ConnexioJDBC connexioJDBC = new ConnexioJDBC();
 
         java.sql.Date sqlDate = new java.sql.Date(reservation.getDate().getTime()); //Fecha en formato sql
         try {
 
-            PreparedStatement updateEXP = connexioJDBC.start().prepareStatement("UPDATE reservation SET room_name = ?, has_workout_plane = ?, date = ? WHERE code = " + integer);
+            PreparedStatement updateEXP = connexioJDBC.start().prepareStatement("UPDATE reservation SET room_name = ?, has_workout_plane = ?, date = ? WHERE code = " + reservationCode);
             updateEXP.setString(1, reservation.getRoomName());
             updateEXP.setString(2, booleanToInteger(reservation.getWorkoutPlane()) + ""); //Booleano para formato SQL
             updateEXP.setString(3, sqlDate + "");
             int result = updateEXP.executeUpdate();
-            System.out.println(result + " rows updated");
+            Log.info("Reservation " + reservationCode + "has been updated");
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -225,7 +226,6 @@ public class DAOReservationJDBC implements DAOReservation{
             }
 
             if(contador > 0) {
-                System.out.println("Se han recuperado " + contador + " reserva(s)");
             } else {
                 lastCode = -1;//La tabla está vacía
             }
