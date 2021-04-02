@@ -2,6 +2,7 @@ package com.github.gym;
 
 import clases.Reservation;
 import clases.User;
+import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -45,6 +46,7 @@ public class ReservationController implements Initializable {
 
     @FXML
     private TableColumn<Reservation, Boolean> colReservationWorkoutplane;
+
 
     //Add reservation
     @FXML
@@ -159,6 +161,4 @@ public class ReservationController implements Initializable {
         //Remove reservation from tableview
         selectedReservation.forEach(observableList::remove);
     }
-
-
 }

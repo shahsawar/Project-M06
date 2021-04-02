@@ -191,7 +191,9 @@ public class MainScreen implements Initializable {
             r.setUserData(userSelected);
             Parent p = loader.getRoot();
             Stage stage = new Stage();
-            stage.setScene(new Scene(p));
+            Scene scene = new Scene(p);
+            scene.getStylesheets().add(getClass().getResource("/css/style.css").toExternalForm());
+            stage.setScene(scene);
             stage.show();
         }
     }
