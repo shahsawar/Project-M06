@@ -8,233 +8,114 @@
 <AnchorPane prefHeight="800.0" prefWidth="1314.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.gym.ReservationController">
    <children>
       <SplitPane dividerPositions="0.5" prefHeight="800.0" prefWidth="1314.0">
-        <items>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+         <items>
+            <AnchorPane prefHeight="718.0" prefWidth="652.0">
                <children>
-                  <VBox prefHeight="139.0" prefWidth="652.0">
-                     <children>
-                        <HBox alignment="CENTER" prefHeight="26.0" prefWidth="652.0">
-                           <children>
-                              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="389.0" text="User Information">
-                                 <font>
-                                    <Font name="System Bold" size="24.0" />
-                                 </font>
-                                 <padding>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                 </padding>
-                              </Label>
-                           </children>
-                           <VBox.margin>
-                              <Insets bottom="15.0" />
-                           </VBox.margin>
-                        </HBox>
-                        <HBox alignment="CENTER" prefHeight="46.0" prefWidth="476.0">
-                           <children>
-                              <Label text="DNI : ">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font></Label>
-                              <Label fx:id="reservationUserDni" layoutX="310.0" layoutY="20.0" minWidth="250.0" style="-fx-border-color: transparent transparent black transparent; -fx-background-color: white;">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                                 <HBox.margin>
-                                    <Insets left="75.0" />
-                                 </HBox.margin>
-                              </Label>
-                           </children>
-                           <opaqueInsets>
-                              <Insets />
-                           </opaqueInsets>
-                           <padding>
-                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                           </padding>
-                        </HBox>
-                        <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="46.0" prefWidth="476.0">
-                           <children>
-                              <Label text="NAME">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font></Label>
-                              <Label fx:id="reservationUserName" layoutX="300.0" layoutY="21.0" minWidth="250.0" style="-fx-background-color: white; -fx-border-color: transparent transparent black transparent;">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                                 <HBox.margin>
-                                    <Insets left="70.0" />
-                                 </HBox.margin>
-                              </Label>
-                           </children>
-                           <opaqueInsets>
-                              <Insets />
-                           </opaqueInsets>
-                           <padding>
-                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                           </padding>
-                        </HBox>
-                        <HBox alignment="CENTER" layoutX="10.0" layoutY="56.0" prefHeight="46.0" prefWidth="476.0">
-                           <children>
-                              <Label text="LASTNAME : ">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font></Label>
-                              <Label fx:id="reservationUserLastname" minWidth="250.0" style="-fx-background-color: white; -fx-border-color: transparent transparent black transparent;">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                                 <HBox.margin>
-                                    <Insets left="8.0" />
-                                 </HBox.margin>
-                              </Label>
-                           </children>
-                           <opaqueInsets>
-                              <Insets />
-                           </opaqueInsets>
-                           <padding>
-                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                           </padding>
-                        </HBox>
-                     </children>
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="47.0" layoutY="31.0" text="USER INFORMATION">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
                      <padding>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                        <Insets bottom="10.0" top="10.0" />
                      </padding>
-                  </VBox>
-                  <VBox layoutY="255.0" prefHeight="139.0" prefWidth="652.0">
-                     <children>
-                        <HBox alignment="CENTER" prefHeight="26.0" prefWidth="652.0">
-                           <children>
-                              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="389.0" text="Add Reservation">
-                                 <font>
-                                    <Font name="System Bold" size="24.0" />
-                                 </font>
-                                 <padding>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                 </padding>
-                              </Label>
-                           </children>
-                           <VBox.margin>
-                              <Insets bottom="15.0" />
-                           </VBox.margin>
-                        </HBox>
-                        <HBox prefHeight="46.0" prefWidth="476.0">
-                           <children>
-                              <Label text="Date">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </Label>
-                              <DatePicker fx:id="reservationInputDate" editable="false" minWidth="250.0">
-                                 <HBox.margin>
-                                    <Insets left="108.0" />
-                                 </HBox.margin></DatePicker>
-                           </children>
-                           <opaqueInsets>
-                              <Insets />
-                           </opaqueInsets>
-                           <padding>
-                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                           </padding>
-                           <VBox.margin>
-                              <Insets left="130.0" />
-                           </VBox.margin>
-                        </HBox>
-                        <HBox layoutX="10.0" layoutY="10.0" prefHeight="46.0" prefWidth="476.0">
-                           <children>
-                              <Label text="Room Name">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </Label>
-                              <TextField fx:id="reservationInputRoomname" minWidth="250.0">
-                                 <HBox.margin>
-                                    <Insets left="40.0" />
-                                 </HBox.margin>
-                              </TextField>
-                           </children>
-                           <opaqueInsets>
-                              <Insets />
-                           </opaqueInsets>
-                           <padding>
-                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                           </padding>
-                           <VBox.margin>
-                              <Insets left="130.0" />
-                           </VBox.margin>
-                        </HBox>
-                        <HBox layoutX="10.0" layoutY="56.0" prefHeight="46.0" prefWidth="476.0">
-                           <children>
-                              <Label text="Workout plane">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                                 <HBox.margin>
-                                    <Insets right="10.0" />
-                                 </HBox.margin>
-                              </Label>
-                              <RadioButton fx:id="radioBtn1" mnemonicParsing="false" text="Yes">
-                                 <HBox.margin>
-                                    <Insets left="12.0" />
-                                 </HBox.margin>
-                              </RadioButton>
-                              <RadioButton fx:id="radioBtn2" mnemonicParsing="false" text="No">
-                                 <HBox.margin>
-                                    <Insets left="10.0" />
-                                 </HBox.margin></RadioButton>
-                           </children>
-                           <opaqueInsets>
-                              <Insets />
-                           </opaqueInsets>
-                           <padding>
-                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                           </padding>
-                           <VBox.margin>
-                              <Insets left="130.0" />
-                           </VBox.margin>
-                        </HBox>
-                     </children>
+                  </Label>
+                  <Label layoutX="47.0" layoutY="103.0" text="DNI">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="reservationUserDni" layoutX="47.0" layoutY="138.0" minWidth="250.0" style="-fx-border-color: transparent transparent black transparent;">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="345.0" layoutY="103.0" text="NAME">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="reservationUserName" layoutX="345.0" layoutY="138.0" minWidth="250.0" style="-fx-border-color: transparent transparent black transparent;">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="47.0" layoutY="189.0" text="LASTNAME">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="reservationUserLastname" layoutX="47.0" layoutY="221.0" minWidth="250.0" style="-fx-border-color: transparent transparent black transparent;">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="47.0" layoutY="321.0" text="ADD RESERVATION">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
                      <padding>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                        <Insets bottom="10.0" top="10.0" />
                      </padding>
-                  </VBox>
-                  <HBox alignment="CENTER" layoutY="486.0" prefHeight="100.0" prefWidth="652.0">
-                     <children>
-                        <Button layoutX="221.0" layoutY="44.0" minWidth="100.0" mnemonicParsing="false" text="Back">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Button>
-                        <Button minWidth="100.0" mnemonicParsing="false" onAction="#add" text="Add">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                           <HBox.margin>
-                              <Insets left="30.0" />
-                           </HBox.margin>
-                        </Button>
-                        <Button minWidth="100.0" mnemonicParsing="false" onAction="#remove" text="Delete">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                           <HBox.margin>
-                              <Insets left="30.0" />
-                           </HBox.margin>
-                        </Button>
-                     </children>
-                  </HBox>
-                  <AnchorPane prefHeight="200.0" prefWidth="200.0" />
+                  </Label>
+                  <Label layoutX="47.0" layoutY="392.0" text="Date">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <DatePicker fx:id="reservationInputDate" editable="false" layoutX="48.0" layoutY="428.0" minWidth="250.0" promptText="dd/mm/yyyy" style="-fx-border-color: transparent transparent black transparent;" />
+                  <Label layoutX="356.0" layoutY="393.0" text="Room Name">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="reservationInputRoomname" layoutX="357.0" layoutY="428.0" minWidth="250.0" promptText="Sala Fitness" style="-fx-border-color: transparent transparent black transparent;" />
+                  <Label layoutX="50.0" layoutY="493.0" text="Do you have a training plan?">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <RadioButton fx:id="radioBtn1" layoutX="375.0" layoutY="495.0" mnemonicParsing="false" text="Yes">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </RadioButton>
+                  <RadioButton fx:id="radioBtn2" layoutX="470.0" layoutY="495.0" mnemonicParsing="false" text="No">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </RadioButton>
+                  <Button fx:id="back" layoutX="113.0" layoutY="613.0" minWidth="100.0" mnemonicParsing="false" onAction="#closeScene" text="Back">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="254.0" layoutY="616.0" minWidth="100.0" mnemonicParsing="false" onAction="#add" text="Add">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="396.0" layoutY="616.0" minWidth="100.0" mnemonicParsing="false" onAction="#remove" text="Delete">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <rotationAxis>
+                        <Point3D />
+                     </rotationAxis>
+                  </Button>
                </children>
             </AnchorPane>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
-                  <TableView fx:id="reservationTableView" layoutY="44.0" prefHeight="200.0" prefWidth="652.0">
-                    <columns>
-                      <TableColumn fx:id="colReservationDate" minWidth="215.0" prefWidth="75.0" text="Date" />
-                      <TableColumn fx:id="colReservationRoomname" minWidth="215.0" onEditCommit="#update" prefWidth="123.0" text="Room name" />
+                  <TableView fx:id="reservationTableView" layoutY="1.0" prefHeight="200.0" prefWidth="652.0">
+                     <columns>
+                        <TableColumn fx:id="colReservationDate" minWidth="215.0" onEditCommit="#updateDate" prefWidth="75.0" text="Date" />
+                        <TableColumn fx:id="colReservationRoomname" minWidth="215.0" onEditCommit="#updateRoomName" prefWidth="123.0" text="Room name" />
                         <TableColumn fx:id="colReservationWorkoutplane" minWidth="220.0" prefWidth="130.0" text="Workout plane" />
-                    </columns>
+                     </columns>
                   </TableView>
-               </children></AnchorPane>
-        </items>
+               </children>
+            </AnchorPane>
+         </items>
       </SplitPane>
    </children>
 </AnchorPane>
