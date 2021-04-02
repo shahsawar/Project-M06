@@ -2,6 +2,7 @@ package com.github.gym;
 
 import clases.Reservation;
 import clases.User;
+import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -10,10 +11,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.stage.Stage;
 import llibreries.FormattedDateValueFactory;
 
 import java.io.IOException;
 import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -43,6 +47,7 @@ public class ReservationController implements Initializable {
     @FXML
     private TableColumn<Reservation, Boolean> colReservationWorkoutplane;
 
+
     //Add reservation
     @FXML
     private DatePicker reservationInputDate;
@@ -50,10 +55,12 @@ public class ReservationController implements Initializable {
     @FXML
     private TextField reservationInputRoomname;
 
-
     @FXML
     private RadioButton radioBtn1, radioBtn2;
 
+    //Close scene
+    @FXML
+    private Button back;
 
     ObservableList<Reservation> observableList = FXCollections.observableArrayList();
 
@@ -83,6 +90,36 @@ public class ReservationController implements Initializable {
         reservationTableView.setItems(observableList);
         reservationTableView.setEditable(true);
         colReservationRoomname.setCellFactory(TextFieldTableCell.forTableColumn());
+        colReservationDate.setCellFactory(TextFieldTableCell.forTableColumn());
+
+    }
+
+    public void updateRoomName(TableColumn.CellEditEvent<Reservation, String> reservationStringCellEditEvent) {
+        Reservation reservation = reservationTableView.getSelectionModel().getSelectedItem();
+        reservation.setRoomName(reservationStringCellEditEvent.getNewValue());
+        App.gestorPersistencia.updateReservation(reservation, reservation.getUserCode());
+    }
+
+    public void updateDate(TableColumn.CellEditEvent<Reservation, String> reservationStringCellEditEvent) {
+        Reservation reservation = reservationTableView.getSelectionModel().getSelectedItem();
+
+        //String to date
+        Date date = null;
+        try {
+            date = new SimpleDateFormat("dd/MM/yyyy").parse(reservationStringCellEditEvent.getNewValue());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        reservation.setDate(date);
+        App.gestorPersistencia.updateReservation(reservation, reservation.getUserCode());
+    }
+
+    @FXML
+    private void closeScene(){
+        // get a handle to the stage
+        Stage stage = (Stage) back.getScene().getWindow();
+        //Close the window
+        stage.close();
     }
 
     @FXML
@@ -94,7 +131,7 @@ public class ReservationController implements Initializable {
         Date date = Date.from(instant);
 
         boolean workOutPlane = false;
-        if (radioBtn1.isSelected()){
+        if (radioBtn1.isSelected()) {
             workOutPlane = true;
         }
 
@@ -104,6 +141,12 @@ public class ReservationController implements Initializable {
 
         //Add reservation to tableView
         observableList.add(reservationTmp);
+
+        //Remove form data
+        reservationInputRoomname.clear();
+        radioBtn1.setSelected(false);
+        radioBtn2.setSelected(false);
+        reservationInputDate.getEditor().clear();
     }
 
     public void remove(ActionEvent actionEvent) {
@@ -118,14 +161,4 @@ public class ReservationController implements Initializable {
         //Remove reservation from tableview
         selectedReservation.forEach(observableList::remove);
     }
-
-
-    public void update(TableColumn.CellEditEvent<Reservation, String> reservationStringCellEditEvent) {
-        Reservation reservation = reservationTableView.getSelectionModel().getSelectedItem();
-        reservation.setRoomName(reservationStringCellEditEvent.getNewValue());
-        App.gestorPersistencia.updateReservation(reservation, reservation.getUserCode());
-    }
-
-
-
 }

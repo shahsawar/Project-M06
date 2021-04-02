@@ -22,5 +22,29 @@ Apr 02, 2021 4:24:44 PM utilities.Log info
 INFO: User 3 has been updaed
 Apr 02, 2021 4:24:48 PM utilities.Log info
 INFO: User 3 has been updaed
-Apr 02, 2021 6:27:48 PM utilities.Log info
+Apr 02, 2021 6:26:05 PM utilities.Log info
+INFO: Mysql database selected
+Apr 02, 2021 6:26:18 PM utilities.Log info
+INFO: Mysql database selected
+Apr 02, 2021 6:26:22 PM utilities.Log info
 INFO: MongoDB database selected
+Apr 02, 2021 6:26:24 PM utilities.Log warning
+WARNING: Not user selected, can't add reservation
+Apr 02, 2021 6:26:25 PM utilities.Log warning
+WARNING: Not user selected, can't delete
+Apr 02, 2021 8:35:13 PM utilities.Log info
+INFO: Mysql database selected
+Apr 02, 2021 8:35:23 PM utilities.Log info
+INFO: User 3 has been deleted
+Apr 02, 2021 8:38:41 PM utilities.Log info
+INFO: Mysql database selected
+Apr 02, 2021 8:38:44 PM utilities.Log info
+INFO: MongoDB database selected
+Apr 02, 2021 8:38:46 PM utilities.Log info
+INFO: Mysql database selected
+Apr 02, 2021 8:38:47 PM utilities.Log info
+INFO: No data to search in search user by name
+Apr 02, 2021 8:52:09 PM utilities.Log info
+INFO: Mysql database selected
+Apr 02, 2021 8:52:15 PM utilities.Log info
+INFO: Mysql database selected

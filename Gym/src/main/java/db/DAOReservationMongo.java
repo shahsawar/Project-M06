@@ -51,7 +51,7 @@ public class DAOReservationMongo implements DAOReservation {
         MongoCollection<Document> collection = conn.start();
 
         Bson filter = eq("user_code", reservation.getUserCode());
-        UpdateOptions options = new UpdateOptions().arrayFilters(asList(eq("ele.reservation_code", integer)));
+        UpdateOptions options = new UpdateOptions().arrayFilters(asList(eq("ele.reservation_code", reservation.getReservationCode())));
         //Bson update = set("reservations.$[ele].workout_plane", false);
         Bson update = combine(
                 set("reservations.$[ele].date",reservation.getDate()),

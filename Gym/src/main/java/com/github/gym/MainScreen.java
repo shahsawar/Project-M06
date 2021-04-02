@@ -21,12 +21,16 @@ import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
 import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
 import clases.*;
 import javafx.stage.Stage;
+import llibreries.FormattedDateValueFactory;
 import javafx.util.Duration;
 import utilities.Log;
 
@@ -60,6 +64,9 @@ public class MainScreen implements Initializable {
     @FXML
     private TableColumn<User, String> colUserLastname;
 
+    @FXML
+    private TableColumn<User, String> colUserbirthdate;
+
     ObservableList<User> observableList = FXCollections.observableArrayList();
     List<User> userList = App.gestorPersistencia.getAllUsers();
 
@@ -75,11 +82,13 @@ public class MainScreen implements Initializable {
         colUserDni.setCellValueFactory(new PropertyValueFactory<>("dni"));
         colUserName.setCellValueFactory(new PropertyValueFactory<>("name"));
         colUserLastname.setCellValueFactory(new PropertyValueFactory<>("lastname"));
+        colUserbirthdate.setCellValueFactory(new FormattedDateValueFactory<User>("birthDate","dd/MM/yyyy"));
 
         mainScreenTable.setItems(observableList);
         mainScreenTable.setEditable(true);
         colUserName.setCellFactory(TextFieldTableCell.forTableColumn());
         colUserLastname.setCellFactory(TextFieldTableCell.forTableColumn());
+        colUserbirthdate.setCellFactory(TextFieldTableCell.forTableColumn());
 
         //Roatation animation
         RotateTransition rt = new RotateTransition(Duration.millis(3000), imagenMainScreen);
@@ -127,6 +136,21 @@ public class MainScreen implements Initializable {
         user.setLastname(userStringCellEditEvent.getNewValue());
         App.gestorPersistencia.updateUser(user, user.getUserCode());
     }
+
+    public void updateBirthdate(TableColumn.CellEditEvent<Reservation, String> reservationStringCellEditEvent) {
+        User user = mainScreenTable.getSelectionModel().getSelectedItem();
+
+        //String to date
+        Date date = null;
+        try {
+            date = new SimpleDateFormat("dd/MM/yyyy").parse(reservationStringCellEditEvent.getNewValue());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        user.setBirthDate(date);
+        App.gestorPersistencia.updateUser(user, user.getUserCode());
+    }
+
 
     public void removeUser(ActionEvent actionEvent) {
 
@@ -193,7 +217,9 @@ public class MainScreen implements Initializable {
             r.setUserData(userSelected);
             Parent p = loader.getRoot();
             Stage stage = new Stage();
-            stage.setScene(new Scene(p));
+            Scene scene = new Scene(p);
+            scene.getStylesheets().add(getClass().getResource("/css/style.css").toExternalForm());
+            stage.setScene(scene);
             stage.show();
         }
     }
@@ -223,7 +249,6 @@ public class MainScreen implements Initializable {
             observableList.clear();
             observableList.addAll(users);
         }
-
     }
 
 }
