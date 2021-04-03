@@ -66,3 +66,37 @@ Apr 02, 2021 9:41:21 PM utilities.Log info
 INFO: MongoDB database selected
 Apr 02, 2021 9:41:28 PM utilities.Log info
 INFO: Mysql database selected
+Apr 03, 2021 2:31:34 PM utilities.Log info
+INFO: Mysql database selected
+Apr 03, 2021 2:31:37 PM utilities.Log warning
+WARNING: Not user selected, can't delete
+Apr 03, 2021 2:31:45 PM utilities.Log warning
+WARNING: Not user selected, can't add reservation
+Apr 03, 2021 2:32:06 PM utilities.Log info
+INFO: MongoDB database selected
+Apr 03, 2021 2:32:06 PM utilities.Log severe
+SEVERE: MongoDB is down
+Apr 03, 2021 2:32:08 PM utilities.Log info
+INFO: MongoDB database selected
+Apr 03, 2021 2:32:08 PM utilities.Log severe
+SEVERE: MongoDB is down
+Apr 03, 2021 2:32:10 PM utilities.Log info
+INFO: MongoDB database selected
+Apr 03, 2021 2:32:13 PM utilities.Log info
+INFO: Mysql database selected
+Apr 03, 2021 2:57:45 PM utilities.Log info
+INFO: Mysql database selected
+Apr 03, 2021 2:57:48 PM utilities.Log info
+INFO: MongoDB database selected
+Apr 03, 2021 2:57:52 PM utilities.Log info
+INFO: Mysql database selected
+Apr 03, 2021 2:57:54 PM utilities.Log info
+INFO: MongoDB database selected
+Apr 03, 2021 2:57:56 PM utilities.Log info
+INFO: Mysql database selected
+Apr 03, 2021 2:58:00 PM utilities.Log warning
+WARNING: Not user selected, can't delete
+Apr 03, 2021 2:58:09 PM utilities.Log info
+INFO: Mysql database selected
+Apr 03, 2021 2:58:12 PM utilities.Log info
+INFO: MongoDB database selected

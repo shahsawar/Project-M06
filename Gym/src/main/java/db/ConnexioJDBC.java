@@ -1,5 +1,6 @@
 package db;
 
+import utilities.Configuracio;
 import utilities.Log;
 
 import java.sql.Connection;
@@ -21,9 +22,6 @@ public class ConnexioJDBC implements Connexio {
      */
     //Coment de prueba
 
-    private final String bbdd = "jdbc:mysql://localhost/gym?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
-    private final String username = "gym_app";
-    private final String passwd = "gym_app123";
     private static Connection conn;
 
     public ConnexioJDBC() {
@@ -33,7 +31,7 @@ public class ConnexioJDBC implements Connexio {
     public Connection start() {
         try {
 
-            conn = DriverManager.getConnection(bbdd, username, passwd);
+            conn = DriverManager.getConnection(Configuracio.URL_DB_JDBC, Configuracio.USER, Configuracio.PASSWORD);
         } catch (SQLException throwables) {
             //throwables.printStackTrace();
             Log.severe("Could not connect to JDBC");
@@ -45,9 +43,9 @@ public class ConnexioJDBC implements Connexio {
     public void close() {
         try {
             conn.close();
-            System.out.println("Se ha cerrado la conexión con la BBDD");
+            //System.out.println("Se ha cerrado la conexión con la BBDD");
         } catch (SQLException ex) {
-            System.err.println("Error: No se ha podido cerrar la conexón con la BBDD");
+            Log.severe("Can't close connection with Mysql database");
         }
     }
 }

@@ -11,17 +11,29 @@ import java.util.Properties;
  */
 public class Configuracio {
 
-    public static void main(String[] args) {
+    public static String URL_DB_JDBC;
+    public static String MONGO_SERVER_ADDRESS;
+    public static String COLLECTION_USERS;
+    public static String DBNAME;
+    public static String USER;
+    public static String PASSWORD;
+
+    static String FILENAME = "configuration.properties";
+
+    public static void getData(){
         Properties properties= new Properties();
         try {
-            properties.load(new FileInputStream(new File("configuration.properties")));
-            System.out.println(properties.get("DB"));
-            System.out.println(properties.get("USER"));
-            System.out.println(properties.get("PASSWORD"));
+            properties.load(new FileInputStream(new File(FILENAME)));
+            DBNAME = (String) properties.get("DB");
+            URL_DB_JDBC = (String) properties.get("URL_DB_JDBC");
+            COLLECTION_USERS = (String) properties.get("COLLECTION_USERS");
+            MONGO_SERVER_ADDRESS = (String) properties.get("MONGO_SERVER_ADDRESS");
+            USER = (String) properties.get("USER");
+            PASSWORD = (String) properties.get("PASSWORD");
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            Log.severe("Properties file " + FILENAME + " not found");
         } catch (IOException e) {
-            e.printStackTrace();
+            Log.severe("I/O error while reading file " + FILENAME);
         }
     }
 }
