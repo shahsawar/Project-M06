@@ -171,13 +171,24 @@ public class MainScreen implements Initializable {
 
             //Remove user from database
             User userTmp = App.gestorPersistencia.getUserById(selectedUser.get(0).getUserCode());
-            App.gestorPersistencia.deleteUser(userTmp);
 
             Alert alert = new Alert(Alert.AlertType.NONE, "Do you want to delete user " + userTmp.getName() + " with dni: " + userTmp.getDni(), ButtonType.NO, ButtonType.YES);
             alert.setTitle("Are you sure?");
             alert.showAndWait();
 
             if (alert.getResult() == ButtonType.YES) {
+
+                List<Reservation> userReservations = userTmp.getReservations();
+                if (userReservations.size() > 0){//Eliminamos sus reservas, necesario para JDBC
+                    for (Reservation reservation : userReservations){
+                        App.gestorPersistencia.deleteReservation(reservation);
+                    }
+                }
+
+                //Remove user from BBDD
+                App.gestorPersistencia.deleteUser(userTmp);
+
+
                 //Remove user from tableview
                 selectedUser.forEach(observableList::remove);
 
