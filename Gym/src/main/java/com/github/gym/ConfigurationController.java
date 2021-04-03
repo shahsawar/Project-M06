@@ -3,6 +3,7 @@ package com.github.gym;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import db.*;
+import execptions.DatabaseNotAvailableExecption;
 import javafx.animation.*;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -18,6 +19,8 @@ import utilities.Log;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.net.URL;
 import java.sql.Connection;
 import java.util.ResourceBundle;
@@ -45,17 +48,16 @@ public class ConfigurationController implements Initializable {
     }
 
     /**
-     *
      * @param imageView the image to scale
-     * @param bigger if true, the animation scale will increase the size, if it's false, will decrease
+     * @param bigger    if true, the animation scale will increase the size, if it's false, will decrease
      */
-    void scaleSizeAnimation(ImageView imageView, boolean bigger){
+    void scaleSizeAnimation(ImageView imageView, boolean bigger) {
         ScaleTransition st = new ScaleTransition(Duration.millis(100), imageView);
 
         double initialSize = 1;
         double biggerSize = 1.1;
 
-        if (bigger){
+        if (bigger) {
             st.setFromX(initialSize);
             st.setFromY(initialSize);
             st.setToX(biggerSize);
@@ -89,7 +91,7 @@ public class ConfigurationController implements Initializable {
 
                 ConnectionMongo con = new ConnectionMongo();
 
-                try{
+                try {
 
                     con.test();
 
@@ -100,9 +102,12 @@ public class ConfigurationController implements Initializable {
                         e.printStackTrace();
                     }
 
-                } catch (Exception e){
+                } catch (DatabaseNotAvailableExecption e) {
                     System.out.println("Mongodb Connnection not possible");
-                    Log.severe("MongoDB is down");
+                    //Convert StackTraceElement to String
+                    StringWriter sw = new StringWriter();
+                    e.printStackTrace(new PrintWriter(sw));
+                    Log.severe("Could not connect to MongoDB\n" + sw.toString());
                 }
             }
         });
@@ -115,10 +120,9 @@ public class ConfigurationController implements Initializable {
                 event.consume();
 
                 ConnexioJDBC con = new ConnexioJDBC();
-                try{
+                try {
                     Connection c = con.start();
-
-                    if (c != null){
+                    if (c != null) {
                         App.gestorPersistencia = new GestorPersistenciaJDBC();
                         Log.config("Mysql database set to use");
                         try {
@@ -128,7 +132,7 @@ public class ConfigurationController implements Initializable {
                         }
                     }
                     con.close();
-                } catch (Exception e){
+                } catch (Exception e) {
                     System.out.println("JDBC Connnection not possible");//No se pone en log porque ya está al ejecutar start()
                 }
 
@@ -139,10 +143,8 @@ public class ConfigurationController implements Initializable {
 
         //BBDD Images hover
         imageViewMongo.addEventFilter(MouseEvent.MOUSE_ENTERED, e -> {
-
             scaleSizeAnimation(imageViewMongo, true);
         });
-
 
         imageViewMongo.addEventFilter(MouseEvent.MOUSE_EXITED, e -> {
             scaleSizeAnimation(imageViewMongo, false);
@@ -151,7 +153,6 @@ public class ConfigurationController implements Initializable {
         imageViewSQL.addEventFilter(MouseEvent.MOUSE_ENTERED, e -> {
             scaleSizeAnimation(imageViewSQL, true);
         });
-
 
         imageViewSQL.addEventFilter(MouseEvent.MOUSE_EXITED, e -> {
             scaleSizeAnimation(imageViewSQL, false);

@@ -5,6 +5,7 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.model.UpdateOptions;
 import com.mongodb.client.model.Updates;
+import execptions.DatabaseNotAvailableExecption;
 import org.bson.Document;
 import org.bson.conversions.Bson;
 
@@ -19,7 +20,7 @@ import static java.util.Arrays.asList;
 
 public class DAOReservationMongo implements DAOReservation {
     @Override
-    public void insert(Reservation reservation) {
+    public void insert(Reservation reservation) throws DatabaseNotAvailableExecption {
         //Create connection
         ConnectionMongo conn = new ConnectionMongo();
 
@@ -30,7 +31,7 @@ public class DAOReservationMongo implements DAOReservation {
     }
 
     @Override
-    public void delete(Reservation reservation) {
+    public void delete(Reservation reservation) throws DatabaseNotAvailableExecption {
         //Create connection
         ConnectionMongo conn = new ConnectionMongo();
 
@@ -44,7 +45,7 @@ public class DAOReservationMongo implements DAOReservation {
     }
 
     @Override
-    public void update(Reservation reservation, Integer integer) {
+    public void update(Reservation reservation, Integer integer) throws DatabaseNotAvailableExecption {
         //Create connection
         ConnectionMongo conn = new ConnectionMongo();
 
@@ -85,7 +86,6 @@ public class DAOReservationMongo implements DAOReservation {
 
     @Override
     public List<Reservation> getAll() {
-
         return null;
     }
 
@@ -96,7 +96,7 @@ public class DAOReservationMongo implements DAOReservation {
 
 
 
-    public int getLastUserId(int user_code) {
+    public int getLastUserId(int user_code) throws DatabaseNotAvailableExecption {
         //Create connection
         ConnectionMongo conn = new ConnectionMongo();
 
@@ -135,7 +135,7 @@ public class DAOReservationMongo implements DAOReservation {
 
 
         ConnectionMongo conn = new ConnectionMongo();
-        MongoCollection<Document> collection = conn.start();
+        //MongoCollection<Document> collection = conn.start();
 
         //Document cursor = collection.deleteOne(eq("reservations.reservation_code", 1)).first();
 

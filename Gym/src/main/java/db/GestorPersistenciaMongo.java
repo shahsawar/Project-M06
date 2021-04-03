@@ -2,7 +2,11 @@ package db;
 
 import clases.Reservation;
 import clases.User;
+import execptions.DatabaseNotAvailableExecption;
+import utilities.Log;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.List;
 
 public class GestorPersistenciaMongo extends GestorPersistencia{
@@ -12,47 +16,104 @@ public class GestorPersistenciaMongo extends GestorPersistencia{
 
     @Override
     public void insertUser(User user) {
-        daoUserMongo.insert(user);
+        try {
+            daoUserMongo.insert(user);
+        } catch (DatabaseNotAvailableExecption databaseNotAvailableExecption) {
+            StringWriter sw = new StringWriter();
+            databaseNotAvailableExecption.printStackTrace(new PrintWriter(sw));
+            Log.severe("\nCould not insert user in database!\n" + sw.toString());
+        }
     }
 
     @Override
     public void updateUser(User user, Integer user_code) {
-        daoUserMongo.update(user, user_code);
+        try {
+            daoUserMongo.update(user, user_code);
+        } catch (DatabaseNotAvailableExecption databaseNotAvailableExecption) {
+            StringWriter sw = new StringWriter();
+            databaseNotAvailableExecption.printStackTrace(new PrintWriter(sw));
+            Log.severe("\nCould not update user in database!\n" + sw.toString());
+        }
     }
 
     @Override
     public void deleteUser(User user) {
-        daoUserMongo.delete(user);
+        try {
+            daoUserMongo.delete(user);
+        } catch (DatabaseNotAvailableExecption databaseNotAvailableExecption) {
+            StringWriter sw = new StringWriter();
+            databaseNotAvailableExecption.printStackTrace(new PrintWriter(sw));
+            Log.severe("\nCould not delete user from database!\n" + sw.toString());
+        }
     }
 
     @Override
     public User getUserById(Integer id) {
-        return daoUserMongo.getByIdentifier(id);
+        try {
+            return daoUserMongo.getByIdentifier(id);
+        } catch (DatabaseNotAvailableExecption databaseNotAvailableExecption) {
+            StringWriter sw = new StringWriter();
+            databaseNotAvailableExecption.printStackTrace(new PrintWriter(sw));
+            Log.severe("\nCould not find user with id = " + id + " in database!\n" + sw.toString());
+        }
+        return null;
     }
 
     @Override
     public User getUserByDNI(String dni) {
-        return daoUserMongo.getUserByDNI(dni);
+        try {
+            return daoUserMongo.getUserByDNI(dni);
+        } catch (DatabaseNotAvailableExecption databaseNotAvailableExecption) {
+            StringWriter sw = new StringWriter();
+            databaseNotAvailableExecption.printStackTrace(new PrintWriter(sw));
+            Log.severe("\nCould not find user with dni = " + dni + " in database!\n" + sw.toString());
+        }
+        return null;
     }
 
     @Override
     public List<User> getAllUsers() {
-        return daoUserMongo.getAll();
+        try {
+            return daoUserMongo.getAll();
+        } catch (DatabaseNotAvailableExecption databaseNotAvailableExecption) {
+            StringWriter sw = new StringWriter();
+            databaseNotAvailableExecption.printStackTrace(new PrintWriter(sw));
+            Log.severe("\nCould not get all users from database!\n" + sw.toString());
+        }
+        return null;
     }
 
     @Override
     public void insertReservation(Reservation reservation) {
-        daoReservationMongo.insert(reservation);
+        try {
+            daoReservationMongo.insert(reservation);
+        } catch (DatabaseNotAvailableExecption databaseNotAvailableExecption) {
+            StringWriter sw = new StringWriter();
+            databaseNotAvailableExecption.printStackTrace(new PrintWriter(sw));
+            Log.severe("\nCould not insert the reservation in database!\n" + sw.toString());
+        }
     }
 
     @Override
     public void updateReservation(Reservation reservation, Integer reservation_code) {
-        daoReservationMongo.update(reservation, reservation_code);
+        try {
+            daoReservationMongo.update(reservation, reservation_code);
+        } catch (DatabaseNotAvailableExecption databaseNotAvailableExecption) {
+            StringWriter sw = new StringWriter();
+            databaseNotAvailableExecption.printStackTrace(new PrintWriter(sw));
+            Log.severe("\nCould not update reservation in database!\n" + sw.toString());
+        }
     }
 
     @Override
     public void deleteReservation(Reservation reservation) {
-        daoReservationMongo.delete(reservation);
+        try {
+            daoReservationMongo.delete(reservation);
+        } catch (DatabaseNotAvailableExecption databaseNotAvailableExecption) {
+            StringWriter sw = new StringWriter();
+            databaseNotAvailableExecption.printStackTrace(new PrintWriter(sw));
+            Log.severe("\nCould not delete reservation from database!\n" + sw.toString());
+        }
     }
 
     @Override

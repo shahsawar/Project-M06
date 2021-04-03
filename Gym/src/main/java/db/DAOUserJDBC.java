@@ -1,6 +1,7 @@
 package db;
 
 import clases.User;
+import execptions.DatabaseNotAvailableExecption;
 import utilities.Log;
 
 import java.sql.PreparedStatement;
@@ -36,12 +37,9 @@ public class DAOUserJDBC implements DAOUser {
         return fecha;
     }
 
-    /***
-     *
-     * @param user
-     */
+
     @Override
-    public void insert(User user) {
+    public void insert(User user) throws DatabaseNotAvailableExecption {
 
         ConnexioJDBC connexioJDBC = new ConnexioJDBC();
 
@@ -79,11 +77,10 @@ public class DAOUserJDBC implements DAOUser {
 
     }
 
-    /**
-     * @param user
-     */
+
     @Override
-    public void delete(User user) {
+    public void delete(User user) throws DatabaseNotAvailableExecption {
+
 
         ConnexioJDBC connexioJDBC = new ConnexioJDBC();
 
@@ -103,7 +100,7 @@ public class DAOUserJDBC implements DAOUser {
     }
 
     @Override
-    public void update(User user, Integer code) {
+    public void update(User user, Integer code) throws DatabaseNotAvailableExecption {
         ConnexioJDBC connexioJDBC = new ConnexioJDBC();
 
 
@@ -126,7 +123,7 @@ public class DAOUserJDBC implements DAOUser {
     }
 
     @Override
-    public List<User> getAll() {
+    public List<User> getAll() throws DatabaseNotAvailableExecption {
 
         ConnexioJDBC connexioJDBC = new ConnexioJDBC();
 
@@ -160,7 +157,7 @@ public class DAOUserJDBC implements DAOUser {
     }
 
     @Override
-    public User getByIdentifier(Integer integer) {
+    public User getByIdentifier(Integer integer) throws DatabaseNotAvailableExecption {
 
         ConnexioJDBC connexioJDBC = new ConnexioJDBC();
 
@@ -192,7 +189,7 @@ public class DAOUserJDBC implements DAOUser {
     }
 
     @Override
-    public int getLastUserId() {
+    public int getLastUserId() throws DatabaseNotAvailableExecption {
 
         ConnexioJDBC connexioJDBC = new ConnexioJDBC();
 
@@ -227,7 +224,7 @@ public class DAOUserJDBC implements DAOUser {
     }
 
     @Override
-    public User getUserByDNI(String dni) {
+    public User getUserByDNI(String dni) throws DatabaseNotAvailableExecption {
 
         ConnexioJDBC connexioJDBC = new ConnexioJDBC();
 

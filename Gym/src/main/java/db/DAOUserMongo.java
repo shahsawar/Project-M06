@@ -1,6 +1,7 @@
 package db;
 import clases.Reservation;
 import com.mongodb.client.*;
+import execptions.DatabaseNotAvailableExecption;
 import org.bson.Document;
 import clases.User;
 
@@ -25,7 +26,7 @@ public class DAOUserMongo implements DAOUser{
     }
 
     @Override
-    public void insert(User user) {
+    public void insert(User user) throws DatabaseNotAvailableExecption {
         //Create connection
         ConnectionMongo conn = new ConnectionMongo();
 
@@ -36,7 +37,7 @@ public class DAOUserMongo implements DAOUser{
     }
 
     @Override
-    public void delete(User user) {
+    public void delete(User user) throws DatabaseNotAvailableExecption {
         //Create connection
         ConnectionMongo conn = new ConnectionMongo();
 
@@ -47,7 +48,7 @@ public class DAOUserMongo implements DAOUser{
 
 
     @Override
-    public void update(User user, Integer integer) {
+    public void update(User user, Integer integer) throws DatabaseNotAvailableExecption {
         //Create connection
         ConnectionMongo conn = new ConnectionMongo();
 
@@ -62,7 +63,7 @@ public class DAOUserMongo implements DAOUser{
 
 
     @Override
-    public List<User> getAll() {
+    public List<User> getAll() throws DatabaseNotAvailableExecption {
         //Create connection
         ConnectionMongo conn = new ConnectionMongo();
 
@@ -80,7 +81,7 @@ public class DAOUserMongo implements DAOUser{
     }
 
     @Override
-    public User getByIdentifier(Integer code) {
+    public User getByIdentifier(Integer code) throws DatabaseNotAvailableExecption {
         //Create connection
         ConnectionMongo conn = new ConnectionMongo();
 
@@ -91,13 +92,13 @@ public class DAOUserMongo implements DAOUser{
         return userTmp;
     }
 
-    public List<Reservation> getAllReservations(int code){
+    public List<Reservation> getAllReservations(int code) throws DatabaseNotAvailableExecption {
         User userTmp = getByIdentifier(code);
         return userTmp.getReservations();
     }
 
     @Override
-    public int getLastUserId() {
+    public int getLastUserId() throws DatabaseNotAvailableExecption {
         //Create connection
         ConnectionMongo conn = new ConnectionMongo();
 
@@ -111,7 +112,7 @@ public class DAOUserMongo implements DAOUser{
     }
 
     @Override
-    public User getUserByDNI(String dni) {
+    public User getUserByDNI(String dni) throws DatabaseNotAvailableExecption {
 
         //Create connection
         ConnectionMongo conn = new ConnectionMongo();
@@ -210,7 +211,7 @@ public class DAOUserMongo implements DAOUser{
         User userTmp = new User("123456789", "user1", "userlastname", new SimpleDateFormat("dd-MM-yyyy").parse("13-10-2020"));
         DAOUserMongo mongo = new DAOUserMongo();
         //User userTmp = mongo.getByIdentifier(1);
-        mongo.insert(userTmp);
+        //mongo.insert(userTmp);
         //mongo.delete(userTmp);
 
 

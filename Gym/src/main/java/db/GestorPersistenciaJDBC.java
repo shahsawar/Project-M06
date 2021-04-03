@@ -2,66 +2,141 @@ package db;
 
 import clases.Reservation;
 import clases.User;
+import execptions.DatabaseNotAvailableExecption;
+import utilities.Log;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.List;
 
-public class GestorPersistenciaJDBC extends GestorPersistencia{
+public class GestorPersistenciaJDBC extends GestorPersistencia {
 
     DAOUserJDBC daoUserJDBC = new DAOUserJDBC();
     DAOReservationJDBC daoReservationJDBC = new DAOReservationJDBC();
 
     @Override
     public void insertUser(User user) {
-        daoUserJDBC.insert(user);
+        try {
+            daoUserJDBC.insert(user);
+        } catch (DatabaseNotAvailableExecption databaseNotAvailableExecption) {
+            StringWriter sw = new StringWriter();
+            databaseNotAvailableExecption.printStackTrace(new PrintWriter(sw));
+            Log.severe("\nCould not insert the user in database!\n" + sw.toString());
+        }
     }
 
     @Override
     public void updateUser(User user, Integer user_code) {
-        daoUserJDBC.update(user, user_code);
+        try {
+            daoUserJDBC.update(user, user_code);
+        } catch (DatabaseNotAvailableExecption databaseNotAvailableExecption) {
+            StringWriter sw = new StringWriter();
+            databaseNotAvailableExecption.printStackTrace(new PrintWriter(sw));
+            Log.severe("\nCould not update the user in database!\n" + sw.toString());
+        }
     }
 
     @Override
     public void deleteUser(User user) {
-        daoUserJDBC.delete(user);
+        try {
+            daoUserJDBC.delete(user);
+        } catch (DatabaseNotAvailableExecption databaseNotAvailableExecption) {
+            StringWriter sw = new StringWriter();
+            databaseNotAvailableExecption.printStackTrace(new PrintWriter(sw));
+            Log.severe("\nCould not delete user from database!\n" + sw.toString());
+        }
     }
 
     @Override
     public User getUserById(Integer id) {
-        return daoUserJDBC.getByIdentifier(id);
+        try {
+            return daoUserJDBC.getByIdentifier(id);
+        } catch (DatabaseNotAvailableExecption databaseNotAvailableExecption) {
+            StringWriter sw = new StringWriter();
+            databaseNotAvailableExecption.printStackTrace(new PrintWriter(sw));
+            Log.severe("\nCould not find the user with id = " + id + " in database!\n" + sw.toString());
+        }
+        return null;
     }
 
     @Override
     public User getUserByDNI(String dni) {
-        return daoUserJDBC.getUserByDNI(dni);
+        try {
+            return daoUserJDBC.getUserByDNI(dni);
+        } catch (DatabaseNotAvailableExecption databaseNotAvailableExecption) {
+            StringWriter sw = new StringWriter();
+            databaseNotAvailableExecption.printStackTrace(new PrintWriter(sw));
+            Log.severe("\nCould not find the user with dni = " + dni + " in database!\n" + sw.toString());
+        }
+        return null;
     }
 
     @Override
     public List<User> getAllUsers() {
-        return daoUserJDBC.getAll();
+        try {
+            return daoUserJDBC.getAll();
+        } catch (DatabaseNotAvailableExecption databaseNotAvailableExecption) {
+            StringWriter sw = new StringWriter();
+            databaseNotAvailableExecption.printStackTrace(new PrintWriter(sw));
+            Log.severe("\nCould not get all users from database!\n" + sw.toString());
+        }
+        return null;
     }
 
     @Override
     public void insertReservation(Reservation reservation) {
-        daoReservationJDBC.insert(reservation);
+        try {
+            daoReservationJDBC.insert(reservation);
+        } catch (DatabaseNotAvailableExecption databaseNotAvailableExecption) {
+            StringWriter sw = new StringWriter();
+            databaseNotAvailableExecption.printStackTrace(new PrintWriter(sw));
+            Log.severe("\nCould not insert the reservation in database!\n" + sw.toString());
+        }
     }
 
     @Override
     public void updateReservation(Reservation reservation, Integer reservation_code) {
-        daoReservationJDBC.update(reservation, reservation_code);
+        try {
+            daoReservationJDBC.update(reservation, reservation_code);
+        } catch (DatabaseNotAvailableExecption databaseNotAvailableExecption) {
+            StringWriter sw = new StringWriter();
+            databaseNotAvailableExecption.printStackTrace(new PrintWriter(sw));
+            Log.severe("\nCould not update reservation in database!\n" + sw.toString());
+        }
     }
 
     @Override
     public void deleteReservation(Reservation reservation) {
-        daoReservationJDBC.delete(reservation);
+        try {
+            daoReservationJDBC.delete(reservation);
+        } catch (DatabaseNotAvailableExecption databaseNotAvailableExecption) {
+            StringWriter sw = new StringWriter();
+            databaseNotAvailableExecption.printStackTrace(new PrintWriter(sw));
+            Log.severe("\nCould not delete reservation from database!\n" + sw.toString());
+        }
     }
 
     @Override
     public Reservation getReservationById(Integer id) {
-        return daoReservationJDBC.getByIdentifier(id);
+        try {
+            return daoReservationJDBC.getByIdentifier(id);
+        } catch (DatabaseNotAvailableExecption databaseNotAvailableExecption) {
+            StringWriter sw = new StringWriter();
+            databaseNotAvailableExecption.printStackTrace(new PrintWriter(sw));
+            Log.severe("\nCould not find the reservation with id = " + id + " in database!\n" + sw.toString());
+        }
+        return null;
     }
 
     @Override
     public List<Reservation> getAllReservations() {
-        return daoReservationJDBC.getAll();
+        try {
+            return daoReservationJDBC.getAll();
+        } catch (DatabaseNotAvailableExecption databaseNotAvailableExecption) {
+            StringWriter sw = new StringWriter();
+            databaseNotAvailableExecption.printStackTrace(new PrintWriter(sw));
+            Log.severe("\nCould not get all reservations from database!\n" + sw.toString());
+        }
+        return null;
     }
 }

@@ -1,13 +1,17 @@
 package db;
 
+import execptions.DatabaseNotAvailableExecption;
 import utilities.Configuracio;
 import utilities.Log;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class ConnexioJDBC implements Connexio {
+
+public class ConnexioJDBC implements Connexio<Connection> {
 
     /*Creación de BBDD User
     CREATE TABLE user (user_code INT NOT NULL PRIMARY KEY, dni VARCHAR(9) NOT NULL, name VARCHAR(20) NOT NULL, lastname VARCHAR(20) NOT NULL, birthdate DATE NOT NULL);
@@ -24,28 +28,37 @@ public class ConnexioJDBC implements Connexio {
 
     private static Connection conn;
 
+
+    /**
+     * Constructs an empty ConnexioJDBC object
+     */
+
     public ConnexioJDBC() {
     }
 
     @Override
-    public Connection start() {
+    public Connection start() throws DatabaseNotAvailableExecption {
         try {
-
             conn = DriverManager.getConnection(Configuracio.URL_DB_JDBC, Configuracio.USER, Configuracio.PASSWORD);
         } catch (SQLException throwables) {
-            //throwables.printStackTrace();
-            Log.severe("Could not connect to JDBC");
+            //Convert StackTraceElement to String
+            StringWriter sw = new StringWriter();
+            throwables.printStackTrace(new PrintWriter(sw));
+            Log.severe("Could not connect to JDBC\n" + sw.toString());
         }
         return conn;
     }
 
     @Override
-    public void close() {
+    public void close() throws DatabaseNotAvailableExecption {
         try {
             conn.close();
             //System.out.println("Se ha cerrado la conexión con la BBDD");
         } catch (SQLException ex) {
-            Log.severe("Can't close connection with Mysql database");
+            //Convert StackTraceElement to String
+            StringWriter sw = new StringWriter();
+            ex.printStackTrace(new PrintWriter(sw));
+            Log.severe("Can't close connection with Mysql database\n" + sw.toString());
         }
     }
 }

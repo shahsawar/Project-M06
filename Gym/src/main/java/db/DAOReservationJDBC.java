@@ -1,6 +1,7 @@
 package db;
 
 import clases.Reservation;
+import execptions.DatabaseNotAvailableExecption;
 import utilities.Log;
 
 import java.sql.PreparedStatement;
@@ -43,7 +44,7 @@ public class DAOReservationJDBC implements DAOReservation{
     }
 
     @Override
-    public void insert(Reservation reservation) {
+    public void insert(Reservation reservation) throws DatabaseNotAvailableExecption {
         ConnexioJDBC connexioJDBC = new ConnexioJDBC();
 
         int insercion = 0;
@@ -82,7 +83,7 @@ public class DAOReservationJDBC implements DAOReservation{
     }
 
     @Override
-    public void delete(Reservation reservation) {
+    public void delete(Reservation reservation) throws DatabaseNotAvailableExecption {
         ConnexioJDBC connexioJDBC = new ConnexioJDBC();
         try {
 
@@ -98,7 +99,7 @@ public class DAOReservationJDBC implements DAOReservation{
     }
 
     @Override
-    public void update(Reservation reservation, Integer reservationCode) {
+    public void update(Reservation reservation, Integer reservationCode) throws DatabaseNotAvailableExecption {
         ConnexioJDBC connexioJDBC = new ConnexioJDBC();
 
         java.sql.Date sqlDate = new java.sql.Date(reservation.getDate().getTime()); //Fecha en formato sql
@@ -119,7 +120,7 @@ public class DAOReservationJDBC implements DAOReservation{
     }
 
     @Override
-    public List<Reservation> getAll() {
+    public List<Reservation> getAll() throws DatabaseNotAvailableExecption {
 
         ConnexioJDBC connexioJDBC = new ConnexioJDBC();
         Statement statement = null;
@@ -149,7 +150,7 @@ public class DAOReservationJDBC implements DAOReservation{
     }
 
     @Override
-    public Reservation getByIdentifier(Integer integer) {
+    public Reservation getByIdentifier(Integer integer) throws DatabaseNotAvailableExecption {
 
         ConnexioJDBC connexioJDBC = new ConnexioJDBC();
         Statement statement = null;
@@ -178,7 +179,7 @@ public class DAOReservationJDBC implements DAOReservation{
     }
 
 
-    public List<Reservation> getUserReservations(int user_code){
+    public List<Reservation> getUserReservations(int user_code) throws DatabaseNotAvailableExecption {
         ConnexioJDBC connexioJDBC = new ConnexioJDBC();
         Statement statement = null;
         List<Reservation> reservations = new ArrayList<>();
@@ -207,7 +208,7 @@ public class DAOReservationJDBC implements DAOReservation{
     }
 
 
-    public int getLastReservationCode() {
+    public int getLastReservationCode() throws DatabaseNotAvailableExecption {
 
         ConnexioJDBC connexioJDBC = new ConnexioJDBC();
         Statement statement = null;

@@ -15,6 +15,7 @@ public class Prueba {
 
     public static void main(String[] args){
 
+        /*
         Date fecha = new Date();
         String fechaStr = "24/11/2001";
         try {
@@ -44,11 +45,11 @@ public class Prueba {
         /*List<User> users = daoUserJDBC.getAll();
         for (User usuario : users) {
             System.out.println(usuario.getName());
-        }*/
+        }
 
         //daoUserJDBC.delete(users.get(0));
         //daoUserJDBC.update(user, users.get(0).getUserCode());
 
-
+        */
     }
 }
