@@ -154,7 +154,6 @@ public class MainScreen implements Initializable {
 
     public void removeUser(ActionEvent actionEvent) {
 
-
         int selectedItems = mainScreenTable.getSelectionModel().getSelectedItems().size();
 
         if (selectedItems == 0){
@@ -178,8 +177,17 @@ public class MainScreen implements Initializable {
             alert.showAndWait();
 
             if (alert.getResult() == ButtonType.YES) {
+
+                List<Reservation> userReservations = userTmp.getReservations();
+                if (userReservations.size() > 0){//Eliminamos sus reservas, necesario para JDBC
+                    for (Reservation reservation : userReservations){
+                        App.gestorPersistencia.deleteReservation(reservation);
+                    }
+                }
+
                 //Remove user from BBDD
                 App.gestorPersistencia.deleteUser(userTmp);
+
 
                 //Remove user from tableview
                 selectedUser.forEach(observableList::remove);
