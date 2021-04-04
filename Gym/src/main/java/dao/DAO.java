@@ -12,18 +12,52 @@ import java.util.List;
  */
 
 public interface DAO<T, I> {
-    //Insert
+
+
+    /**
+     * Insert an object of type T in database
+     *
+     * @param t object to insert in the database
+     * @throws DatabaseNotAvailableExecption
+     * @throws KeyException
+     */
     public void insert(T t) throws DatabaseNotAvailableExecption, KeyException;
 
-    //Delete
+
+    /**
+     * Removes an object of type T from the database
+     *
+     * @param t object to remove from database
+     * @throws DatabaseNotAvailableExecption
+     */
     public void delete(T t) throws DatabaseNotAvailableExecption;
 
-    //Update
+
+    /**
+     * Updates the object of type T with identifier I in the database
+     *
+     * @param t object to update in the database
+     * @param i user Id
+     * @throws DatabaseNotAvailableExecption
+     */
     public void update(T t, I i) throws DatabaseNotAvailableExecption;
 
-    //GetAll
+
+    /**
+     * Return a list of type T
+     *
+     * @return returns a list of type T
+     * @throws DatabaseNotAvailableExecption
+     */
     public List<T> getAll() throws DatabaseNotAvailableExecption;
 
-    //Get by identifier
+
+    /**
+     * Returns an object of type T
+     *
+     * @param i identifier
+     * @return return object T
+     * @throws DatabaseNotAvailableExecption
+     */
     public T getByIdentifier(I i) throws DatabaseNotAvailableExecption;
 }

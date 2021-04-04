@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="JavadocGenerationManager">
-    <option name="OUTPUT_DIRECTORY" value="$USER_HOME$" />
+    <option name="OUTPUT_DIRECTORY" value="$USER_HOME$/Downloads/JavaDocGym" />
+    <option name="OPTION_SCOPE" value="private" />
+    <option name="OPTION_NAVIGATOR" value="false" />
   </component>
   <component name="MavenProjectsManager">
     <option name="originalFiles">
