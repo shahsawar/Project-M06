@@ -78,18 +78,27 @@ public class InsertUserController{
         }
 
         if (canInsertUser){
+
             try {
+
                 App.gestorPersistencia.insertUser(new User(dniInput.getText(), nameInput.getText(), lastnameInput.getText(), date));
-            } catch (DatabaseNotAvailableExecption | KeyException ex) {
+                try {
+                    App.setRoot("MainScreen");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            } catch (KeyException e){ //If is KeyException we show a popUp
+                String message = "User with dni '" + dniInput.getText() + "' already exists";
+                showPopUp(message);
+                StringWriter sw = new StringWriter();
+                e.printStackTrace(new PrintWriter(sw));
+                Log.severe(message + "\n" + sw.toString());
+
+            } catch (DatabaseNotAvailableExecption ex) {
                 StringWriter sw = new StringWriter();
                 ex.printStackTrace(new PrintWriter(sw));
                 Log.severe("\nCould not insert the user in database!\n" + sw.toString());
-            }
-
-            try {
-                App.setRoot("MainScreen");
-            } catch (IOException e) {
-                e.printStackTrace();
             }
         }
     }

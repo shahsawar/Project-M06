@@ -43,7 +43,9 @@ public class DAOUserJDBC implements DAOUser {
     @Override
     public void insert(User user) throws DatabaseNotAvailableExecption, KeyException {
 
-        if (user.getDni().equals(getUserByDNI(user.getDni()).getDni())) {
+        User userTmp = getUserByDNI(user.getDni());
+
+        if (userTmp != null) {//User with the same dni already exist
             throw new KeyException();
         } else {
             int insercion = 0;

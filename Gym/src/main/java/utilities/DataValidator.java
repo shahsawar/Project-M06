@@ -30,8 +30,6 @@ public class DataValidator {
             String[] letters = {"T", "R", "W", "A", "G", "M", "I", "F", "P", "D", "X", "B", "N", "J", "Z", "S", "Q", "V", "H", "L", "C", "K", "E"};
 
             rest = dniNumbers % 23;
-            System.out.println("Rest: " + rest);
-            System.out.println("DNI NUMBERS: " + dniNumbers);
             letterResult = letters[rest];
 
             if (letterResult.equals(dniLetter)){
