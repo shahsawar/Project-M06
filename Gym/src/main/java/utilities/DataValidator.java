@@ -12,7 +12,8 @@ public class DataValidator {
 
     /**
      * @author ronald
-     * @return
+     * @param dni
+     * @return true if DNI is correct
      */
     public static boolean isDNICorrect(String dni){
         boolean valid = false;
@@ -46,7 +47,8 @@ public class DataValidator {
 
     /**
      * @author ronald
-     * @return
+     * @param str
+     * @return true if Name or LastName is correct
      */
     public static boolean isName_LastNameCorrect(String str){
         boolean valid = false;
@@ -59,6 +61,11 @@ public class DataValidator {
         return valid;
     }
 
+    /**
+     * @author ronald
+     * @param strDate
+     * @return true if strDate is correct date
+     */
     public static boolean isValidDateStr(String strDate){
         boolean valid = false;
 
