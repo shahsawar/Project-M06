@@ -35,18 +35,34 @@ public class Log {
         }
     }
 
+    /**
+     * Writes a INFO type log
+     * @param msg
+     */
     public static void info(String msg){
         logger.info(msg);
     }
 
+    /**
+     * Writes a SEVERE type log, used to show errors
+     * @param msg
+     */
     public static void severe(String msg){//Serious failure.
         logger.severe(msg);
     }
 
+    /**
+     * Writes a CONFIG type log
+     * @param msg
+     */
     public static void config(String msg){//Configuration messages.
         logger.config(msg);
     }
 
+    /**
+     * Writes a WARNING type log, used for not so severe errors
+     * @param msg
+     */
     public static void warning(String msg){//Warning messages.
         logger.warning(msg);
     }
