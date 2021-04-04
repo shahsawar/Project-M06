@@ -62,12 +62,12 @@
     -fx-background-color:rgba(77,102,204,0.16);
 }
 
-.removeUserBtn{
+.removeUserBtn, .deleteBtn{
     -fx-background-color:rgba(197, 58, 75,0.5);
     -fx-text-fill: #fff;
 }
 
-.removeUserBtn:hover{
+.removeUserBtn:hover, .deleteBtn:hover{
     -fx-background-color:#C53A4B;
 }
 

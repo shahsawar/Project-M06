@@ -136,4 +136,18 @@ public class GestorPersistenciaJDBC extends GestorPersistencia {
         }
         return null;
     }
+
+    @Override
+    public List<Reservation> getReservationsByUser(User user) {
+
+        try {
+            return daoReservationJDBC.getUserReservations(user.getUserCode());
+        } catch (DatabaseNotAvailableExecption databaseNotAvailableExecption) {
+            StringWriter sw = new StringWriter();
+            databaseNotAvailableExecption.printStackTrace(new PrintWriter(sw));
+            Log.severe("\nCould not get all reservations by user from database!\n" + sw.toString());
+        }
+
+        return null;
+    }
 }

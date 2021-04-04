@@ -20,6 +20,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -144,11 +146,20 @@ public class MainScreen implements Initializable {
         Date date = null;
         try {
             date = new SimpleDateFormat("dd/MM/yyyy").parse(reservationStringCellEditEvent.getNewValue());
+
+            user.setBirthDate(date);
+            App.gestorPersistencia.updateUser(user, user.getUserCode());
+
         } catch (ParseException e) {
-            e.printStackTrace();
+            //Convert StackTraceElement to String
+            StringWriter sw = new StringWriter();
+            e.printStackTrace(new PrintWriter(sw));
+            Log.severe("Date " + reservationStringCellEditEvent.getNewValue() + " is not valid \n" + sw.toString());
+
+            Alert alert = new Alert(Alert.AlertType.NONE, "Date " + reservationStringCellEditEvent.getNewValue() + " is not valid", ButtonType.OK);
+            alert.setTitle("Alert");
+            alert.showAndWait();
         }
-        user.setBirthDate(date);
-        App.gestorPersistencia.updateUser(user, user.getUserCode());
     }
 
 
@@ -169,7 +180,6 @@ public class MainScreen implements Initializable {
             //User selected to be remove
             ObservableList<User> selectedUser = mainScreenTable.getSelectionModel().getSelectedItems();
 
-            //Remove user from database
             User userTmp = App.gestorPersistencia.getUserById(selectedUser.get(0).getUserCode());
 
             Alert alert = new Alert(Alert.AlertType.NONE, "Do you want to delete user " + userTmp.getName() + " with dni: " + userTmp.getDni(), ButtonType.NO, ButtonType.YES);

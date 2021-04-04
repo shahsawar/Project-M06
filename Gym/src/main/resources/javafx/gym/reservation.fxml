@@ -79,12 +79,12 @@
                         <Font size="20.0" />
                      </font>
                   </RadioButton>
-                  <RadioButton fx:id="radioBtn2" layoutX="470.0" layoutY="495.0" mnemonicParsing="false" text="No">
+                  <RadioButton fx:id="radioBtn2" layoutX="470.0" layoutY="495.0" mnemonicParsing="false" selected="true" text="No">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </RadioButton>
-                  <Button fx:id="back" layoutX="113.0" layoutY="613.0" minWidth="100.0" mnemonicParsing="false" onAction="#closeScene" text="Back">
+                  <Button fx:id="back" layoutX="113.0" layoutY="613.0" minWidth="100.0" mnemonicParsing="false" onAction="#closeScene" styleClass="cancelButton" text="Back">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -94,7 +94,7 @@
                         <Font size="18.0" />
                      </font>
                   </Button>
-                  <Button layoutX="396.0" layoutY="616.0" minWidth="100.0" mnemonicParsing="false" onAction="#remove" text="Delete">
+                  <Button layoutX="396.0" layoutY="616.0" minWidth="100.0" mnemonicParsing="false" onAction="#remove" styleClass="deleteBtn" text="Delete">
                      <font>
                         <Font size="18.0" />
                      </font>

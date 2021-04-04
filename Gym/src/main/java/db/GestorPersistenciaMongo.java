@@ -122,4 +122,17 @@ public class GestorPersistenciaMongo extends GestorPersistencia{
     public List<Reservation> getAllReservations() {
         return daoReservationMongo.getAll();
     }
+
+    @Override
+    public List<Reservation> getReservationsByUser(User user) {
+        try{
+            return daoUserMongo.getAllReservations(user.getUserCode());
+        }  catch (DatabaseNotAvailableExecption databaseNotAvailableExecption) {
+            StringWriter sw = new StringWriter();
+            databaseNotAvailableExecption.printStackTrace(new PrintWriter(sw));
+            Log.severe("\nCould not get reservation from database!\n" + sw.toString());
+        }
+
+        return null;
+    }
 }
