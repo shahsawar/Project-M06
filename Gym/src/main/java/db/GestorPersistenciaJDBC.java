@@ -12,6 +12,9 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.List;
 
+/**
+ * @author ronald
+ */
 public class GestorPersistenciaJDBC extends GestorPersistencia {
 
     DAOUserJDBC daoUserJDBC = new DAOUserJDBC();

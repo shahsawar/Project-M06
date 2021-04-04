@@ -16,8 +16,9 @@ public class ConnectionMongo implements Connexio<MongoCollection<Document>> {
     public ConnectionMongo() {
     }
 
-    /***
-     * Test if mongoDB server is active
+    /**
+     * Test if the MongoDB server is active
+     * @throws DatabaseNotAvailableExecption is the server is down
      */
     public void test() throws DatabaseNotAvailableExecption{
 
@@ -35,6 +36,10 @@ public class ConnectionMongo implements Connexio<MongoCollection<Document>> {
 
     }
 
+    /**
+     *
+     * @return The collection {@code users}
+     */
     @Override
     public MongoCollection<Document> start() {
         MongoCollection<Document> collection;
@@ -45,23 +50,14 @@ public class ConnectionMongo implements Connexio<MongoCollection<Document>> {
         return collection;
     }
 
+    /**
+     *
+     * @throws DatabaseNotAvailableExecption
+     */
     @Override
     public void close() throws DatabaseNotAvailableExecption {
         mongoClient.close();
         System.out.println("Connection close successfully");
     }
-
-    /*
-    public static MongoCollection<Document> start() {
-        mongoClient = MongoClients.create();
-        MongoDatabase database = mongoClient.getDatabase(DATABASENAME);
-        MongoCollection<Document> collection = database.getCollection(COLLECTIONNAME);
-        return collection;
-    }
-
-    public static void close(){
-        System.out.println("Connection close successfully");
-        mongoClient.close();
-    }*/
 
 }

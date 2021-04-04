@@ -36,6 +36,11 @@ public class ConnexioJDBC implements Connexio<Connection> {
     public ConnexioJDBC() {
     }
 
+    /**
+     * {@inheritDoc}
+     * @return The Connection object of JDBC
+     * @throws DatabaseNotAvailableExecption if the connection is not available
+     */
     @Override
     public Connection start() throws DatabaseNotAvailableExecption {
         try {
@@ -49,6 +54,10 @@ public class ConnexioJDBC implements Connexio<Connection> {
         return conn;
     }
 
+    /**
+     * {@inheritDoc}
+     * @throws DatabaseNotAvailableExecption if the connection is not available
+     */
     @Override
     public void close() throws DatabaseNotAvailableExecption {
         try {

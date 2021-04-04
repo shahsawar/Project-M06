@@ -12,6 +12,9 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.List;
 
+/**
+ * @author shah
+ */
 public class GestorPersistenciaMongo extends GestorPersistencia{
 
     DAOUserMongo daoUserMongo = new DAOUserMongo();
