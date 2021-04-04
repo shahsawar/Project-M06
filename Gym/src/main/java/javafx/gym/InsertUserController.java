@@ -59,22 +59,28 @@ public class InsertUserController{
     @FXML
     public void clickSave(ActionEvent actionEvent) {
 
-        LocalDate localDate = dateInput.getValue();
-        Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
-        Date date = Date.from(instant);
-
         boolean canInsertUser = true;
+        Date date = new Date();
 
-        if (!DataValidator.isDNICorrect(dniInput.getText())){
-            showPopUp("DNI is incorrect");
+        if (dateInput.getValue() == null || nameInput.getText().length() == 0 || lastnameInput.getText().length() == 0 || lastnameInput.getText().length() == 0){//Por si la fecha está vacía
             canInsertUser = false;
+            showPopUp("Please fill all the fields");
+        } else {
+            LocalDate localDate = dateInput.getValue();
+            Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
+            date = Date.from(instant);
 
-        } else if (!DataValidator.isName_LastNameCorrect(nameInput.getText())){
-            showPopUp("Name is incorrect");
-            canInsertUser = false;
-        } else if (!DataValidator.isName_LastNameCorrect(lastnameInput.getText())){
-            showPopUp("Lastname is incorrect");
-            canInsertUser = false;
+            if (!DataValidator.isDNICorrect(dniInput.getText())){
+                showPopUp("DNI is incorrect");
+                canInsertUser = false;
+
+            } else if (!DataValidator.isName_LastNameCorrect(nameInput.getText())){
+                showPopUp("Name is incorrect");
+                canInsertUser = false;
+            } else if (!DataValidator.isName_LastNameCorrect(lastnameInput.getText())){
+                showPopUp("Lastname is incorrect");
+                canInsertUser = false;
+            }
         }
 
         if (canInsertUser){

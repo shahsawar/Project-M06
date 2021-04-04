@@ -115,11 +115,13 @@ public class DAOUserJDBC implements DAOUser {
         try {
 
             PreparedStatement updateEXP = connexioJDBC.start().prepareStatement("UPDATE user SET dni = ?, name = ?, lastname = ?, birthdate = ? WHERE user_code= " + code);
+
             updateEXP.setString(1, user.getDni());
             updateEXP.setString(2, user.getName());
             updateEXP.setString(3, user.getLastname());
             updateEXP.setString(4, sqlDate + "");
-            int result = updateEXP.executeUpdate();
+
+            updateEXP.executeUpdate();
             Log.info("User " + code + " has been updaed");
 
         } catch (SQLException throwables) {

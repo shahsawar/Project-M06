@@ -3,6 +3,7 @@ package clases;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Objects;
 
 /***
  *
@@ -84,6 +85,19 @@ public class Reservation {
         sb.append("RoomName: ").append(roomName).append(System.lineSeparator());
         sb.append("WorkoutPlane: ").append(workoutPlane).append(System.lineSeparator()).append(System.lineSeparator());
         return sb.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Reservation that = (Reservation) o;
+        return reservationCode == that.reservationCode;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(reservationCode);
     }
 
     public String dateToString(Date date){
