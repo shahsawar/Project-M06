@@ -3,8 +3,8 @@ package dao;
 import clases.Reservation;
 import com.mongodb.client.*;
 import db.ConnectionMongo;
-import execptions.DatabaseNotAvailableExecption;
-import execptions.KeyException;
+import exceptions.DatabaseNotAvailableExecption;
+import exceptions.KeyException;
 import org.bson.Document;
 import clases.User;
 
@@ -31,9 +31,9 @@ public class DAOUserMongo implements DAOUser {
 
 
     /**
-     * Insert an object of type User in the database
+     * Insert an object of type {@link clases.User} in the database
      *
-     * @param user user to insert into database
+     * @param user {@link clases.User} to insert into database
      * @throws DatabaseNotAvailableExecption
      * @throws KeyException
      */
@@ -59,9 +59,9 @@ public class DAOUserMongo implements DAOUser {
 
 
     /**
-     * Removes an object of type User from the database
+     * Removes an object of type {@link clases.User} from the database
      *
-     * @param user user to remove from database
+     * @param user {@link clases.User} to remove from database
      * @throws DatabaseNotAvailableExecption
      */
     @Override
@@ -78,9 +78,9 @@ public class DAOUserMongo implements DAOUser {
 
 
     /**
-     * Updates the object of type User with identifier integer in the database
+     * Updates the object of type {@link clases.User} with identifier integer in the database
      *
-     * @param user user to update in database
+     * @param user {@link clases.User} to update in database
      * @param integer
      * @throws DatabaseNotAvailableExecption
      */
@@ -102,9 +102,9 @@ public class DAOUserMongo implements DAOUser {
 
 
     /**
-     * Returns a list of type User
+     * Returns a list of type {@link clases.User}
      *
-     * @return Return a list of type User
+     * @return Return a list of type {@link clases.User}
      * @throws DatabaseNotAvailableExecption
      */
     @Override
@@ -129,10 +129,10 @@ public class DAOUserMongo implements DAOUser {
 
 
     /**
-     * Returns an object of type User
+     * Returns an object of type {@link clases.User}
      *
      * @param code identifier
-     * @return return object User
+     * @return return object {@link clases.User}
      * @throws DatabaseNotAvailableExecption
      */
     @Override
@@ -187,10 +187,10 @@ public class DAOUserMongo implements DAOUser {
 
 
     /**
-     * Returns a list of type Reservations
+     * Returns a list of type {@link clases.Reservation}
      *
      * @param code userCode
-     * @return returns list of reservations
+     * @return returns list of {@link clases.Reservation}
      * @throws DatabaseNotAvailableExecption
      */
     public List<Reservation> getAllReservations(int code) throws DatabaseNotAvailableExecption {

@@ -5,16 +5,9 @@ import com.mongodb.client.*;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-import execptions.DatabaseNotAvailableExecption;
+import exceptions.DatabaseNotAvailableExecption;
 import org.bson.Document;
 import utilities.Configuracio;
-import utilities.Log;
-
-import java.io.PrintWriter;
-import java.io.StringWriter;
-import java.net.ConnectException;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
 
 public class ConnectionMongo implements Connexio<MongoCollection<Document>> {
 

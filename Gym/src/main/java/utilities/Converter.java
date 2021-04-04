@@ -18,6 +18,18 @@ import java.util.List;
 public class Converter {
 
 
+
+    /**
+     * Date to String
+     * @param date
+     * @return String
+     */
+    public static String dateToString(Date date){
+        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        return dateFormat.format(date);
+    }
+
+
     /**
      * Convert String to date
      *
@@ -50,10 +62,10 @@ public class Converter {
 
 
     /***
-     * Convert a document to user
+     * Convert a document to {@link clases.User}
      *
-     * @param doc User document
-     * @return return User
+     * @param doc {@link clases.User} document
+     * @return return {@link clases.User}
      */
     public static User toUser(Document doc) {
         User userTmp = new User();
@@ -75,9 +87,9 @@ public class Converter {
 
 
     /**
-     * Convert user to document
+     * Convert {@link clases.User} to document
      *
-     * @param user User
+     * @param user {@link clases.User}
      * @return Document
      */
     public static Document userToDoc(User user) {
@@ -93,9 +105,9 @@ public class Converter {
 
 
     /**
-     * Convert reservation to Doc
+     * Convert {@link clases.Reservation} to Doc
      *
-     * @param reservation reservation
+     * @param reservation {@link clases.Reservation}
      * @return Document
      */
     public static Document reservationToDoc(Reservation reservation) {
@@ -110,10 +122,10 @@ public class Converter {
 
 
     /**
-     * Convert document to reservation
+     * Convert document to {@link clases.Reservation}
      *
      * @param doc Document
-     * @return Reservation
+     * @return {@link clases.Reservation}
      */
     public static Reservation toReservation(Document doc) {
         Reservation reservationTmp = new Reservation();

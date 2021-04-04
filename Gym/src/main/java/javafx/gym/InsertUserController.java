@@ -1,8 +1,8 @@
 package javafx.gym;
 
 import clases.User;
-import execptions.DatabaseNotAvailableExecption;
-import execptions.KeyException;
+import exceptions.DatabaseNotAvailableExecption;
+import exceptions.KeyException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;

@@ -2,7 +2,7 @@ package dao;
 
 import clases.Reservation;
 import db.ConnexioJDBC;
-import execptions.DatabaseNotAvailableExecption;
+import exceptions.DatabaseNotAvailableExecption;
 import utilities.Log;
 
 import java.sql.PreparedStatement;
@@ -22,6 +22,12 @@ import static utilities.Converter.stringToDate;
 
 public class DAOReservationJDBC implements DAOReservation {
 
+    /**
+     * Insert an object of type {@link clases.Reservation} in the database
+     *
+     * @param reservation {@link clases.Reservation} to insert into database
+     * @throws DatabaseNotAvailableExecption
+     */
     @Override
     public void insert(Reservation reservation) throws DatabaseNotAvailableExecption {
         ConnexioJDBC connexioJDBC = new ConnexioJDBC();
@@ -61,6 +67,13 @@ public class DAOReservationJDBC implements DAOReservation {
         }
     }
 
+
+    /**
+     * Removes an object of type {@link clases.Reservation} from the database
+     *
+     * @param reservation {@link clases.Reservation} to remove from database
+     * @throws DatabaseNotAvailableExecption
+     */
     @Override
     public void delete(Reservation reservation) throws DatabaseNotAvailableExecption {
         ConnexioJDBC connexioJDBC = new ConnexioJDBC();
@@ -77,6 +90,14 @@ public class DAOReservationJDBC implements DAOReservation {
         }
     }
 
+
+    /**
+     * Updates the object of type {@link clases.Reservation} with identifier integer in the database
+     *
+     * @param reservation {@link clases.Reservation} to update in database
+     * @param reservationCode
+     * @throws DatabaseNotAvailableExecption
+     */
     @Override
     public void update(Reservation reservation, Integer reservationCode) throws DatabaseNotAvailableExecption {
         ConnexioJDBC connexioJDBC = new ConnexioJDBC();
@@ -98,6 +119,13 @@ public class DAOReservationJDBC implements DAOReservation {
         }
     }
 
+    /**
+     * Returns a list of type {@link clases.Reservation}
+     *
+     * @return Returns a list of {@link clases.Reservation}
+     * @throws DatabaseNotAvailableExecption
+     * @deprecated No need to use this method
+     */
     @Override
     public List<Reservation> getAll() throws DatabaseNotAvailableExecption {
 
@@ -116,7 +144,6 @@ public class DAOReservationJDBC implements DAOReservation {
                 reservation.setRoomName(rs.getString("room_name"));
                 reservation.setWorkoutPlane(rs.getBoolean("has_workout_plane"));
                 reservation.setDate(stringToDate(rs.getString("date")));
-
                 reservations.add(reservation);
             }
 
@@ -128,6 +155,14 @@ public class DAOReservationJDBC implements DAOReservation {
         return reservations;
     }
 
+
+    /**
+     * Returns an object of type {@link clases.Reservation}
+     *
+     * @param integer identifier
+     * @return return object {@link clases.Reservation}
+     * @throws DatabaseNotAvailableExecption
+     */
     @Override
     public Reservation getByIdentifier(Integer integer) throws DatabaseNotAvailableExecption {
 
@@ -157,7 +192,12 @@ public class DAOReservationJDBC implements DAOReservation {
 
     }
 
-
+    /**
+     * Returns a list of {@link clases.Reservation} for a specific user.
+     * @param user_code user code
+     * @return return {@link clases.Reservation} list
+     * @throws DatabaseNotAvailableExecption
+     */
     public List<Reservation> getUserReservations(int user_code) throws DatabaseNotAvailableExecption {
         ConnexioJDBC connexioJDBC = new ConnexioJDBC();
         Statement statement = null;
@@ -186,7 +226,12 @@ public class DAOReservationJDBC implements DAOReservation {
         return reservations;
     }
 
-
+    /**
+     * returns the last {@link clases.Reservation} code
+     *
+     * @return last {@link clases.Reservation} code
+     * @throws DatabaseNotAvailableExecption
+     */
     public int getLastReservationCode() throws DatabaseNotAvailableExecption {
 
         ConnexioJDBC connexioJDBC = new ConnexioJDBC();
@@ -218,6 +263,5 @@ public class DAOReservationJDBC implements DAOReservation {
 
         return lastCode;
     }
-
 
 }

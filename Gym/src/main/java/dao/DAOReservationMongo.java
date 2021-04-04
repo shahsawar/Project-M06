@@ -5,11 +5,10 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.UpdateOptions;
 import com.mongodb.client.model.Updates;
 import db.ConnectionMongo;
-import execptions.DatabaseNotAvailableExecption;
+import exceptions.DatabaseNotAvailableExecption;
 import org.bson.Document;
 import org.bson.conversions.Bson;
 
-import java.text.ParseException;
 import java.util.List;
 
 import static com.mongodb.client.model.Filters.*;
@@ -22,9 +21,9 @@ public class DAOReservationMongo implements DAOReservation {
 
 
     /**
-     * Insert an object of type Reservation in the database
+     * Insert an object of type {@link clases.Reservation} in the database
      *
-     * @param reservation reservation to insert into database
+     * @param reservation {@link clases.Reservation} to insert into database
      * @throws DatabaseNotAvailableExecption
      */
     @Override
@@ -32,7 +31,7 @@ public class DAOReservationMongo implements DAOReservation {
         //Create connection
         ConnectionMongo conn = new ConnectionMongo();
 
-        reservation.setReservationCode(getLastUserId(reservation.getUserCode())+1);
+        reservation.setReservationCode(getLastReservationCode(reservation.getUserCode())+1);
         MongoCollection<Document> collection = conn.start();
         collection.updateOne(eq("user_code", reservation.getUserCode()), Updates.push("reservations", reservationToDoc(reservation)));
 
@@ -42,9 +41,9 @@ public class DAOReservationMongo implements DAOReservation {
 
 
     /**
-     * Removes an object of type Reservation from the database
+     * Removes an object of type {@link clases.Reservation} from the database
      *
-     * @param reservation reservation to remove from database
+     * @param reservation {@link clases.Reservation} to remove from database
      * @throws DatabaseNotAvailableExecption
      */
     @Override
@@ -63,9 +62,9 @@ public class DAOReservationMongo implements DAOReservation {
 
 
     /**
-     * Updates the object of type Reservation with identifier integer in the database
+     * Updates the object of type {@link clases.Reservation} with identifier integer in the database
      *
-     * @param reservation reservarion to update in database
+     * @param reservation {@link clases.Reservation} to update in database
      * @param integer
      * @throws DatabaseNotAvailableExecption
      */
@@ -89,19 +88,31 @@ public class DAOReservationMongo implements DAOReservation {
         conn.close();
     }
 
-
+    /**
+     *
+     * @deprecated No need to use it in mongo
+     */
     @Override
     public List<Reservation> getAll() {
         return null;
     }
 
+    /**
+     * @deprecated No need to use it in mongo
+     */
     @Override
     public Reservation getByIdentifier(Integer integer) {
         return null;
     }
 
-
-    public int getLastUserId(int user_code) throws DatabaseNotAvailableExecption {
+    /**
+     * returns the last {@link clases.Reservation} code
+     *
+     * @param user_code User code
+     * @return last {@link clases.Reservation} code
+     * @throws DatabaseNotAvailableExecption
+     */
+    public int getLastReservationCode(int user_code) throws DatabaseNotAvailableExecption {
         //Create connection
         ConnectionMongo conn = new ConnectionMongo();
 

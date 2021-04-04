@@ -1,7 +1,7 @@
 package dao;
 
-import execptions.DatabaseNotAvailableExecption;
-import execptions.KeyException;
+import exceptions.DatabaseNotAvailableExecption;
+import exceptions.KeyException;
 
 import java.util.List;
 

@@ -37,7 +37,7 @@ import javafx.util.Duration;
 import utilities.Log;
 
 /**
- * @autor shah
+ * @autor shah, Ronald
  */
 public class MainScreen implements Initializable {
 
@@ -212,7 +212,6 @@ public class MainScreen implements Initializable {
     @FXML
     private void addReservation(ActionEvent event){
 
-
         int selectedItems = mainScreenTable.getSelectionModel().getSelectedItems().size();
 
         if (selectedItems == 0){
@@ -244,6 +243,7 @@ public class MainScreen implements Initializable {
             stage.show();
         }
     }
+
 
     @FXML
     private void searchUserByName(ActionEvent event){

@@ -2,8 +2,8 @@ package db;
 
 import clases.Reservation;
 import clases.User;
-import execptions.DatabaseNotAvailableExecption;
-import execptions.KeyException;
+import exceptions.DatabaseNotAvailableExecption;
+import exceptions.KeyException;
 
 import java.util.List;
 

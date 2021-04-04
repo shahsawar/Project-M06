@@ -2,8 +2,8 @@ package dao;
 
 import clases.User;
 import db.ConnexioJDBC;
-import execptions.DatabaseNotAvailableExecption;
-import execptions.KeyException;
+import exceptions.DatabaseNotAvailableExecption;
+import exceptions.KeyException;
 import utilities.Log;
 
 import java.sql.PreparedStatement;
@@ -23,9 +23,9 @@ import static utilities.Converter.stringToDate;
 public class DAOUserJDBC implements DAOUser {
 
     /**
-     * Insert an object of type User in the database
+     * Insert an object of type {@link clases.User} in the database
      *
-     * @param user user to insert into database
+     * @param user {@link clases.User} to insert into database
      * @throws DatabaseNotAvailableExecption
      * @throws KeyException
      */
@@ -75,9 +75,9 @@ public class DAOUserJDBC implements DAOUser {
 
 
     /**
-     * Removes an object of type User from the database
+     * Removes an object of type {@link clases.User} from the database
      *
-     * @param user user to remove from database
+     * @param user {@link clases.User} to remove from database
      * @throws DatabaseNotAvailableExecption
      */
     @Override
@@ -101,9 +101,9 @@ public class DAOUserJDBC implements DAOUser {
     }
 
     /**
-     * Updates the object of type User with identifier integer in the database
+     * Updates the object of type {@link clases.User} with identifier integer in the database
      *
-     * @param user user to update in database
+     * @param user {@link clases.User} to update in database
      * @param code
      * @throws DatabaseNotAvailableExecption
      */
@@ -131,9 +131,9 @@ public class DAOUserJDBC implements DAOUser {
 
 
     /**
-     * Returns a list of type User
+     * Returns a list of type {@link clases.User}
      *
-     * @return Return a list of type User
+     * @return Return a list of type {@link clases.User}
      * @throws DatabaseNotAvailableExecption
      */
     @Override
@@ -172,10 +172,10 @@ public class DAOUserJDBC implements DAOUser {
 
 
     /**
-     * Returns an object of type User
+     * Returns an object of type {@link clases.User}
      *
      * @param code identifier
-     * @return return object User
+     * @return return object {@link clases.User}
      * @throws DatabaseNotAvailableExecption
      */
     @Override

@@ -1,6 +1,6 @@
 package db;
 
-import execptions.DatabaseNotAvailableExecption;
+import exceptions.DatabaseNotAvailableExecption;
 
 public interface Connexio<T> {
     public T start() throws DatabaseNotAvailableExecption;

@@ -7,9 +7,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
+import static utilities.Converter.dateToString;
+
 /**
  * The User class represents a user object.
- * @author Ronald
+ * @author Shah
  */
 
 public class User {
@@ -22,73 +24,139 @@ public class User {
     private List<Reservation> reservations = new ArrayList<>();
 
     /**
-     * Initializes a newly created User object so that it represents an empty user object.
+     * Constructs an empty user
      */
     public User() {
     }
 
-    public User(String dni, String name, String lastname, Date birthday) {
+    /**
+     * Constructs a user object assigning the attributes that are received by parameter
+     *
+     * @param dni dni
+     * @param name name
+     * @param lastname lastname
+     * @param birthDate birthDate
+     */
+    public User(String dni, String name, String lastname, Date birthDate) {
         this.dni = dni;
         this.name = name;
         this.lastname = lastname;
-        this.birthDate = birthday;
+        this.birthDate = birthDate;
     }
 
-    public User(String dni, String name, String lastname, Date birthday, int userCode) {
+    /**
+     * Constructs a user object assigning the attributes that are received by parameter
+     *
+     * @param dni dni
+     * @param name name
+     * @param lastname lastname
+     * @param birthDate birthDate
+     * @param userCode user code
+     */
+    public User(String dni, String name, String lastname, Date birthDate, int userCode) {
         this.dni = dni;
         this.name = name;
         this.lastname = lastname;
-        this.birthDate = birthday;
+        this.birthDate = birthDate;
         this.userCode = userCode;
     }
 
+    /**
+     * Return Dni
+     * @return return dni
+     */
     public String getDni() {
         return dni;
     }
 
+    /**
+     * Set dni
+     * @param dni
+     */
     public void setDni(String dni) {
         this.dni = dni;
     }
 
+    /**
+     * Return name
+     * @return return name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Set name
+     * @param name
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * Return last name
+     * @return last name
+     */
     public String getLastname() {
         return lastname;
     }
 
+    /**
+     * Set last name
+     * @param lastname
+     */
     public void setLastname(String lastname) {
         this.lastname = lastname;
     }
 
+    /**
+     * Return birthday
+     * @return birthday
+     */
     public Date getBirthDate() {
         return birthDate;
     }
 
+    /**
+     * Set birthday
+     * @param birthday
+     */
     public void setBirthDate(Date birthday) {
         this.birthDate = birthday;
     }
 
+    /**
+     * Return user code
+     * @return user code
+     */
     public int getUserCode() {
         return userCode;
     }
 
+    /**
+     * Set user code
+     * @param userCode
+     */
     public void setUserCode(int userCode) {
         this.userCode = userCode;
     }
 
+    /**
+     * Return user {@link clases.Reservation} list
+     * @return {@link clases.Reservation} list
+     */
     public List<Reservation> getReservations() {
         return reservations;
     }
 
+    /**
+     * Set {@link clases.Reservation} list
+     * @param reservations
+     */
     public void setReservations(List<Reservation> reservations) {
         this.reservations = reservations;
     }
+
 
     @Override
     public boolean equals(Object o) {
@@ -118,10 +186,5 @@ public class User {
             }
         }
         return sb.toString();
-    }
-
-    public String dateToString(Date date){
-        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-        return dateFormat.format(date);
     }
 }

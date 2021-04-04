@@ -1,6 +1,6 @@
 package db;
 
-import execptions.DatabaseNotAvailableExecption;
+import exceptions.DatabaseNotAvailableExecption;
 import utilities.Configuracio;
 import utilities.Log;
 

@@ -1,4 +1,4 @@
-package execptions;
+package exceptions;
 
 /**
  * @autor shah

@@ -4,8 +4,8 @@ import clases.Reservation;
 import clases.User;
 import dao.DAOReservationMongo;
 import dao.DAOUserMongo;
-import execptions.DatabaseNotAvailableExecption;
-import execptions.KeyException;
+import exceptions.DatabaseNotAvailableExecption;
+import exceptions.KeyException;
 import utilities.Log;
 
 import java.io.PrintWriter;

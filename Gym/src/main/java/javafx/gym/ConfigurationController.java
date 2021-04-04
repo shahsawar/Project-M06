@@ -1,7 +1,7 @@
 package javafx.gym;
 
 import db.*;
-import execptions.DatabaseNotAvailableExecption;
+import exceptions.DatabaseNotAvailableExecption;
 import javafx.animation.*;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
