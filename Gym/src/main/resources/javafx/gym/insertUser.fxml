@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<GridPane prefHeight="352.0" prefWidth="587.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.gym.InsertUserController">
+<GridPane prefHeight="352.0" prefWidth="587.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafx.gym.InsertUserController">
    <rowConstraints>
       <RowConstraints maxHeight="196.0" minHeight="10.0" prefHeight="67.0" vgrow="SOMETIMES" />
       <RowConstraints maxHeight="196.0" minHeight="7.0" prefHeight="12.0" vgrow="SOMETIMES" />

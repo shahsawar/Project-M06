@@ -1,16 +1,15 @@
-package db;
+package dao;
 
 import clases.Reservation;
 import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoCursor;
 import com.mongodb.client.model.UpdateOptions;
 import com.mongodb.client.model.Updates;
+import db.ConnectionMongo;
 import execptions.DatabaseNotAvailableExecption;
 import org.bson.Document;
 import org.bson.conversions.Bson;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 import static com.mongodb.client.model.Filters.*;

@@ -1,7 +1,10 @@
-package db;
+package dao;
+
 import clases.Reservation;
 import com.mongodb.client.*;
+import db.ConnectionMongo;
 import execptions.DatabaseNotAvailableExecption;
+import execptions.KeyException;
 import org.bson.Document;
 import clases.User;
 
@@ -19,20 +22,25 @@ import static com.mongodb.client.model.Updates.set;
 /***
  * @author shah
  */
-public class DAOUserMongo implements DAOUser{
+public class DAOUserMongo implements DAOUser {
 
-    public DAOUserMongo(){
+    public DAOUserMongo() {
 
     }
 
     @Override
-    public void insert(User user) throws DatabaseNotAvailableExecption {
+    public void insert(User user) throws DatabaseNotAvailableExecption, KeyException {
         //Create connection
         ConnectionMongo conn = new ConnectionMongo();
 
-        user.setUserCode(getLastUserId()+1);
-        MongoCollection<Document> collection = conn.start();
-        collection.insertOne(toDoc(user));
+        if (user.getDni().equals(getUserByDNI(user.getDni()).getDni())) {
+            throw new KeyException();
+        } else {
+            user.setUserCode(getLastUserId() + 1);
+            MongoCollection<Document> collection = conn.start();
+            collection.insertOne(toDoc(user));
+        }
+
         conn.close();//Close Connection
     }
 
@@ -55,9 +63,9 @@ public class DAOUserMongo implements DAOUser{
         MongoCollection<Document> collection = conn.start();
         collection.updateOne(eq("user_code", integer), combine(
                 set("dni", user.getDni()),
-                set("name",user.getName()),
-                set("lastname",user.getLastname()),
-                set("birthday",user.getBirthDate())));
+                set("name", user.getName()),
+                set("lastname", user.getLastname()),
+                set("birthday", user.getBirthDate())));
         conn.close();
     }
 
@@ -69,8 +77,8 @@ public class DAOUserMongo implements DAOUser{
 
         List<User> userList = new ArrayList<>();
         MongoCollection<Document> collection = conn.start();
-        try (MongoCursor<Document> cursor = collection.find().iterator()){
-            while (cursor.hasNext()){
+        try (MongoCursor<Document> cursor = collection.find().iterator()) {
+            while (cursor.hasNext()) {
                 Document docTmp = cursor.next();
                 User userTmp = toUser(docTmp);
                 userList.add(userTmp);
@@ -104,7 +112,7 @@ public class DAOUserMongo implements DAOUser{
 
         MongoCollection<Document> collection = conn.start();
         Document myDoc = collection.find().sort(new Document("_id", -1)).first();
-        if (myDoc == null){
+        if (myDoc == null) {
             return 0;
         }
         conn.close();
@@ -120,7 +128,7 @@ public class DAOUserMongo implements DAOUser{
         MongoCollection<Document> collection = conn.start();
         Document mydoc = collection.find(eq("dni", dni)).first();
 
-        if (mydoc == null){
+        if (mydoc == null) {
             return null;
         }
 
@@ -134,17 +142,17 @@ public class DAOUserMongo implements DAOUser{
      * @param doc
      * @return
      */
-    private User toUser(Document doc){
+    private User toUser(Document doc) {
         User userTmp = new User();
         userTmp.setDni(doc.getString("dni"));
         userTmp.setName(doc.getString("name"));
         userTmp.setLastname(doc.getString("lastname"));
         userTmp.setBirthDate(doc.getDate("birthday"));
         userTmp.setUserCode(doc.getInteger("user_code"));
-        if (doc.containsKey("reservations")){
+        if (doc.containsKey("reservations")) {
             List<Document> listTmp = doc.getList("reservations", Document.class);
             List<Reservation> reservationList = new ArrayList<>();
-            for (Document docTmp: listTmp) {
+            for (Document docTmp : listTmp) {
                 reservationList.add(DAOReservationMongo.toReservation(docTmp));
             }
             userTmp.setReservations(reservationList);
@@ -152,7 +160,7 @@ public class DAOUserMongo implements DAOUser{
         return userTmp;
     }
 
-    private Document toDoc(User user){
+    private Document toDoc(User user) {
         Document docTmp = new Document();
         docTmp.append("dni", user.getDni());
         docTmp.append("name", user.getName());
@@ -163,11 +171,10 @@ public class DAOUserMongo implements DAOUser{
         return docTmp;
     }
 
-    public String dateToString(Date date){
+    public String dateToString(Date date) {
         DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         return dateFormat.format(date);
     }
-
 
 
     public static void main(String[] args) throws ParseException {

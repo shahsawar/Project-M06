@@ -1,4 +1,4 @@
-package com.github.gym;
+package javafx.gym;
 
 import java.io.IOException;
 import java.net.URL;

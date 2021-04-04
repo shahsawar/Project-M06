@@ -2,7 +2,10 @@ package db;
 
 import clases.Reservation;
 import clases.User;
+import dao.DAOReservationJDBC;
+import dao.DAOUserJDBC;
 import execptions.DatabaseNotAvailableExecption;
+import execptions.KeyException;
 import utilities.Log;
 
 import java.io.PrintWriter;
@@ -15,14 +18,8 @@ public class GestorPersistenciaJDBC extends GestorPersistencia {
     DAOReservationJDBC daoReservationJDBC = new DAOReservationJDBC();
 
     @Override
-    public void insertUser(User user) {
-        try {
-            daoUserJDBC.insert(user);
-        } catch (DatabaseNotAvailableExecption databaseNotAvailableExecption) {
-            StringWriter sw = new StringWriter();
-            databaseNotAvailableExecption.printStackTrace(new PrintWriter(sw));
-            Log.severe("\nCould not insert the user in database!\n" + sw.toString());
-        }
+    public void insertUser(User user) throws DatabaseNotAvailableExecption, KeyException {
+        daoUserJDBC.insert(user);
     }
 
     @Override

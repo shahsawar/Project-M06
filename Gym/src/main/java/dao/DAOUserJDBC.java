@@ -1,7 +1,9 @@
-package db;
+package dao;
 
 import clases.User;
+import db.ConnexioJDBC;
 import execptions.DatabaseNotAvailableExecption;
+import execptions.KeyException;
 import utilities.Log;
 
 import java.sql.PreparedStatement;
@@ -39,40 +41,44 @@ public class DAOUserJDBC implements DAOUser {
 
 
     @Override
-    public void insert(User user) throws DatabaseNotAvailableExecption {
+    public void insert(User user) throws DatabaseNotAvailableExecption, KeyException {
 
-        ConnexioJDBC connexioJDBC = new ConnexioJDBC();
-
-        int insercion = 0;
-        java.sql.Date sqlDate = new java.sql.Date(user.getBirthDate().getTime()); //Fecha en formato sql
-        int lastUserCode = getLastUserId();
-        if (lastUserCode == -1) {
-            lastUserCode = 1;
+        if (user.getDni().equals(getUserByDNI(user.getDni()).getDni())) {
+            throw new KeyException();
         } else {
-            lastUserCode++;
-        }
-        user.setUserCode(lastUserCode);
-        String sentenciaSQL = "INSERT INTO user (user_code, dni, name, lastname, birthdate) VALUES (?,?,?,?,?)";
-        PreparedStatement sentenciaPreparada = null;
+            int insercion = 0;
+            java.sql.Date sqlDate = new java.sql.Date(user.getBirthDate().getTime()); //Fecha en formato sql
+            int lastUserCode = getLastUserId();
+            if (lastUserCode == -1) {
+                lastUserCode = 1;
+            } else {
+                lastUserCode++;
+            }
+            user.setUserCode(lastUserCode);
+            String sentenciaSQL = "INSERT INTO user (user_code, dni, name, lastname, birthdate) VALUES (?,?,?,?,?)";
+            PreparedStatement sentenciaPreparada = null;
 
-        try {
-            sentenciaPreparada = connexioJDBC.start().prepareStatement(sentenciaSQL);
-            sentenciaPreparada.setInt(1, user.getUserCode());
-            sentenciaPreparada.setString(2, user.getDni());
-            sentenciaPreparada.setString(3, user.getName());
-            sentenciaPreparada.setString(4, user.getLastname());
-            sentenciaPreparada.setString(5, sqlDate + "");
-            insercion = sentenciaPreparada.executeUpdate();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        } finally {
-            connexioJDBC.close();
-        }
+            ConnexioJDBC connexioJDBC = new ConnexioJDBC();
 
-        if (insercion == 1) {
-            Log.info("User with dni " + user.getDni() + " added correctly");
-        } else {
-            Log.info("An error occurred while inserting the user with DNI: " + user.getDni());
+            try {
+                sentenciaPreparada = connexioJDBC.start().prepareStatement(sentenciaSQL);
+                sentenciaPreparada.setInt(1, user.getUserCode());
+                sentenciaPreparada.setString(2, user.getDni());
+                sentenciaPreparada.setString(3, user.getName());
+                sentenciaPreparada.setString(4, user.getLastname());
+                sentenciaPreparada.setString(5, sqlDate + "");
+                insercion = sentenciaPreparada.executeUpdate();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            } finally {
+                connexioJDBC.close();
+            }
+
+            if (insercion == 1) {
+                Log.info("User with dni " + user.getDni() + " added correctly");
+            } else {
+                Log.info("An error occurred while inserting the user with DNI: " + user.getDni());
+            }
         }
 
     }
@@ -80,7 +86,6 @@ public class DAOUserJDBC implements DAOUser {
 
     @Override
     public void delete(User user) throws DatabaseNotAvailableExecption {
-
 
         ConnexioJDBC connexioJDBC = new ConnexioJDBC();
 
@@ -232,7 +237,7 @@ public class DAOUserJDBC implements DAOUser {
         User user = new User();
         try {
             statement = connexioJDBC.start().createStatement();
-            String sentenciaSQL = "SELECT *  FROM user WHERE dni = '" + dni +"';";
+            String sentenciaSQL = "SELECT *  FROM user WHERE dni = '" + dni + "';";
 
             ResultSet rs = statement.executeQuery(sentenciaSQL);
 
@@ -247,7 +252,7 @@ public class DAOUserJDBC implements DAOUser {
             DAOReservationJDBC daoReservationJDBC = new DAOReservationJDBC();
             user.setReservations(daoReservationJDBC.getUserReservations(user.getUserCode()));
 
-            if (user.getDni() == null){
+            if (user.getDni() == null) {
                 return null;
             }
 

@@ -4,8 +4,8 @@ module com.github.gym {
     requires mongo.java.driver;
     requires java.sql;
 
-    opens com.github.gym to javafx.fxml;
+    opens javafx.gym to javafx.fxml;
     opens clases to javafx.base;
 
-    exports com.github.gym;
+    exports javafx.gym;
 }

@@ -49,7 +49,7 @@
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>0.0.5</version>
                 <configuration>
-                    <mainClass>com.github.gym.App</mainClass>
+                    <mainClass>javafx.gym.App</mainClass>
                 </configuration>
             </plugin>
         </plugins>

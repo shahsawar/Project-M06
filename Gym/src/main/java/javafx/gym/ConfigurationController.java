@@ -1,23 +1,18 @@
-package com.github.gym;
+package javafx.gym;
 
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
 import db.*;
 import execptions.DatabaseNotAvailableExecption;
 import javafx.animation.*;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.util.Duration;
-import org.bson.Document;
 import utilities.Log;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -135,8 +130,6 @@ public class ConfigurationController implements Initializable {
                 } catch (Exception e) {
                     System.out.println("JDBC Connnection not possible");//No se pone en log porque ya está al ejecutar start()
                 }
-
-
             }
         });
 
@@ -159,6 +152,4 @@ public class ConfigurationController implements Initializable {
         });
 
     }
-
-
 }

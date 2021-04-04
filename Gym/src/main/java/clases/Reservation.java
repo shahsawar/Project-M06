@@ -5,9 +5,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /***
+ *
+ *
  * @author Ronald
  */
-
 
 public class Reservation {
     private int reservationCode;

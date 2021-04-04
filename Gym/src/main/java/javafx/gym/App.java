@@ -1,4 +1,4 @@
-package com.github.gym;
+package javafx.gym;
 
 import db.GestorPersistencia;
 import javafx.application.Application;

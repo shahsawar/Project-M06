@@ -1,13 +1,19 @@
-package db;
+package dao;
 
 import execptions.DatabaseNotAvailableExecption;
+import execptions.KeyException;
 
 import java.util.List;
 
-public interface DAO <T, I>{
+/**
+ * @param <T> T - the type of element in this DAO
+ * @param <I> I - the identifier of the object to update or search.
+ * @author Ronald, Shah
+ */
 
+public interface DAO<T, I> {
     //Insert
-    public void insert(T t) throws DatabaseNotAvailableExecption;
+    public void insert(T t) throws DatabaseNotAvailableExecption, KeyException;
 
     //Delete
     public void delete(T t) throws DatabaseNotAvailableExecption;
@@ -20,6 +26,4 @@ public interface DAO <T, I>{
 
     //Get by identifier
     public T getByIdentifier(I i) throws DatabaseNotAvailableExecption;
-
-
 }

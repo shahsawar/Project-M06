@@ -1,22 +1,23 @@
-package com.github.gym;
+package javafx.gym;
 
 import clases.User;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import execptions.DatabaseNotAvailableExecption;
+import execptions.KeyException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import utilities.DataValidator;
+import utilities.Log;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
-import java.util.List;
 
 /***
  @author ronald
@@ -64,15 +65,7 @@ public class InsertUserController{
 
         boolean canInsertUser = true;
 
-        //Check if user already exist
-        User userTmp = App.gestorPersistencia.getUserByDNI(dniInput.getText());
-
-        if (userTmp != null){
-
-            showPopUp("User already exist");
-            canInsertUser = false;
-
-        } else if (!DataValidator.isDNICorrect(dniInput.getText())){
+        if (!DataValidator.isDNICorrect(dniInput.getText())){
             showPopUp("DNI is incorrect");
             canInsertUser = false;
 
@@ -85,7 +78,13 @@ public class InsertUserController{
         }
 
         if (canInsertUser){
-            App.gestorPersistencia.insertUser(new User(dniInput.getText(), nameInput.getText(), lastnameInput.getText(), date));
+            try {
+                App.gestorPersistencia.insertUser(new User(dniInput.getText(), nameInput.getText(), lastnameInput.getText(), date));
+            } catch (DatabaseNotAvailableExecption | KeyException ex) {
+                StringWriter sw = new StringWriter();
+                ex.printStackTrace(new PrintWriter(sw));
+                Log.severe("\nCould not insert the user in database!\n" + sw.toString());
+            }
 
             try {
                 App.setRoot("MainScreen");

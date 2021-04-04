@@ -1,4 +1,4 @@
-package db;
+package dao;
 
 import clases.User;
 import execptions.DatabaseNotAvailableExecption;

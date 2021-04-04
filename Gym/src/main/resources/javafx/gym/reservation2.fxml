@@ -5,97 +5,12 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="800.0" prefWidth="1314.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.gym.ReservationController">
+<AnchorPane prefHeight="800.0" prefWidth="1314.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafx.gym.ReservationController">
    <children>
       <SplitPane dividerPositions="0.5" prefHeight="800.0" prefWidth="1314.0">
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
-                  <VBox prefHeight="139.0" prefWidth="652.0">
-                     <children>
-                        <HBox alignment="CENTER_LEFT" prefHeight="26.0" prefWidth="652.0">
-                           <children>
-                              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="238.0" text="User Information">
-                                 <font>
-                                    <Font name="System Bold" size="24.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                           <VBox.margin>
-                              <Insets bottom="15.0" />
-                           </VBox.margin>
-                        </HBox>
-                        <HBox alignment="CENTER" prefHeight="46.0" prefWidth="476.0">
-                           <children>
-                              <Label text="DNI : ">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font></Label>
-                              <Label fx:id="reservationUserDni" layoutX="310.0" layoutY="20.0" minWidth="250.0" style="-fx-border-color: transparent transparent black transparent; -fx-background-color: white;">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                                 <HBox.margin>
-                                    <Insets left="75.0" />
-                                 </HBox.margin>
-                              </Label>
-                           </children>
-                           <opaqueInsets>
-                              <Insets />
-                           </opaqueInsets>
-                           <padding>
-                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                           </padding>
-                        </HBox>
-                        <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="46.0" prefWidth="476.0">
-                           <children>
-                              <Label text="NAME">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font></Label>
-                              <Label fx:id="reservationUserName" layoutX="300.0" layoutY="21.0" minWidth="250.0" style="-fx-background-color: white; -fx-border-color: transparent transparent black transparent;">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                                 <HBox.margin>
-                                    <Insets left="70.0" />
-                                 </HBox.margin>
-                              </Label>
-                           </children>
-                           <opaqueInsets>
-                              <Insets />
-                           </opaqueInsets>
-                           <padding>
-                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                           </padding>
-                        </HBox>
-                        <HBox alignment="CENTER" layoutX="10.0" layoutY="56.0" prefHeight="46.0" prefWidth="476.0">
-                           <children>
-                              <Label text="LASTNAME : ">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font></Label>
-                              <Label fx:id="reservationUserLastname" minWidth="250.0" style="-fx-background-color: white; -fx-border-color: transparent transparent black transparent;">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                                 <HBox.margin>
-                                    <Insets left="8.0" />
-                                 </HBox.margin>
-                              </Label>
-                           </children>
-                           <opaqueInsets>
-                              <Insets />
-                           </opaqueInsets>
-                           <padding>
-                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                           </padding>
-                        </HBox>
-                     </children>
-                     <padding>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                     </padding>
-                  </VBox>
                   <VBox layoutY="255.0" prefHeight="139.0" prefWidth="652.0">
                      <children>
                         <HBox alignment="CENTER" prefHeight="26.0" prefWidth="652.0">
@@ -218,7 +133,42 @@
                         </Button>
                      </children>
                   </HBox>
-                  <AnchorPane prefHeight="200.0" prefWidth="200.0" />
+                  <AnchorPane layoutX="19.0" layoutY="575.0" prefHeight="200.0" prefWidth="200.0" />
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="37.0" layoutY="33.0" prefHeight="30.0" prefWidth="283.0" text="USER INFORMATION">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="47.0" layoutY="103.0" text="Dni">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="reservationUserDni" layoutX="47.0" layoutY="138.0" minWidth="250.0" style="-fx-border-color: transparent transparent black transparent; -fx-background-color: white;">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="345.0" layoutY="103.0" text="NAME">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="reservationUserName" layoutX="345.0" layoutY="138.0" minWidth="250.0" style="-fx-background-color: white; -fx-border-color: transparent transparent black transparent;">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="47.0" layoutY="186.0" text="LASTNAME">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="reservationUserLastname" layoutX="47.0" layoutY="221.0" minWidth="250.0" style="-fx-background-color: white; -fx-border-color: transparent transparent black transparent;">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">

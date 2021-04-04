@@ -1,6 +1,7 @@
-package db;
+package dao;
 
 import clases.Reservation;
+import db.ConnexioJDBC;
 import execptions.DatabaseNotAvailableExecption;
 import utilities.Log;
 

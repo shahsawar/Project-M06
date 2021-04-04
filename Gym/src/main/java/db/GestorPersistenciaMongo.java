@@ -2,7 +2,10 @@ package db;
 
 import clases.Reservation;
 import clases.User;
+import dao.DAOReservationMongo;
+import dao.DAOUserMongo;
 import execptions.DatabaseNotAvailableExecption;
+import execptions.KeyException;
 import utilities.Log;
 
 import java.io.PrintWriter;
@@ -15,14 +18,8 @@ public class GestorPersistenciaMongo extends GestorPersistencia{
     DAOReservationMongo daoReservationMongo = new DAOReservationMongo();
 
     @Override
-    public void insertUser(User user) {
-        try {
-            daoUserMongo.insert(user);
-        } catch (DatabaseNotAvailableExecption databaseNotAvailableExecption) {
-            StringWriter sw = new StringWriter();
-            databaseNotAvailableExecption.printStackTrace(new PrintWriter(sw));
-            Log.severe("\nCould not insert user in database!\n" + sw.toString());
-        }
+    public void insertUser(User user) throws DatabaseNotAvailableExecption, KeyException {
+        daoUserMongo.insert(user);
     }
 
     @Override

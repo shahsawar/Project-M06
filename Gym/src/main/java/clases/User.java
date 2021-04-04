@@ -1,7 +1,5 @@
 package clases;
 
-import clases.Reservation;
-
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -9,7 +7,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
-/***
+/**
+ * The User class represents a user object.
  * @author Ronald
  */
 
@@ -22,6 +21,9 @@ public class User {
     private int userCode;
     private List<Reservation> reservations = new ArrayList<>();
 
+    /**
+     * Initializes a newly created User object so that it represents an empty user object.
+     */
     public User() {
     }
 

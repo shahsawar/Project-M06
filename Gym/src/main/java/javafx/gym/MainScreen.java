@@ -1,4 +1,4 @@
-package com.github.gym;
+package javafx.gym;
 
 import javafx.animation.Animation;
 import javafx.animation.Interpolator;
