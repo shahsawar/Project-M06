@@ -9,40 +9,18 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import static utilities.Converter.booleanToInteger;
+import static utilities.Converter.stringToDate;
 
 /***
  * @author ronald
  */
 
-public class DAOReservationJDBC implements DAOReservation{
-
-    //TODO Poner este método en otra clase para aprovachar que tambien se usa en DAOUserJDBC
-    private Date stringToDate(String strDate) {
-        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        Date fecha = null;
-
-        try {
-            //Parsing the String
-            fecha = formatter.parse(strDate);
-
-        } catch (ParseException e) {
-            Log.severe("Error, can't parse date " + strDate);
-        }
-
-
-        return fecha;
-    }
-
-    static int booleanToInteger(boolean booleano) {
-
-        return  booleano ? 1 : 0;
-    }
+public class DAOReservationJDBC implements DAOReservation {
 
     @Override
     public void insert(Reservation reservation) throws DatabaseNotAvailableExecption {
@@ -52,7 +30,7 @@ public class DAOReservationJDBC implements DAOReservation{
         java.sql.Date sqlDate = new java.sql.Date(reservation.getDate().getTime()); //Fecha en formato sql
 
         int lastReservationCode = getLastReservationCode();
-        if (lastReservationCode == -1 ){
+        if (lastReservationCode == -1) {
             lastReservationCode = 1;
         } else {
             lastReservationCode++;
@@ -64,11 +42,11 @@ public class DAOReservationJDBC implements DAOReservation{
 
         try {
             sentenciaPreparada = connexioJDBC.start().prepareStatement(sentenciaSQL);
-            sentenciaPreparada.setInt(1,reservation.getReservationCode());
-            sentenciaPreparada.setInt(2,reservation.getUserCode());
-            sentenciaPreparada.setString(3,reservation.getRoomName());
-            sentenciaPreparada.setString(4,booleanToInteger(reservation.getWorkoutPlane()) + ""); //Booleano para formato SQL
-            sentenciaPreparada.setString(5,sqlDate + "");
+            sentenciaPreparada.setInt(1, reservation.getReservationCode());
+            sentenciaPreparada.setInt(2, reservation.getUserCode());
+            sentenciaPreparada.setString(3, reservation.getRoomName());
+            sentenciaPreparada.setString(4, booleanToInteger(reservation.getWorkoutPlane()) + ""); //Booleano para formato SQL
+            sentenciaPreparada.setString(5, sqlDate + "");
             insercion = sentenciaPreparada.executeUpdate();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -166,7 +144,7 @@ public class DAOReservationJDBC implements DAOReservation{
                 reservation.setUserCode(rs.getInt("user_code"));
                 reservation.setRoomName(rs.getString("room_name"));
                 reservation.setWorkoutPlane(rs.getBoolean("has_workout_plane"));
-                reservation.setDate((Date)rs.getDate("date"));
+                reservation.setDate((Date) rs.getDate("date"));
             }
 
         } catch (SQLException throwables) {
@@ -227,7 +205,7 @@ public class DAOReservationJDBC implements DAOReservation{
                 contador++;
             }
 
-            if(contador > 0) {
+            if (contador > 0) {
             } else {
                 lastCode = -1;//La tabla está vacía
             }

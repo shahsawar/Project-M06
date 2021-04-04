@@ -2,6 +2,9 @@ package dao;
 
 import clases.Reservation;
 
-public interface DAOReservation extends DAO<Reservation, Integer>{
+/**
+ * @author Shah, Ronald
+ */
+public interface DAOReservation extends DAO<Reservation, Integer> {
 
 }

@@ -15,9 +15,9 @@ public interface DAO<T, I> {
 
 
     /**
-     * Insert an object of type T in database
+     * Insert an object of type T into the database
      *
-     * @param t object to insert in the database
+     * @param t object to insert into database
      * @throws DatabaseNotAvailableExecption
      * @throws KeyException
      */
@@ -36,7 +36,7 @@ public interface DAO<T, I> {
     /**
      * Updates the object of type T with identifier I in the database
      *
-     * @param t object to update in the database
+     * @param t object to update in database
      * @param i user Id
      * @throws DatabaseNotAvailableExecption
      */

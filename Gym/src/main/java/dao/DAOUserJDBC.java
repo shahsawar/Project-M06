@@ -10,12 +10,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import static utilities.Converter.stringToDate;
 
 /**
  * @author ronald
@@ -23,23 +22,13 @@ import java.util.List;
 
 public class DAOUserJDBC implements DAOUser {
 
-    private Date stringToDate(String strDate) {
-        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        Date fecha = null;
-
-        try {
-            //Parsing the String
-            fecha = formatter.parse(strDate);
-
-        } catch (ParseException e) {
-
-            System.out.println("Error: " + e);
-        }
-
-        return fecha;
-    }
-
-
+    /**
+     * Insert an object of type User in the database
+     *
+     * @param user user to insert into database
+     * @throws DatabaseNotAvailableExecption
+     * @throws KeyException
+     */
     @Override
     public void insert(User user) throws DatabaseNotAvailableExecption, KeyException {
 
@@ -82,10 +71,15 @@ public class DAOUserJDBC implements DAOUser {
                 Log.info("An error occurred while inserting the user with DNI: " + user.getDni());
             }
         }
-
     }
 
 
+    /**
+     * Removes an object of type User from the database
+     *
+     * @param user user to remove from database
+     * @throws DatabaseNotAvailableExecption
+     */
     @Override
     public void delete(User user) throws DatabaseNotAvailableExecption {
 
@@ -101,34 +95,46 @@ public class DAOUserJDBC implements DAOUser {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         } finally {
-            connexioJDBC.close();
+            connexioJDBC.close();//Close connection
         }
 
     }
 
+    /**
+     * Updates the object of type User with identifier integer in the database
+     *
+     * @param user user to update in database
+     * @param code
+     * @throws DatabaseNotAvailableExecption
+     */
     @Override
     public void update(User user, Integer code) throws DatabaseNotAvailableExecption {
         ConnexioJDBC connexioJDBC = new ConnexioJDBC();
 
-
         java.sql.Date sqlDate = new java.sql.Date(user.getBirthDate().getTime()); //Fecha en formato sql
         try {
-
             PreparedStatement updateEXP = connexioJDBC.start().prepareStatement("UPDATE user SET dni = ?, name = ?, lastname = ?, birthdate = ? WHERE user_code= " + code);
             updateEXP.setString(1, user.getDni());
             updateEXP.setString(2, user.getName());
             updateEXP.setString(3, user.getLastname());
             updateEXP.setString(4, sqlDate + "");
-            int result = updateEXP.executeUpdate();
+            updateEXP.executeUpdate();
             Log.info("User " + code + " has been updaed");
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         } finally {
-            connexioJDBC.close();
+            connexioJDBC.close();//Close connection
         }
     }
 
+
+    /**
+     * Returns a list of type User
+     *
+     * @return Return a list of type User
+     * @throws DatabaseNotAvailableExecption
+     */
     @Override
     public List<User> getAll() throws DatabaseNotAvailableExecption {
 
@@ -158,13 +164,21 @@ public class DAOUserJDBC implements DAOUser {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         } finally {
-            connexioJDBC.close();
+            connexioJDBC.close();//Close connection
         }
         return users;
     }
 
+
+    /**
+     * Returns an object of type User
+     *
+     * @param code identifier
+     * @return return object User
+     * @throws DatabaseNotAvailableExecption
+     */
     @Override
-    public User getByIdentifier(Integer integer) throws DatabaseNotAvailableExecption {
+    public User getByIdentifier(Integer code) throws DatabaseNotAvailableExecption {
 
         ConnexioJDBC connexioJDBC = new ConnexioJDBC();
 
@@ -172,7 +186,7 @@ public class DAOUserJDBC implements DAOUser {
         User user = new User();
         try {
             statement = connexioJDBC.start().createStatement();
-            String sentenciaSQL = "SELECT *  FROM user WHERE user_code = " + integer;
+            String sentenciaSQL = "SELECT *  FROM user WHERE user_code = " + code;
             ResultSet rs = statement.executeQuery(sentenciaSQL);
 
             while (rs.next()) {
@@ -189,11 +203,12 @@ public class DAOUserJDBC implements DAOUser {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         } finally {
-            connexioJDBC.close();
+            connexioJDBC.close();//Close connection
         }
 
         return user;
     }
+
 
     @Override
     public int getLastUserId() throws DatabaseNotAvailableExecption {
@@ -224,11 +239,12 @@ public class DAOUserJDBC implements DAOUser {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         } finally {
-            connexioJDBC.close();
+            connexioJDBC.close();//Close connection
         }
 
         return lastCode;
     }
+
 
     @Override
     public User getUserByDNI(String dni) throws DatabaseNotAvailableExecption {
@@ -261,10 +277,9 @@ public class DAOUserJDBC implements DAOUser {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         } finally {
-            connexioJDBC.close();
+            connexioJDBC.close();//Close connection
         }
 
         return user;
     }
-
 }
