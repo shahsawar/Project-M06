@@ -2,4 +2,4 @@
 
 Es una aplicación donde el usuario hace una reserva para ir al gimnasio. 
 
-Más información
+[Más información](www.google.es)
