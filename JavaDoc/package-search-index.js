@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"m":"com.github.gym","l":"clases"},{"m":"com.github.gym","l":"dao"},{"m":"com.github.gym","l":"db"},{"m":"com.github.gym","l":"ejemplos"},{"m":"com.github.gym","l":"exceptions"},{"m":"com.github.gym","l":"javafx.gym"},{"m":"com.github.gym","l":"llibreries"},{"m":"com.github.gym","l":"utilities"}]
