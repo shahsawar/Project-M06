@@ -32,56 +32,86 @@ public class ReservationController implements Initializable {
 
     User userTmp;
 
+    /**
+     * User data
+     */
     @FXML
     private Label reservationUserDni, reservationUserName, reservationUserLastname;
 
+    /**
+     * Reservation tableview
+     */
     @FXML
     private TableView<Reservation> reservationTableView;
 
+    /**
+     * Reservation table date column
+     */
     @FXML
     private TableColumn<Reservation, String> colReservationDate;
 
+    /**
+     * Reservation table room name column
+     */
     @FXML
     private TableColumn<Reservation, String> colReservationRoomname;
 
+    /**
+     * Reservation table workout plane column
+     */
     @FXML
     private TableColumn<Reservation, Boolean> colReservationWorkoutplane;
 
 
-    //Add reservation
+    /**
+     * Reservation form date column
+     */
     @FXML
     private DatePicker reservationInputDate;
 
+    /**
+     * Reservation form room name column
+     */
     @FXML
     private TextField reservationInputRoomname;
 
+    /**
+     * Reservation form radio button
+     */
     @FXML
     private RadioButton radioBtn1, radioBtn2;
+
 
     //Close scene
     @FXML
     private Button back;
 
     ObservableList<Reservation> observableList = FXCollections.observableArrayList();
-
     List<Reservation> reservationList = new ArrayList<>();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        //Radion button group
         ToggleGroup group = new ToggleGroup();
         radioBtn1.setToggleGroup(group);
         radioBtn2.setToggleGroup(group);
-
     }
 
+    /**
+     * Assign user data to screen reservation
+     * @param u {@link clases.User}
+     */
     public void setUserData(User u) {
 
+        //Set user info to labels
         reservationUserDni.setText(u.getDni());
         reservationUserName.setText(u.getName());
         reservationUserLastname.setText(u.getLastname());
+
+        //Assign the received user to userTmp
         userTmp = u;
 
+        //Get all user reservations and assign them to tableview
         reservationList = App.gestorPersistencia.getReservationsByUser(userTmp);
         observableList.addAll(reservationList);
         //colReservationDate.setCellValueFactory(new PropertyValueFactory<Reservation, Date>("date"));
@@ -89,19 +119,31 @@ public class ReservationController implements Initializable {
         colReservationRoomname.setCellValueFactory(new PropertyValueFactory<>("roomName"));
         colReservationWorkoutplane.setCellValueFactory(new PropertyValueFactory<>("workoutPlane"));
 
+        //Set observableList to tableView
         reservationTableView.setItems(observableList);
+
+        //Make tableView editable
         reservationTableView.setEditable(true);
+
+        //Allow user to edit only the following columns
         colReservationRoomname.setCellFactory(TextFieldTableCell.forTableColumn());
         colReservationDate.setCellFactory(TextFieldTableCell.forTableColumn());
-
     }
 
+    /**
+     * Update reservation room name
+     * @param reservationStringCellEditEvent
+     */
     public void updateRoomName(TableColumn.CellEditEvent<Reservation, String> reservationStringCellEditEvent) {
         Reservation reservation = reservationTableView.getSelectionModel().getSelectedItem();
         reservation.setRoomName(reservationStringCellEditEvent.getNewValue());
         App.gestorPersistencia.updateReservation(reservation, reservation.getUserCode());
     }
 
+    /**
+     * Update reservation date
+     * @param reservationStringCellEditEvent
+     */
     public void updateDate(TableColumn.CellEditEvent<Reservation, String> reservationStringCellEditEvent) {
         Reservation reservation = reservationTableView.getSelectionModel().getSelectedItem();
 
@@ -116,6 +158,9 @@ public class ReservationController implements Initializable {
         App.gestorPersistencia.updateReservation(reservation, reservation.getUserCode());
     }
 
+    /**
+     * Close current screen
+     */
     @FXML
     private void closeScene(){
         // get a handle to the stage
@@ -124,6 +169,10 @@ public class ReservationController implements Initializable {
         stage.close();
     }
 
+    /**
+     * Add reservation
+     * @param actionEvent
+     */
     @FXML
     public void add(ActionEvent actionEvent) {
 
@@ -152,16 +201,18 @@ public class ReservationController implements Initializable {
             //Add reservation to tableView
             observableList.add(reservationTmp);
 
-            //Remove form data
+            //Remove data from the form when inserting a reservation
             reservationInputRoomname.clear();
             radioBtn1.setSelected(false);
             radioBtn2.setSelected(false);
             reservationInputDate.getEditor().clear();
-
         }
-
     }
 
+    /**
+     * Remove selected reservation
+     * @param actionEvent
+     */
     public void remove(ActionEvent actionEvent) {
 
         //Reservation selected to be remove
@@ -198,6 +249,5 @@ public class ReservationController implements Initializable {
                 reservationList.remove(reservationTmp);
             }
         }
-
     }
 }

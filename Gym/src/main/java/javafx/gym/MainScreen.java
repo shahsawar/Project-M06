@@ -41,31 +41,51 @@ import utilities.Log;
  */
 public class MainScreen implements Initializable {
 
-
+    /**
+     * Configuration image
+     */
     @FXML
     private ImageView imagenMainScreen;
 
+    /**
+     * Redirect to inserUser screen
+     */
     @FXML
     private Button mainScreenAddUserBtn;
 
+    /**
+     * Field name
+     */
     @FXML
     private TextField textFieldName;
 
-    @FXML
-    private Button btnFind;
-
+    /**
+     * TableView
+     */
     @FXML
     private TableView<User> mainScreenTable;
 
+    /**
+     * Dni column
+     */
     @FXML
     private TableColumn<User, String> colUserDni;
 
+    /**
+     * Name column
+     */
     @FXML
     private TableColumn<User, String> colUserName;
 
+    /**
+     * Last name column
+     */
     @FXML
     private TableColumn<User, String> colUserLastname;
 
+    /**
+     * Birthdate column
+     */
     @FXML
     private TableColumn<User, String> colUserbirthdate;
 
@@ -73,26 +93,40 @@ public class MainScreen implements Initializable {
     List<User> userList = App.gestorPersistencia.getAllUsers();
 
 
+    /**
+     * Load all database users in tableview
+     *
+     * @param url            url
+     * @param resourceBundle resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+        //Icon
         Image image = new Image(getClass().getResourceAsStream("/images/settings.png"));
         imagenMainScreen.setImage(image);
 
+        //Add all users to observableList
         observableList.addAll(userList);
 
+        //Extract information from user object and assign it to columns
         colUserDni.setCellValueFactory(new PropertyValueFactory<>("dni"));
         colUserName.setCellValueFactory(new PropertyValueFactory<>("name"));
         colUserLastname.setCellValueFactory(new PropertyValueFactory<>("lastname"));
-        colUserbirthdate.setCellValueFactory(new FormattedDateValueFactory<User>("birthDate","dd/MM/yyyy"));
+        colUserbirthdate.setCellValueFactory(new FormattedDateValueFactory<User>("birthDate", "dd/MM/yyyy"));
 
+        //Set observableList to tableView
         mainScreenTable.setItems(observableList);
+
+        //Make tableView editable
         mainScreenTable.setEditable(true);
+
+        //Allow user to edit only the following columns
         colUserName.setCellFactory(TextFieldTableCell.forTableColumn());
         colUserLastname.setCellFactory(TextFieldTableCell.forTableColumn());
         colUserbirthdate.setCellFactory(TextFieldTableCell.forTableColumn());
 
-        //Roatation animation
+        //Icon roatation animation
         RotateTransition rt = new RotateTransition(Duration.millis(3000), imagenMainScreen);
         rt.setByAngle(360);
         rt.setCycleCount(Animation.INDEFINITE);
@@ -102,6 +136,7 @@ public class MainScreen implements Initializable {
         imagenMainScreen.setOnMouseEntered(e -> rt.play());
         imagenMainScreen.setOnMouseExited(e -> rt.pause());
 
+        //Redirect to configuration screen
         imagenMainScreen.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -114,6 +149,7 @@ public class MainScreen implements Initializable {
             }
         });
 
+        //Redirect to inserUser screen
         mainScreenAddUserBtn.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
@@ -124,30 +160,45 @@ public class MainScreen implements Initializable {
                 }
             }
         });
-
     }
 
+    /**
+     * Update user name
+     *
+     * @param userStringCellEditEvent
+     */
     public void updateUserName(TableColumn.CellEditEvent<User, String> userStringCellEditEvent) {
         User user = mainScreenTable.getSelectionModel().getSelectedItem();
         user.setName(userStringCellEditEvent.getNewValue());
         App.gestorPersistencia.updateUser(user, user.getUserCode());
     }
 
+    /**
+     * Update user last name
+     *
+     * @param userStringCellEditEvent
+     */
     public void updateUserLastname(TableColumn.CellEditEvent<User, String> userStringCellEditEvent) {
         User user = mainScreenTable.getSelectionModel().getSelectedItem();
         user.setLastname(userStringCellEditEvent.getNewValue());
         App.gestorPersistencia.updateUser(user, user.getUserCode());
     }
 
+    /**
+     * Update user birthdate
+     *
+     * @param reservationStringCellEditEvent
+     */
     public void updateBirthdate(TableColumn.CellEditEvent<Reservation, String> reservationStringCellEditEvent) {
-        User user = mainScreenTable.getSelectionModel().getSelectedItem();
 
-        //String to date
+        //Get selected user
+        User user = mainScreenTable.getSelectionModel().getSelectedItem();
         Date date = null;
         try {
+            //String to date
             date = new SimpleDateFormat("dd/MM/yyyy").parse(reservationStringCellEditEvent.getNewValue());
-
             user.setBirthDate(date);
+
             App.gestorPersistencia.updateUser(user, user.getUserCode());
 
         } catch (ParseException e) {
@@ -162,12 +213,16 @@ public class MainScreen implements Initializable {
         }
     }
 
-
+    /**
+     * Remove user
+     *
+     * @param actionEvent
+     */
     public void removeUser(ActionEvent actionEvent) {
 
         int selectedItems = mainScreenTable.getSelectionModel().getSelectedItems().size();
 
-        if (selectedItems == 0){
+        if (selectedItems == 0) {
             Log.warning("Not user selected, can't delete");
 
             //Monstramos la alerta
@@ -189,15 +244,14 @@ public class MainScreen implements Initializable {
             if (alert.getResult() == ButtonType.YES) {
 
                 List<Reservation> userReservations = userTmp.getReservations();
-                if (userReservations.size() > 0){//Eliminamos sus reservas, necesario para JDBC
-                    for (Reservation reservation : userReservations){
+                if (userReservations.size() > 0) {//Eliminamos sus reservas, necesario para JDBC
+                    for (Reservation reservation : userReservations) {
                         App.gestorPersistencia.deleteReservation(reservation);
                     }
                 }
 
                 //Remove user from BBDD
                 App.gestorPersistencia.deleteUser(userTmp);
-
 
                 //Remove user from tableview
                 selectedUser.forEach(observableList::remove);
@@ -208,13 +262,17 @@ public class MainScreen implements Initializable {
         }
     }
 
-
+    /**
+     * Redirect to AddReservation screen
+     *
+     * @param event
+     */
     @FXML
-    private void addReservation(ActionEvent event){
+    private void addReservation(ActionEvent event) {
 
         int selectedItems = mainScreenTable.getSelectionModel().getSelectedItems().size();
 
-        if (selectedItems == 0){
+        if (selectedItems == 0) {
             Log.warning("Not user selected, can't add reservation");
 
             //Monstramos la alerta
@@ -233,8 +291,12 @@ public class MainScreen implements Initializable {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+
+            //Pass the selected user to reservation controller
             ReservationController r = loader.getController();
             r.setUserData(userSelected);
+
+            //Show new screen
             Parent p = loader.getRoot();
             Stage stage = new Stage();
             Scene scene = new Scene(p);
@@ -244,25 +306,29 @@ public class MainScreen implements Initializable {
         }
     }
 
-
+    /**
+     * Search user by name
+     *
+     * @param event
+     */
     @FXML
-    private void searchUserByName(ActionEvent event){
+    private void searchUserByName(ActionEvent event) {
         List<User> users = new ArrayList<>();
         String name = textFieldName.getText();
 
-        //Si el usuario no ha escrito nada, no se hará la búsqueda
-        if (name.equalsIgnoreCase("") || name.equalsIgnoreCase(" ") ){
+        //If the user has not entered anything, the search will not be done
+        if (name.equalsIgnoreCase("") || name.equalsIgnoreCase(" ")) {
             Log.info("No data to search in search user by name");
 
-            if (observableList.size() != userList.size()){//Ni se estan mostrando todos los usuarios por pantalla, se mostrarán ahora
+            if (observableList.size() != userList.size()) {//Ni se estan mostrando todos los usuarios por pantalla, se mostrarán ahora
                 observableList.clear();
                 observableList.addAll(userList);
             }
 
         } else {
 
-            for (User user : userList){
-                if (user.getName().equalsIgnoreCase(name)){
+            for (User user : userList) {
+                if (user.getName().equalsIgnoreCase(name)) {
                     users.add(user);
                 }
             }

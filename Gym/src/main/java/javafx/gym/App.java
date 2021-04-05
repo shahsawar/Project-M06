@@ -26,6 +26,7 @@ public class App extends Application {
 
         //Añadimos el css
         scene.getStylesheets().add(getClass().getResource("/css/style.css").toExternalForm());
+
         //Icono
         stage.getIcons().add(new Image(App.class.getResourceAsStream("/images/icon.png")));
 
@@ -38,20 +39,33 @@ public class App extends Application {
         Configuracio.getData();//Get the data from the configuration file
     }
 
+    /**
+     * Sets the value of the property root.
+     *
+     * @param fxml
+     * @throws IOException
+     */
     static void setRoot(String fxml) throws IOException {
         scene.setRoot(loadFXML(fxml));
     }
 
-    static void setRootWithData(String fxml, Object object) throws IOException {
-        scene.setUserData(object);
-        scene.setRoot(loadFXML(fxml));
-    }
-
+    /**
+     * Load the fxml file
+     *
+     * @param fxml fxml to load
+     * @return
+     * @throws IOException
+     */
     private static Parent loadFXML(String fxml) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
         return fxmlLoader.load();
     }
 
+    /**
+     * Run the application
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         launch();
     }
