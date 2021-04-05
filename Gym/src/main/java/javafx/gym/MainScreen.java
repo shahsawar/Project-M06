@@ -308,7 +308,6 @@ public class MainScreen implements Initializable {
 
     /**
      * Search user by name
-     *
      * @param event
      */
     @FXML
@@ -320,7 +319,7 @@ public class MainScreen implements Initializable {
         if (name.equalsIgnoreCase("") || name.equalsIgnoreCase(" ")) {
             Log.info("No data to search in search user by name");
 
-            if (observableList.size() != userList.size()) {//Ni se estan mostrando todos los usuarios por pantalla, se mostrarán ahora
+            if (observableList.size() != userList.size()) {//If not all the users are showing, it will be shown
                 observableList.clear();
                 observableList.addAll(userList);
             }
