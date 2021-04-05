@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="800.0" prefWidth="1314.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafx.gym.ReservationController">
+   <children>
+      <SplitPane dividerPositions="0.5" prefHeight="800.0" prefWidth="1314.0">
+         <items>
+            <AnchorPane prefHeight="718.0" prefWidth="652.0">
+               <children>
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="47.0" layoutY="31.0" text="USER INFORMATION">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="10.0" top="10.0" />
+                     </padding>
+                  </Label>
+                  <Label layoutX="47.0" layoutY="103.0" text="DNI">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="reservationUserDni" layoutX="47.0" layoutY="138.0" minWidth="250.0" style="-fx-border-color: transparent transparent black transparent;">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="345.0" layoutY="103.0" text="NAME">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="reservationUserName" layoutX="345.0" layoutY="138.0" minWidth="250.0" style="-fx-border-color: transparent transparent black transparent;">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="47.0" layoutY="189.0" text="LASTNAME">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="reservationUserLastname" layoutX="47.0" layoutY="221.0" minWidth="250.0" style="-fx-border-color: transparent transparent black transparent;">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="47.0" layoutY="321.0" text="ADD RESERVATION">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="10.0" top="10.0" />
+                     </padding>
+                  </Label>
+                  <Label layoutX="47.0" layoutY="392.0" text="Date">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <DatePicker fx:id="reservationInputDate" editable="false" layoutX="48.0" layoutY="428.0" minWidth="250.0" promptText="dd/mm/yyyy" style="-fx-border-color: transparent transparent black transparent;" />
+                  <Label layoutX="356.0" layoutY="393.0" text="Room Name">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="reservationInputRoomname" layoutX="357.0" layoutY="428.0" minWidth="250.0" promptText="Sala Fitness" style="-fx-border-color: transparent transparent black transparent;" />
+                  <Label layoutX="50.0" layoutY="493.0" text="Do you have a training plan?">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <RadioButton fx:id="radioBtn1" layoutX="375.0" layoutY="495.0" mnemonicParsing="false" text="Yes">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </RadioButton>
+                  <RadioButton fx:id="radioBtn2" layoutX="470.0" layoutY="495.0" mnemonicParsing="false" selected="true" text="No">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </RadioButton>
+                  <Button fx:id="back" layoutX="113.0" layoutY="613.0" minWidth="100.0" mnemonicParsing="false" onAction="#closeScene" styleClass="cancelButton" text="Back">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="254.0" layoutY="616.0" minWidth="100.0" mnemonicParsing="false" onAction="#add" text="Add">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="396.0" layoutY="616.0" minWidth="100.0" mnemonicParsing="false" onAction="#remove" styleClass="deleteBtn" text="Delete">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <rotationAxis>
+                        <Point3D />
+                     </rotationAxis>
+                  </Button>
+               </children>
+            </AnchorPane>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <TableView fx:id="reservationTableView" layoutY="1.0" prefHeight="200.0" prefWidth="652.0">
+                     <columns>
+                        <TableColumn fx:id="colReservationDate" minWidth="215.0" onEditCommit="#updateDate" prefWidth="75.0" text="Date" />
+                        <TableColumn fx:id="colReservationRoomname" minWidth="215.0" onEditCommit="#updateRoomName" prefWidth="123.0" text="Room name" />
+                        <TableColumn fx:id="colReservationWorkoutplane" minWidth="220.0" prefWidth="130.0" text="Workout plane" />
+                     </columns>
+                  </TableView>
+               </children>
+            </AnchorPane>
+         </items>
+      </SplitPane>
+   </children>
+</AnchorPane>
