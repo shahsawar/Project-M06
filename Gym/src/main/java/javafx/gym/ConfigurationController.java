@@ -1,5 +1,6 @@
 package javafx.gym;
 
+import clases.User;
 import db.*;
 import exceptions.DatabaseNotAvailableExecption;
 import javafx.animation.*;
@@ -20,6 +21,10 @@ import java.net.URL;
 import java.sql.Connection;
 import java.util.ResourceBundle;
 
+/**
+ * The controller class for the screen in charge of let the user choose a database
+ * @author ronald
+ */
 public class ConfigurationController implements Initializable {
 
     @FXML
@@ -43,8 +48,9 @@ public class ConfigurationController implements Initializable {
     }
 
     /**
+     * Generates a scale animation
      * @param imageView the image to scale
-     * @param bigger    if true, the animation scale will increase the size, if it's false, will decrease
+     * @param bigger if true, the animation scale will increase the size, if it's false, will decrease
      */
     void scaleSizeAnimation(ImageView imageView, boolean bigger) {
         ScaleTransition st = new ScaleTransition(Duration.millis(100), imageView);
@@ -67,6 +73,12 @@ public class ConfigurationController implements Initializable {
     }
 
 
+    /**
+     * This method is the first one that is executed
+     * Here we set image resources and mouse envent listeners
+     * @param location
+     * @param resources
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
@@ -77,7 +89,9 @@ public class ConfigurationController implements Initializable {
         imageViewSQL.setImage(image);
         imageViewMongo.setImage(imageMongo);
 
-        //MongoDB selected
+        /**
+         * Sets the Mongo database if the user choose it by clicking a button
+         */
         imageViewMongo.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -107,7 +121,9 @@ public class ConfigurationController implements Initializable {
             }
         });
 
-        //Mysql selected
+        /**
+         * Sets the MySQL database if the user choose it by clicking a button
+         */
         imageViewSQL.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -134,19 +150,30 @@ public class ConfigurationController implements Initializable {
         });
 
 
-        //BBDD Images hover
+        /**
+         * Check if mouse entered in the image to start the {@link #scaleSizeAnimation(ImageView, boolean)}
+         */
         imageViewMongo.addEventFilter(MouseEvent.MOUSE_ENTERED, e -> {
             scaleSizeAnimation(imageViewMongo, true);
         });
 
+        /**
+         * Check if mouse entered in the image to start the {@link #scaleSizeAnimation(ImageView, boolean)}
+         */
         imageViewMongo.addEventFilter(MouseEvent.MOUSE_EXITED, e -> {
             scaleSizeAnimation(imageViewMongo, false);
         });
 
+        /**
+         * Check if mouse entered in the image to start the {@link #scaleSizeAnimation(ImageView, boolean)}
+         */
         imageViewSQL.addEventFilter(MouseEvent.MOUSE_ENTERED, e -> {
             scaleSizeAnimation(imageViewSQL, true);
         });
 
+        /**
+         * Check if mouse entered in the image to start the {@link #scaleSizeAnimation(ImageView, boolean)}
+         */
         imageViewSQL.addEventFilter(MouseEvent.MOUSE_EXITED, e -> {
             scaleSizeAnimation(imageViewSQL, false);
         });
