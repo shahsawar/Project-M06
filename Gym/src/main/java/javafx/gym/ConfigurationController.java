@@ -48,8 +48,9 @@ public class ConfigurationController implements Initializable {
     }
 
     /**
+     * Generates a scale animation
      * @param imageView the image to scale
-     * @param bigger    if true, the animation scale will increase the size, if it's false, will decrease
+     * @param bigger if true, the animation scale will increase the size, if it's false, will decrease
      */
     void scaleSizeAnimation(ImageView imageView, boolean bigger) {
         ScaleTransition st = new ScaleTransition(Duration.millis(100), imageView);
