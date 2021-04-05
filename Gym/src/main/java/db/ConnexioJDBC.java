@@ -14,7 +14,7 @@ import java.sql.SQLException;
 public class ConnexioJDBC implements Connexio<Connection> {
 
     /*Creación de BBDD User
-    CREATE TABLE user (user_code INT NOT NULL , dni VARCHAR(9) NOT NULL, name VARCHAR(20) NOT NULL, lastname VARCHAR(20) NOT NULL, birthdate DATE NOT NULL, PRIMARY KEY (user_code, dni) );
+    CREATE TABLE user (user_code INT NOT NULL , dni VARCHAR(9) NOT NULL, name VARCHAR(20) NOT NULL, lastname VARCHAR(20) NOT NULL, birthdate DATE NOT NULL, PRIMARY KEY (user_code) );
 
 
     Creación de BBDD Reservation

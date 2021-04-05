@@ -13,6 +13,7 @@ import java.io.StringWriter;
 import java.util.List;
 
 /**
+ * Extention of {@link GestorPersistencia} abstract class to be used in MongoDB databases
  * @author shah
  */
 public class GestorPersistenciaMongo extends GestorPersistencia{
@@ -20,11 +21,22 @@ public class GestorPersistenciaMongo extends GestorPersistencia{
     DAOUserMongo daoUserMongo = new DAOUserMongo();
     DAOReservationMongo daoReservationMongo = new DAOReservationMongo();
 
+    /**
+     *
+     * @param user {@link clases.User} object
+     * @throws DatabaseNotAvailableExecption
+     * @throws KeyException
+     */
     @Override
     public void insertUser(User user) throws DatabaseNotAvailableExecption, KeyException {
         daoUserMongo.insert(user);
     }
 
+    /**
+     *
+     * @param user {@link clases.User} object
+     * @param user_code
+     */
     @Override
     public void updateUser(User user, Integer user_code) {
         try {
@@ -37,6 +49,10 @@ public class GestorPersistenciaMongo extends GestorPersistencia{
         }
     }
 
+    /**
+     *
+     * @param user
+     */
     @Override
     public void deleteUser(User user) {
         try {
@@ -49,6 +65,11 @@ public class GestorPersistenciaMongo extends GestorPersistencia{
         }
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     @Override
     public User getUserById(Integer id) {
         try {
@@ -62,6 +83,11 @@ public class GestorPersistenciaMongo extends GestorPersistencia{
         return null;
     }
 
+    /**
+     *
+     * @param dni
+     * @return
+     */
     @Override
     public User getUserByDNI(String dni) {
         try {
@@ -75,6 +101,10 @@ public class GestorPersistenciaMongo extends GestorPersistencia{
         return null;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public List<User> getAllUsers() {
         try {
@@ -88,6 +118,10 @@ public class GestorPersistenciaMongo extends GestorPersistencia{
         return null;
     }
 
+    /**
+     *
+     * @param reservation
+     */
     @Override
     public void insertReservation(Reservation reservation) {
         try {
@@ -100,6 +134,11 @@ public class GestorPersistenciaMongo extends GestorPersistencia{
         }
     }
 
+    /**
+     *
+     * @param reservation {@link clases.Reservation} object
+     * @param reservation_code id of the {@link clases.Reservation}
+     */
     @Override
     public void updateReservation(Reservation reservation, Integer reservation_code) {
         try {
@@ -112,6 +151,10 @@ public class GestorPersistenciaMongo extends GestorPersistencia{
         }
     }
 
+    /**
+     *
+     * @param reservation {@link clases.Reservation} object
+     */
     @Override
     public void deleteReservation(Reservation reservation) {
         try {
@@ -124,16 +167,30 @@ public class GestorPersistenciaMongo extends GestorPersistencia{
         }
     }
 
+    /**
+     *
+     * @param id {@link clases.Reservation}'s identifier
+     * @return
+     */
     @Override
     public Reservation getReservationById(Integer id) {
         return daoReservationMongo.getByIdentifier(id);
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public List<Reservation> getAllReservations() {
         return daoReservationMongo.getAll();
     }
 
+    /**
+     *
+     * @param user {@link clases.User} object from which we extract the {@link clases.Reservation} list
+     * @return
+     */
     @Override
     public List<Reservation> getReservationsByUser(User user) {
         try{

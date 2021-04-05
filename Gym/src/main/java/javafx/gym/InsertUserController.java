@@ -19,8 +19,10 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 
-/***
- @author ronald
+/**
+ * The controller class for the screen in charge of insert a new {@link User}
+ * @author ronald
+ * @author shah
  */
 public class InsertUserController{
 
@@ -44,11 +46,19 @@ public class InsertUserController{
     private ImageView newUserIlustration;
 
 
+    /**
+     * This method is the first one that is executed
+     * In this case is used to set an image resource
+     */
     public void initialize() {
         Image image = new Image(getClass().getResourceAsStream("/images/newUser.png"));
         newUserIlustration.setImage(image);
     }
 
+    /**
+     * Show an alert popUp with the provided message
+     * @param message text to show
+     */
     static void showPopUp(String message){
         Alert alert = new Alert(Alert.AlertType.NONE, message, ButtonType.OK);
         alert.setTitle("Alert");
@@ -56,6 +66,10 @@ public class InsertUserController{
     }
 
 
+    /**
+     * Calls the {@link db.GestorPersistencia#insertUser(User)} method to insert a new {@link User} to the database
+     * @param actionEvent
+     */
     @FXML
     public void clickSave(ActionEvent actionEvent) {
 
@@ -111,6 +125,10 @@ public class InsertUserController{
         }
     }
 
+    /**
+     * Cancels the insert {@link User} operation and goes back to the main scene {@link MainScreen}
+     * @param actionEvent
+     */
     @FXML
     public void clickCancel(ActionEvent actionEvent) {
         try {
