@@ -30,6 +30,7 @@ public class GestorPersistenciaMongo extends GestorPersistencia{
         try {
             daoUserMongo.update(user, user_code);
         } catch (DatabaseNotAvailableExecption databaseNotAvailableExecption) {
+            System.out.println("Could not update user in database!");
             StringWriter sw = new StringWriter();
             databaseNotAvailableExecption.printStackTrace(new PrintWriter(sw));
             Log.severe("\nCould not update user in database!\n" + sw.toString());
@@ -41,6 +42,7 @@ public class GestorPersistenciaMongo extends GestorPersistencia{
         try {
             daoUserMongo.delete(user);
         } catch (DatabaseNotAvailableExecption databaseNotAvailableExecption) {
+            System.out.println("Could not delete user from database!");
             StringWriter sw = new StringWriter();
             databaseNotAvailableExecption.printStackTrace(new PrintWriter(sw));
             Log.severe("\nCould not delete user from database!\n" + sw.toString());
@@ -52,6 +54,7 @@ public class GestorPersistenciaMongo extends GestorPersistencia{
         try {
             return daoUserMongo.getByIdentifier(id);
         } catch (DatabaseNotAvailableExecption databaseNotAvailableExecption) {
+            System.out.println("Could not find user with id = " + id + " in database!");
             StringWriter sw = new StringWriter();
             databaseNotAvailableExecption.printStackTrace(new PrintWriter(sw));
             Log.severe("\nCould not find user with id = " + id + " in database!\n" + sw.toString());
@@ -64,6 +67,7 @@ public class GestorPersistenciaMongo extends GestorPersistencia{
         try {
             return daoUserMongo.getUserByDNI(dni);
         } catch (DatabaseNotAvailableExecption databaseNotAvailableExecption) {
+            System.out.println("Could not find user with dni = " + dni + " in database!");
             StringWriter sw = new StringWriter();
             databaseNotAvailableExecption.printStackTrace(new PrintWriter(sw));
             Log.severe("\nCould not find user with dni = " + dni + " in database!\n" + sw.toString());
@@ -76,6 +80,7 @@ public class GestorPersistenciaMongo extends GestorPersistencia{
         try {
             return daoUserMongo.getAll();
         } catch (DatabaseNotAvailableExecption databaseNotAvailableExecption) {
+            System.out.println("Could not get all users from database!");
             StringWriter sw = new StringWriter();
             databaseNotAvailableExecption.printStackTrace(new PrintWriter(sw));
             Log.severe("\nCould not get all users from database!\n" + sw.toString());
@@ -88,6 +93,7 @@ public class GestorPersistenciaMongo extends GestorPersistencia{
         try {
             daoReservationMongo.insert(reservation);
         } catch (DatabaseNotAvailableExecption databaseNotAvailableExecption) {
+            System.out.println("Could not insert the reservation in database!");
             StringWriter sw = new StringWriter();
             databaseNotAvailableExecption.printStackTrace(new PrintWriter(sw));
             Log.severe("\nCould not insert the reservation in database!\n" + sw.toString());
@@ -99,6 +105,7 @@ public class GestorPersistenciaMongo extends GestorPersistencia{
         try {
             daoReservationMongo.update(reservation, reservation_code);
         } catch (DatabaseNotAvailableExecption databaseNotAvailableExecption) {
+            System.out.println("Could not update reservation in database!");
             StringWriter sw = new StringWriter();
             databaseNotAvailableExecption.printStackTrace(new PrintWriter(sw));
             Log.severe("\nCould not update reservation in database!\n" + sw.toString());
@@ -110,6 +117,7 @@ public class GestorPersistenciaMongo extends GestorPersistencia{
         try {
             daoReservationMongo.delete(reservation);
         } catch (DatabaseNotAvailableExecption databaseNotAvailableExecption) {
+            System.out.println("Could not delete reservation from database!");
             StringWriter sw = new StringWriter();
             databaseNotAvailableExecption.printStackTrace(new PrintWriter(sw));
             Log.severe("\nCould not delete reservation from database!\n" + sw.toString());
@@ -131,6 +139,7 @@ public class GestorPersistenciaMongo extends GestorPersistencia{
         try{
             return daoUserMongo.getAllReservations(user.getUserCode());
         }  catch (DatabaseNotAvailableExecption databaseNotAvailableExecption) {
+            System.out.println("Could not get reservation from database!");
             StringWriter sw = new StringWriter();
             databaseNotAvailableExecption.printStackTrace(new PrintWriter(sw));
             Log.severe("\nCould not get reservation from database!\n" + sw.toString());
