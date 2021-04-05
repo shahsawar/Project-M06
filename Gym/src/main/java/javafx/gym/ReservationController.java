@@ -14,6 +14,8 @@ import javafx.stage.Stage;
 import llibreries.FormattedDateValueFactory;
 import utilities.Log;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -151,11 +153,18 @@ public class ReservationController implements Initializable {
         Date date = null;
         try {
             date = new SimpleDateFormat("dd/MM/yyyy").parse(reservationStringCellEditEvent.getNewValue());
+
+            reservation.setDate(date);
+            App.gestorPersistencia.updateReservation(reservation, reservation.getUserCode());
         } catch (ParseException e) {
-            e.printStackTrace();
+            StringWriter sw = new StringWriter();
+            e.printStackTrace(new PrintWriter(sw));
+            Log.severe("Date " + reservationStringCellEditEvent.getNewValue() + " is not valid \n" + sw.toString());
+
+            Alert alert = new Alert(Alert.AlertType.NONE, "Date " + reservationStringCellEditEvent.getNewValue() + " is not valid", ButtonType.OK);
+            alert.setTitle("Alert");
+            alert.showAndWait();
         }
-        reservation.setDate(date);
-        App.gestorPersistencia.updateReservation(reservation, reservation.getUserCode());
     }
 
     /**
