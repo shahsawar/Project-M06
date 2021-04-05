@@ -41,11 +41,18 @@ public class ConnectionMongo implements Connexio<MongoCollection<Document>> {
      * @return The collection {@code users}
      */
     @Override
-    public MongoCollection<Document> start() {
+    public MongoCollection<Document> start() throws DatabaseNotAvailableExecption{
+
         MongoCollection<Document> collection;
-        mongoClient = MongoClients.create();
-        MongoDatabase database = mongoClient.getDatabase(Configuracio.DBNAME);
-        collection = database.getCollection(Configuracio.COLLECTION_USERS);
+
+        try {
+            mongoClient = MongoClients.create();
+            MongoDatabase database = mongoClient.getDatabase(Configuracio.DBNAME);
+            collection = database.getCollection(Configuracio.COLLECTION_USERS);
+
+        } catch (Exception e){
+            throw new DatabaseNotAvailableExecption();
+        }
 
         return collection;
     }

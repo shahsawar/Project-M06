@@ -45,11 +45,14 @@ public class ConnexioJDBC implements Connexio<Connection> {
     public Connection start() throws DatabaseNotAvailableExecption {
         try {
             conn = DriverManager.getConnection(Configuracio.URL_DB_JDBC, Configuracio.USER, Configuracio.PASSWORD);
-        } catch (SQLException throwables) {
+        } catch (SQLException  throwables) {
+
             //Convert StackTraceElement to String
             StringWriter sw = new StringWriter();
             throwables.printStackTrace(new PrintWriter(sw));
             Log.severe("Could not connect to JDBC\n" + sw.toString());
+
+            throw new DatabaseNotAvailableExecption();
         }
         return conn;
     }

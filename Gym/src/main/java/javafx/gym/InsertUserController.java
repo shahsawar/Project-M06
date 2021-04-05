@@ -117,10 +117,11 @@ public class InsertUserController{
                 System.out.println(message);
 
             } catch (DatabaseNotAvailableExecption ex) {
+
+                String message = "Could not insert the user in database!";
                 StringWriter sw = new StringWriter();
                 ex.printStackTrace(new PrintWriter(sw));
-                Log.severe("\nCould not insert the user in database!\n" + sw.toString());
-                System.out.println("Could not insert the user in database!");
+                Log.severe( message + "\n" + sw.toString());
             }
         }
     }
