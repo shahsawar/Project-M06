@@ -5,7 +5,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-/***
+/**
+ * This class provides the methods to validate data from the forms
  @author ronald
  */
 public class DataValidator {

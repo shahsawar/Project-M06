@@ -13,6 +13,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
+ * This class provides diferent methods to do data types conversions
  * @autor shah
  */
 public class Converter {

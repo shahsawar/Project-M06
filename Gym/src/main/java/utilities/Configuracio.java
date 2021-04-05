@@ -6,7 +6,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 
-/***
+/**
+ * Class to get the database access from a .properties file
  @author ronald
  */
 public class Configuracio {
@@ -18,8 +19,14 @@ public class Configuracio {
     public static String USER;
     public static String PASSWORD;
 
+    /**
+     * Name of the .properties file
+     */
     static String FILENAME = "configuration.properties";
 
+    /**
+     * Get the .properties file data
+     */
     public static void getData(){
         Properties properties= new Properties();
         try {

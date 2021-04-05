@@ -6,7 +6,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
-/***
+/**
+ * Class to handle the generated logs
  @author ronald
  */
 public class Log {
